@@ -13,8 +13,12 @@ namespace AnimeHouse.Controllers
 			_logger = logger;
 		}
 
-		public IActionResult Index()
+
+		[HttpGet]
+		[Route("")]
+		public IActionResult Main()
 		{
+
 			return View();
 		}
 

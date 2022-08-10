@@ -1,0 +1,27 @@
+﻿@model AnimeHouse.Models.User
+<!doctype html>
+<html>
+	<head>
+		<title>Home Page</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h2>Регистрация</h2>
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken();
+			<div>
+				@Html.Label("user.Email", "Email");
+				@Html.TextBox("Email", "", new {type = "email"})
+				@Html.Label("user.Nickname", "Nickname")
+				@Html.TextBox("Nickname")
+				@Html.Label("user.Password", "Password")
+				@Html.Password("Password")
+				@Html.Label("user.PasswordConfirm", "Password")
+				@Html.Password("Password")
+				<input type="submit" value="Send">
+			</div>
+		}
+		
+	</body>
+</html>
