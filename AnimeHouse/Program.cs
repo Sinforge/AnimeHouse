@@ -1,7 +1,11 @@
+
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AnimeHouse.ApplicationContext>();
 
 var app = builder.Build();
 
