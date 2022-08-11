@@ -14,9 +14,13 @@ namespace AnimeHouse.Models
 		public string Nickname { get; set; }
 
 		[Required]
+        [DataType(DataType.Password)]
 		public string Password { get; set; }
 
+
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
 		[Required]
+        [DataType(DataType.Password)]
 		public string PasswordConfirm { get; set; }
 
 	}

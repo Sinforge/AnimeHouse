@@ -34,20 +34,8 @@ namespace AnimeHouse.Controllers
 			}
 			else
 			{
-				string errors = "";
 				_logger.LogInformation("User enter uncorrect data");
-				foreach(var item in ModelState)
-                {
-					if(item.Value.ValidationState == ModelValidationState.Invalid)
-                    {
-						errors += $"Ошибки свойства: {item.Key}:\n";
-						foreach (var error in item.Value.Errors)
-                        {
-							errors += $"{error.ErrorMessage.ToString()}\n";
-                        } 
-                    }
-                }
-				return View(errors);
+				return View(user);
 			}
 
 		}

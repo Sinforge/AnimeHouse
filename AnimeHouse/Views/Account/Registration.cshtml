@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model AnimeHouse.Models.UserRegistrationModel
 <!doctype html>
 <html>
 	<head>
@@ -10,22 +10,33 @@
 		@using (Html.BeginForm(FormMethod.Post))
 		{
 			<div>
-				@Html.Label("user.Email", "Email")
-				@Html.TextBox("user.Email")
-				@Html.Label("user.Nickname", "Nickname")
-				@Html.TextBox("user.Nickname")
-				@Html.Label("user.Password", "Password")
-				@Html.TextBox("user.Password")
-				@Html.Label("user.PasswordConfirm", "Password")
-				@Html.TextBox("user.PasswordConfirm")
-				<input type="submit" value="Send">
+					<label asp-for="Email">Email</label><br />
+					<input type="email" asp-for="Email" />
+					<span asp-validation-for="Email" />
 			</div>
+			<div>
+
+					<label asp-for="Nickname">Nickname</label><br />
+					<input type="text" asp-for="Nickname" />
+					<span asp-validation-for="Nickname" />
+			</div>
+			<div>
+
+					<label asp-for="Password">Password</label><br />
+					<input type="password" asp-for="Password" />
+					<span asp-validation-for="Password" />
+			</div>
+			<div>
+
+					<label asp-for="PasswordConfirm">Password</label><br />
+					<input type="password" asp-for="PasswordConfirm" />
+					<span asp-validation-for="PasswordConfirm" />
+			</div>
+			<input type="submit" value="Send">
 		}
-		<div>
-			@if(@Model != null) {
-				<p>@Model.ToString()</p>
-			}
-		</div>
-		
+
+		<script src="/js/jquery-3.5.1.min.js"></script>
+		<script src="/js/jquery.validate.min.js"></script>
+		<script src="/js/jquery.validate.unobtrusive.min.js"></script>
 	</body>
 </html>
