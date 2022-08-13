@@ -1,4 +1,4 @@
-﻿@model UserLoginModel
+﻿@model UserLoginViewModel
 <!doctype html>
 <html>
 	<head>
@@ -7,16 +7,27 @@
 	</head>
 	<body>
 		<h2>Login</h2>
-		@using (Html.BeginForm(FormMethod.Post))
-		{
-			<div>
-				@Html.Label("user.Email", "Email")
-				@Html.TextBox("user.Email")
-				@Html.Label("user.Password", "Password")
-				@Html.Password("user.Password")
-				<input type="submit" value="Login">
-			</div>
-		}
+		<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+			<div asp-validation-summary="ModelOnly">			</div>
+
+				<div>
+					<label asp-for="Nickname"></label><br />
+					<input asp-for="Nickname" />
+					<span asp-validation-for="Nickname"></span>
+				</div>
+				<div>
+					<label asp-for="Password"></label><br />
+					<input asp-for="Password" />
+					<span asp-validation-for="Password"></span>
+				</div>
+				<div>
+					<label asp-for="RememberMe"></label><br />
+					<input asp-for="RememberMe" />
+				</div>
+				<div>
+					<input type="submit" value="Login">
+				</div>
+		</form>
 		
 	</body>
 </html>

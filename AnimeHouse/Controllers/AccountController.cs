@@ -26,7 +26,7 @@ namespace AnimeHouse.Controllers
 
 		[HttpPost]
 		[Route("Registration")]
-		public async  Task<IActionResult> Registration(UserRegistrationModel user)
+		public async  Task<IActionResult> Registration(UserRegistrationViewModel user)
 		{
 			if (ModelState.IsValid)
 			{
@@ -72,11 +72,48 @@ namespace AnimeHouse.Controllers
         }
         [HttpGet]
         [Route("Login")]
-		public IActionResult Login()
+		public IActionResult Login(string returnUrl = null)
         {
-			return View();
+			return View(new UserLoginViewModel { ReturnUrl = returnUrl});
         }
 
-      
+		[HttpPost]
+		[Route("Login")]
+		public async Task<IActionResult> Login(UserLoginViewModel user)
+		{
+			if (ModelState.IsValid)
+			{
+				var result =
+					await _signInManager.PasswordSignInAsync(user.Nickname, user.Password, user.RememberMe, false);
+				if (result.Succeeded)
+				{
+					if (!string.IsNullOrEmpty(user.ReturnUrl) && Url.IsLocalUrl(user.ReturnUrl))
+					{
+						return Redirect(user.ReturnUrl);
+					}
+					else
+					{
+						return RedirectToAction("Main", "Home");
+					}
+				}
+				else
+				{
+					ModelState.AddModelError("", "Uncorrect nickname or password");
+				}
+
+			}
+			return View(user);
+
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Logout()
+		{
+			// удаляем аутентификационные куки
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Main", "Home");
+		}
+
+
 	}
 }

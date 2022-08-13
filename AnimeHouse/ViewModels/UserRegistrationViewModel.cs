@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using AnimeHouse.Models.Attributes;
 namespace AnimeHouse.Models
 {
-	public class UserRegistrationModel
+	public class UserRegistrationViewModel
 	{
 
 		

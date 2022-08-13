@@ -5,6 +5,17 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
+		@if(User.Identity.IsAuthenticated) {
+			<p>@User.Identity.Name</p>
+ 
+		<form method="post" asp-controller="Account" asp-action="Logout">
+			<input type="submit" value="Выход" />
+		</form>
+		}
+		else {
+			<a asp-controller="Account" asp-action="Login">Вход</a>
+			<a asp-controller="Account" asp-action="Registration">Регистрация</a>
+		}
 		<p>WELCOME to AnimeHouse<br />
 Here you will find the best anime in high quality and a variety of voice acting that you will like</p>
 		<img src="img/luffy_main_page.png" />
