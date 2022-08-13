@@ -2,15 +2,20 @@
 using AnimeHouse.Models;
 using AnimeHouse.Data;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Identity;
 
 namespace AnimeHouse.Controllers
 {
 	public class AccountController : Controller
 	{
 		private readonly ILogger<AccountController> _logger;
-		public AccountController(ILogger<AccountController> logger)
+		private readonly UserManager<User> _userManager;
+		private readonly SignInManager<User> _signInManager;
+		public AccountController(ILogger<AccountController> logger, UserManager<User> userManager,SignInManager<User> signInManager)
         {
 			_logger = logger;
+			_userManager = userManager;
+			_signInManager = signInManager;
         }
 		[Route("Registration")]
 		[HttpGet]
@@ -21,16 +26,28 @@ namespace AnimeHouse.Controllers
 
 		[HttpPost]
 		[Route("Registration")]
-		public IActionResult Registration(UserRegistrationModel user, [FromServices]ApplicationContext db)
+		public async  Task<IActionResult> Registration(UserRegistrationModel user)
 		{
-			if(ModelState.IsValid)
+			if (ModelState.IsValid)
 			{
-				User user1 = new User { Email = user.Email, Nickname = user.Nickname, Password = user.Password};
+
+				User user1 = new User { Email = user.Email, UserName = user.Nickname};
 				_logger.LogInformation("User enter correct data");
-				db.Users.Add(user1);
-				_logger.LogInformation("User's data add to database");
-				db.SaveChanges();
+				var result = await _userManager.CreateAsync(user1, user.Password);
+				if (result.Succeeded)
+				{
+					await _signInManager.SignInAsync(user1, false);
+					_logger.LogInformation("User's data add to database");
+				}
+				else
+				{
+					foreach (var error in result.Errors)
+					{
+						ModelState.AddModelError(string.Empty, error.Description);
+					}
+				}
 				return RedirectToAction("Login");
+                
 			}
 			else
 			{
@@ -39,11 +56,27 @@ namespace AnimeHouse.Controllers
 			}
 
 		}
+        [AcceptVerbs("Get","Post")]
+		public async Task<IActionResult> CheckEmail(string Email)
+        {
+			_logger.LogInformation("Check Email");
+			var user = await _userManager.FindByEmailAsync(Email);
+			if (user == null)
+            {
+				_logger.LogInformation("Email is valid");
+				return Json(true);
+            }
+			_logger.LogInformation("Email is invalid");
+			return Json(false);
+
+        }
         [HttpGet]
         [Route("Login")]
 		public IActionResult Login()
         {
 			return View();
         }
+
+      
 	}
 }

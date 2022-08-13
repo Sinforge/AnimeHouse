@@ -1,11 +1,21 @@
+using AnimeHouse.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AnimeHouse.ApplicationContext>();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationContext>(options =>
+	options.UseSqlServer(connectionString));
+
+builder.Services.AddIdentity<User, IdentityRole>()
+	.AddEntityFrameworkStores<ApplicationContext>();
+
+builder.Services.AddMvc();
 
 var app = builder.Build();
 
@@ -21,7 +31,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

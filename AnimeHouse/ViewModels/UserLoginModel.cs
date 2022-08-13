@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace AnimeHouse.Models
 {
-    public class UserLoginModelcs
+    public class UserLoginModel
     {
         [BindRequired]
+        [EmailAddress]
         public string Email { get; set; }
 
 
