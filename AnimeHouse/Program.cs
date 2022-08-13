@@ -12,7 +12,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationContext>(options =>
 	options.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+	options.Password.RequireNonAlphanumeric = false;
+	options.Password.RequiredLength = 5;
+	options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
+	options.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
+	options.Password.RequireDigit = false; // требуются ли цифры
+})
 	.AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.AddMvc();

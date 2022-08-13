@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AnimeHouse.Models;
 using AnimeHouse.Data;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Identity;
 
 namespace AnimeHouse.Controllers
@@ -38,6 +37,7 @@ namespace AnimeHouse.Controllers
 				{
 					await _signInManager.SignInAsync(user1, false);
 					_logger.LogInformation("User's data add to database");
+					return RedirectToAction("Main", "Home");
 				}
 				else
 				{
@@ -45,15 +45,15 @@ namespace AnimeHouse.Controllers
 					{
 						ModelState.AddModelError(string.Empty, error.Description);
 					}
-				}
-				return RedirectToAction("Login");
-                
+			}
+             
 			}
 			else
 			{
 				_logger.LogInformation("User enter uncorrect data");
 				return View(user);
 			}
+			return View(user);
 
 		}
         [AcceptVerbs("Get","Post")]
@@ -72,9 +72,9 @@ namespace AnimeHouse.Controllers
         }
         [HttpGet]
         [Route("Login")]
-		public IActionResult Login(string returnUrl = null)
+		public IActionResult Login()
         {
-			return View(new UserLoginViewModel { ReturnUrl = returnUrl});
+			return View();
         }
 
 		[HttpPost]
@@ -83,21 +83,18 @@ namespace AnimeHouse.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				_logger.LogInformation("Uncorrect input data");
 				var result =
 					await _signInManager.PasswordSignInAsync(user.Nickname, user.Password, user.RememberMe, false);
 				if (result.Succeeded)
 				{
-					if (!string.IsNullOrEmpty(user.ReturnUrl) && Url.IsLocalUrl(user.ReturnUrl))
-					{
-						return Redirect(user.ReturnUrl);
-					}
-					else
-					{
-						return RedirectToAction("Main", "Home");
-					}
+					_logger.LogInformation("User is login");
+					return RedirectToAction("Main", "Home");
+					
 				}
 				else
 				{
+					_logger.LogInformation("Неправильно введены данные");
 					ModelState.AddModelError("", "Uncorrect nickname or password");
 				}
 

@@ -1,6 +1,6 @@
 ﻿using AnimeHouse.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnimeHouse.Controllers
 {
@@ -27,6 +27,11 @@ namespace AnimeHouse.Controllers
 			return View();
 		}
 
-		
+        [Route("/Anime/KomiSan")]
+        [Authorize]
+		public IActionResult AnimePage()
+        {
+			return View();
+        }
 	}
 }

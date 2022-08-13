@@ -5,19 +5,18 @@ namespace AnimeHouse.Models
 {
     public class UserLoginViewModel
     {
-        [BindRequired]
+        [Required]
         [Display(Name ="Nickname")]
         public string Nickname { get; set; }
 
 
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [BindRequired]
+        [Required]
         public string Password { get; set; }
 
         [Display(Name ="Remember")]
         public bool RememberMe { get; set; }
 
-        public string ReturnUrl { get; set; }
     }
 }

@@ -13,11 +13,12 @@ namespace AnimeHouse.Models
         [Remote(action:"CheckEmail", controller:"Account", ErrorMessage = "This email was taked")]
 		public string Email { get; set; }
 		[Required]
-        [Nickname(new string[] {"lox", "idiot", "nigger" }, ErrorMessage = "Uncorrect nickname")]
+        [Nickname(new string[] {"lox", "idiot", "abobus" }, ErrorMessage = "Uncorrect nickname")]
 		public string Nickname { get; set; }
 
 		[Required]
-        [DataType(DataType.Password)]
+		[StringLength(100, ErrorMessage = "Поле {0} должно иметь минимум {2} и максимум {1} символов.", MinimumLength = 5)]
+		[DataType(DataType.Password)]
 		public string Password { get; set; }
 
 
