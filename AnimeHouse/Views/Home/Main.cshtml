@@ -18,6 +18,7 @@
 		<ul>
 		  <li><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
 		  <li><a asp-action="CreateTitle" asp-controller="Anime" >Create Title</a></li>
+		  <li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
 		@if(User.Identity.IsAuthenticated) {
 			<li><a>@User.Identity.Name</a></li>
 		

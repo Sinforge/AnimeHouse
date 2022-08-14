@@ -18,32 +18,31 @@ namespace AnimeHouse.Controllers
             _directory = new DirectoryInfo(Path.Combine(Directory.GetCurrentDirectory(), @"\wwwroot\animes\"));
         }
 
-        /*[Route("Anime")]
-        public async Task<IActionResult> Anime(ApplicationContext db)
+        [Route("Anime")]
+        public IActionResult GetListAnime()
         {
             
+            return View(_db.Animes.ToArray());
 
-        }*/
+        }
 
 
 
-        
-                [HttpPost]
-                [Route("/Anime/CreateTitle")]
-                public  async Task<IActionResult> CreateTitle(AddAnimeTitleViewModel model)
-                {
-            string path = Directory.GetCurrentDirectory() + @"\wwwroot\animes\" + model.TitleEng;
-            Console.WriteLine(path);       
-            _logger.LogInformation($"Title was added and his path: {path}");
-                    Directory.CreateDirectory(path);
-                    Anime anime = new Anime { Description = model.Description, ImgPath = path, ShortDescription = model.ShortDescription, TitleName = model.TitleEng};
-                    _db.Animes.Add(anime);
-                    await _db.SaveChangesAsync();
-                    _logger.LogInformation("New title was succesful added");
+         [HttpPost]
+         [Route("/Anime/CreateTitle")]
+          public  async Task<IActionResult> CreateTitle(AddAnimeTitleViewModel model)
+          {
+                string path = Directory.GetCurrentDirectory() + @"\wwwroot\animes\" + model.TitleEng;
+                Console.WriteLine(path);       
+                _logger.LogInformation($"Title was added and his path: {path}");
+                Directory.CreateDirectory(path);
+                Anime anime = new Anime { Description = model.Description, ImgPath = path, ShortDescription = model.ShortDescription, TitleName = model.TitleEng};
+                _db.Animes.Add(anime);
+                await _db.SaveChangesAsync();
+                _logger.LogInformation("New title was succesful added");
+                return RedirectToAction("Main", "Home");
 
-                    return RedirectToAction("Main", "Home");
-
-                }
+          }
 
 
     [HttpGet]

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Anime>
+<!doctype html>
+<html>
+	<head>
+		<title>Home Page</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h2>Anime List</h2>
+		<ul>
+		@foreach(var anime in Model) {
+			<li>
+				<div>
+					<h3>@anime.TitleName</h3>
+					<img src="@anime.ImgPath" alt="Здесь должна быть картинка аниме, но автор забыл ее добавить">
+					<p>@anime.ShortDescription</p>
+				</div>
+			</li>
+		}
+		</ul>
+		
+	</body>
+</html>
