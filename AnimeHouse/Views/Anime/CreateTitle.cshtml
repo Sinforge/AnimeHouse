@@ -1,0 +1,42 @@
+﻿@model AddAnimeTitleViewModel;
+<!doctype html>
+<html>
+	<head>
+		<title>Home Page</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h2>Создание тайтла</h2>
+		@using (Html.BeginForm(FormMethod.Post))
+		{
+		<div asp-validation-summary="ModelOnly"> </div>
+			<div>
+					<label asp-for="TitleEng"></label><br />
+					<input type="text" asp-for="TitleEng" />
+					<span asp-validation-for="TitleEng" />
+			</div>
+			<div>
+
+					<label asp-for="TitleRu"></label><br />
+					<input type="text" asp-for="TitleRu" />
+					<span asp-validation-for="TitleRu" />
+			</div>
+			<div>
+
+					<label asp-for="ShortDescription"></label><br />
+					<input type="text" asp-for="ShortDescription" />
+					<span asp-validation-for="ShortDescription" />
+			</div>
+			<div>
+
+					<label asp-for="Description"></label><br />
+					<input type="text" asp-for="Description" />
+					<span asp-validation-for="Description" />
+			</div>
+			<input type="submit" value="Send">
+		}
+		<script src="~/js/jquery-3.5.1.min.js"></script>
+		<script src="~/js/jquery.validate.min.js"></script>
+		<script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+	</body>
+</html>
