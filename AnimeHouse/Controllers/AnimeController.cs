@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AnimeHouse.Models;
-using System.IO;
 using AnimeHouse.ViewModels;
 using AnimeHouse.Data;
 
@@ -26,41 +25,41 @@ namespace AnimeHouse.Controllers
 
         }
 
-		[Route("Anime")]
 		[HttpPost]
-        public async Task<IActionResult> GetListAnime(AddAnimeTitleViewModel model) { 
+        public async Task<IActionResult> ChangeAnime(AddAnimeTitleViewModel model) { 
 	
             Anime? anime = _db.Animes.FirstOrDefault(a => a.TitleName == model.Title);
             if(anime == null)
 			{
                 return NotFound();
 			}
-            if(model.Img == null)
+            if(anime.ImgName != null && model.Img != null)
 			{
-
-                return RedirectToAction("GetListAnime");
+                System.IO.File.Delete(anime.Path + @$"\{anime.ImgName}");
+                   // (anime.Path + @$"\{anime.ImgName}");
+                
 			}
-            if(anime.ImgName != null)
-			{
-                FileInfo fileInfo = new FileInfo(anime.Path + @$"\{anime.ImgName}");
-                fileInfo.Delete();
-			}
-            string FilePath = anime.Path + @$"\{model.Img.FileName}";
-            using (var fileStream = new FileStream(FilePath, FileMode.Create))
+            if(model.Img != null)
             {
-               await model.Img.CopyToAsync(fileStream);
+                string FilePath = anime.Path + @$"\{model.Img.FileName}";
+                using (var fileStream = new FileStream(FilePath, FileMode.Create))
+                {
+                    await model.Img.CopyToAsync(fileStream);
+                }
+                anime.ImgName = model.Img.FileName;
             }
+
 
 
             //Change variables of record
             anime.Description = model.Description??anime.Description;
             anime.ShortDescription = model.ShortDescription??anime.Description;
             anime.CountEpisodes = model.CountEpisodes??anime.CountEpisodes;
-            anime.Path = model.Img.FileName;
-            anime.TitleName = model.Title;
+    
+            anime.TitleName = model.Title??anime.TitleName;
             _db.SaveChanges();
             
-            return View();
+            return View("DataSuccessfulAdd", "Home");
 
 
         } 
@@ -74,7 +73,7 @@ namespace AnimeHouse.Controllers
                 _logger.LogInformation($"Title was added and his path: {path}");
                 Directory.CreateDirectory(path);
               
-                Anime anime = new Anime() { CountEpisodes = model.CountEpisodes, ImgName = model.Img?.FileName ,Description = model.Description, Path = path, ShortDescription = model.ShortDescription, TitleName = model.Title};
+                Anime anime = new Anime() { CountEpisodes = model.CountEpisodes, ImgName = model.Img?.FileName ,Description = model.Description, Path = @$"animes\{model.Title}\", ShortDescription = model.ShortDescription, TitleName = model.Title};
                 if(model.Img != null)
 			{
                 _logger.LogInformation("User add img for anime");

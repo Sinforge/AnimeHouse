@@ -13,9 +13,9 @@
 				<div>
 					<h3>@anime.TitleName</h3>
 					<h4>Count of episods: @anime.CountEpisodes</h4>
-					<img src="@(anime.Path+@"\" +anime.ImgName)" alt="Cant found img">
+					<img src="@(@anime.Path + anime.ImgName)" width="300" height="300" alt="Cant found img">
 					<p>@anime.ShortDescription</p>
-					<form asp-action="GetAnimeList" asp-controller="Anime" method="post">
+					<form asp-action="ChangeAnime" asp-controller="Anime" method="post" enctype="multipart/form-data">
 						<label for="Title">Title</label>
 						<input type="text" value="@anime.TitleName" name="Title">
 						
@@ -30,7 +30,7 @@
 						<label for="CountEpisodes">CountEpisodes</label>
 						<input type="number" value="@anime.CountEpisodes" name="CountEpisodes">
 
-						<input type="file" name="TitleImg">
+						<input type="file" name="Img">
 						<input type="submit" value="Send">
 					</form>
 				</div>
