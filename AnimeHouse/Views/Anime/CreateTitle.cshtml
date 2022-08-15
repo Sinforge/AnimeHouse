@@ -7,19 +7,12 @@
 	</head>
 	<body>
 		<h2>Создание тайтла</h2>
-		@using (Html.BeginForm(FormMethod.Post))
-		{
+		<form method="post" asp-controller="Anime" asp-action="CreateTitle" enctype="multipart/form-data">
 		<div asp-validation-summary="ModelOnly"> </div>
 			<div>
-					<label asp-for="TitleEng"></label><br />
-					<input type="text" asp-for="TitleEng" />
-					<span asp-validation-for="TitleEng" />
-			</div>
-			<div>
-
-					<label asp-for="TitleRu"></label><br />
-					<input type="text" asp-for="TitleRu" />
-					<span asp-validation-for="TitleRu" />
+					<label asp-for="Title"></label><br />
+					<input type="text" asp-for="Title" />
+					<span asp-validation-for="Title" />
 			</div>
 			<div>
 
@@ -33,8 +26,20 @@
 					<input type="text" asp-for="Description" />
 					<span asp-validation-for="Description" />
 			</div>
+			<div>
+
+					<label asp-for="CountEpisodes"></label><br />
+					<input type="number" asp-for="CountEpisodes" />
+					<span asp-validation-for="CountEpisodes" />
+			</div>
+			<div>
+
+					<label asp-for="Img"></label><br />
+					<input type="file" asp-for="Img" />
+					<span asp-validation-for="Img" />
+			</div>
 			<input type="submit" value="Send">
-		}
+		</form>
 		<script src="~/js/jquery-3.5.1.min.js"></script>
 		<script src="~/js/jquery.validate.min.js"></script>
 		<script src="~/js/jquery.validate.unobtrusive.min.js"></script>

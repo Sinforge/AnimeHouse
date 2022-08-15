@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\animes\Naruto\**" />
+    <Content Remove="wwwroot\animes\Naruto\**" />
+    <EmbeddedResource Remove="wwwroot\animes\Naruto\**" />
+    <None Remove="wwwroot\animes\Naruto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNet.WebHelpers" Version="3.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />

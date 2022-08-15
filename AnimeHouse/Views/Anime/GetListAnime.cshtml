@@ -12,8 +12,27 @@
 			<li>
 				<div>
 					<h3>@anime.TitleName</h3>
-					<img src="@anime.ImgPath" alt="Здесь должна быть картинка аниме, но автор забыл ее добавить">
+					<h4>Count of episods: @anime.CountEpisodes</h4>
+					<img src="@(anime.Path+@"\" +anime.ImgName)" alt="Cant found img">
 					<p>@anime.ShortDescription</p>
+					<form asp-action="GetAnimeList" asp-controller="Anime" method="post">
+						<label for="Title">Title</label>
+						<input type="text" value="@anime.TitleName" name="Title">
+						
+						
+						<label for="ShortDescription">ShortDescription</label>
+						<input type="text" value="@anime.ShortDescription" name="ShortDescription">
+						
+						<label for="Description">Description</label>
+						<input type="text" value="@anime.Description" name="Description">
+						
+
+						<label for="CountEpisodes">CountEpisodes</label>
+						<input type="number" value="@anime.CountEpisodes" name="CountEpisodes">
+
+						<input type="file" name="TitleImg">
+						<input type="submit" value="Send">
+					</form>
 				</div>
 			</li>
 		}
