@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using AnimeHouse.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace AnimeHouse.Data
 {
@@ -14,6 +15,9 @@ namespace AnimeHouse.Data
 			Database.EnsureCreated();
 		}
 
-	}
+     
+		
+    }
+
 }
 

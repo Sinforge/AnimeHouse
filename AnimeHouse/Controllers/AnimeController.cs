@@ -35,13 +35,13 @@ namespace AnimeHouse.Controllers
 			}
             if(anime.ImgName != null && model.Img != null)
 			{
-                System.IO.File.Delete(anime.Path + @$"\{anime.ImgName}");
+                System.IO.File.Delete($@"wwwroot\" + anime.Path + @$"\{anime.ImgName}");
                    // (anime.Path + @$"\{anime.ImgName}");
                 
 			}
             if(model.Img != null)
             {
-                string FilePath = anime.Path + @$"\{model.Img.FileName}";
+                string FilePath = $@"wwwroot\" + anime.Path + @$"\{model.Img.FileName}";
                 using (var fileStream = new FileStream(FilePath, FileMode.Create))
                 {
                     await model.Img.CopyToAsync(fileStream);

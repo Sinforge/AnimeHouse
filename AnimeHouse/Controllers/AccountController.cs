@@ -10,8 +10,10 @@ namespace AnimeHouse.Controllers
 		private readonly ILogger<AccountController> _logger;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
-		public AccountController(ILogger<AccountController> logger, UserManager<User> userManager,SignInManager<User> signInManager)
+		private readonly RoleManager<IdentityRole> _roleManager;
+		public AccountController(ILogger<AccountController> logger, UserManager<User> userManager,SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
         {
+			_roleManager = roleManager;
 			_logger = logger;
 			_userManager = userManager;
 			_signInManager = signInManager;
@@ -35,6 +37,7 @@ namespace AnimeHouse.Controllers
 				var result = await _userManager.CreateAsync(user1, user.Password);
 				if (result.Succeeded)
 				{
+					await _userManager.AddToRoleAsync(user1, "user");
 					await _signInManager.SignInAsync(user1, false);
 					_logger.LogInformation("User's data add to database");
 					return RedirectToAction("Main", "Home");

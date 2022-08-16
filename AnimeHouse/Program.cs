@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationContext>(options =>
 	options.UseSqlServer(connectionString));
@@ -25,7 +23,21 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 builder.Services.AddMvc();
 
 var app = builder.Build();
-
+using(var scope = app.Services.CreateScope())
+{
+	var services = scope.ServiceProvider;
+	try
+    {
+		var userManager = services.GetService<UserManager<User>>();
+		var roleManager = services.GetService<RoleManager<IdentityRole>>();
+		await RoleInitializer.InitializeAsync(userManager, roleManager);
+    }
+	catch(Exception ex)
+    {
+		var _logger = services.GetService<ILogger<Program>>();
+		_logger.LogError("An error occurred while seeding the database.");
+    }
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
