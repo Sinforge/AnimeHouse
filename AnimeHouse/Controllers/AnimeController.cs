@@ -122,6 +122,22 @@ namespace AnimeHouse.Controllers
             return Json(false);
 
         }
+<<<<<<< 23e86ec417bb3435f988177741faaddcd8212bf5
+=======
+        [Route("/Anime/Episods")]
+        public async Task<ActionResult> AnimePage([FromQuery] string title, [FromQuery] int episod)
+        {
+            Anime? founded_anime = _db.Animes.FirstOrDefault(a => a.TitleName == title);
+            if (founded_anime == null || episod > founded_anime?.CountEpisodes || episod < 0)
+            {
+                return NotFound();
+            }
+            return View(new AnimePageViewModel { SearchedAnime = founded_anime, EpisodId = episod});
+        }
+
+
+        
+>>>>>>> add page for watching anime
     }
     }
 

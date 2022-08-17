@@ -4,6 +4,7 @@
 	<head>
 		<title>Home Page</title>
 		<meta charset="utf-8" />
+		<base href="/" />
 	</head>
 	<body>
 		<h2>Anime List</h2>
@@ -11,7 +12,7 @@
 		@foreach(var anime in Model) {
 			<li>
 				<div>
-					<h3>@anime.TitleName</h3>
+					<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 ><h3>@anime.TitleName</h3></a>
 					<h4>Count of episods: @anime.CountEpisodes</h4>
 					<img src="@(@anime.Path + anime.ImgName)" width="300" height="300" alt="Cant found img">
 					<p>@anime.ShortDescription</p>
