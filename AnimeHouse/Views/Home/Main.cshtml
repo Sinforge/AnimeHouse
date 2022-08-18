@@ -19,7 +19,8 @@
 		  <li><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
 		@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 		{
-			<li><a asp-action="CreateTitle" asp-controller="Anime" >Create Title</a></li>
+			<li><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+			<li><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
 		}
 		<li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
 		@if(User.Identity.IsAuthenticated) {
