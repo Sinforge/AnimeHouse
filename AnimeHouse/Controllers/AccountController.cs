@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using AnimeHouse.Models;
 using AnimeHouse.Data;
 using Microsoft.AspNetCore.Identity;
+using AnimeHouse.ViewModels.AccountModels;
+using AnimeHouse.ViewModels.AccountModels;
+using AnimeHouse.Models;
 
 namespace AnimeHouse.Controllers
 {
-	public class AccountController : Controller
+    public class AccountController : Controller
 	{
 		private readonly ILogger<AccountController> _logger;
 		private readonly UserManager<User> _userManager;

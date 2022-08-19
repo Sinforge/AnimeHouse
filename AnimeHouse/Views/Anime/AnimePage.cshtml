@@ -1,5 +1,8 @@
-﻿
+﻿@using AnimeHouse.Data
+@using AnimeHouse.ViewModels.AnimeModels;
+@using Microsoft.AspNetCore.Identity
 @model AnimePageViewModel
+@inject ApplicationContext db
 <!doctype html>
 <html>
 	<head>
@@ -8,8 +11,33 @@
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="/css/StyleSheet.css">
 	</head>
+	@{
+		User user =  db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+	}
 	<body>
 		<h1>@Model.SearchedAnime.TitleName</h1>
+		<h2>@Model.SearchedAnime.Description</h2>
+		<h2>Episods count: @Model.SearchedAnime.CountEpisodes</h2>
+		@if(User.Identity.IsAuthenticated)
+		{
+			@if(user.FavoriteAnimes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
+			{
+				<button >In your favorite</button>
+
+			}
+			else
+			{
+				<p>@user.FavoriteAnimes.FirstOrDefault(a => a.Id == @Model.SearchedAnime.Id) != null)</p>
+				 <form asp-action="AddToFavorite" asp-controller="Anime" method="post">
+					 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
+					 <input hidden name="userId" value="@user.Id">
+					 <input type="submit" value="Add to favorite">
+				 </form>
+			}
+
+
+		}
+
 		<video controls="controls" autoplay="autoplay" height="300" width="400">
 			<source  src="animes\KomiSan\episods\episod1.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
 		</video>

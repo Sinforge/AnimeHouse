@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AnimeHouse.Models;
-using AnimeHouse.ViewModels;
 using AnimeHouse.Data;
+using AnimeHouse.ViewModels.AdminModels;
+using AnimeHouse.ViewModels.AnimeModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace AnimeHouse.Controllers
 {
@@ -9,10 +11,12 @@ namespace AnimeHouse.Controllers
     {
         private readonly ILogger<AnimeController> _logger;
         private readonly ApplicationContext _db;
-        public AnimeController(ILogger<AnimeController> logger, ApplicationContext db)
+        private readonly UserManager<User> _userManager;
+        public AnimeController(ILogger<AnimeController> logger, ApplicationContext db, UserManager<User> userManager)
         {
             _logger = logger;
             _db = db;
+            _userManager = userManager; 
         }
 
         [Route("Anime")]
@@ -82,6 +86,7 @@ namespace AnimeHouse.Controllers
 
         }
 
+        [HttpGet]
         [Route("/Anime/Episods")]
         public async Task<ActionResult> AnimePage([FromQuery] string title, [FromQuery] int episod)
         {
@@ -92,6 +97,21 @@ namespace AnimeHouse.Controllers
                 return NotFound();
             }
             return View(new AnimePageViewModel { SearchedAnime = founded_anime, Episod = episod });
+        }
+
+
+        public async Task<ActionResult> AddToFavorite(int animeId, string userId)
+        {
+            Anime? anime = await Task.Run(()=>_db.Animes.FirstOrDefault(a => a.Id == animeId));
+            User? user = await _userManager.FindByIdAsync(userId);
+            if (anime != null && user != null)
+            {
+                user.FavoriteAnimes.Add(anime);
+                _db.SaveChanges();
+                return Content("Anime was added to your list");
+            }
+            else return NotFound();
+            
         }
 
 

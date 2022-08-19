@@ -1,8 +1,7 @@
 ﻿using AnimeHouse.Data;
 using AnimeHouse.Models;
-using AnimeHouse.ViewModels;
+using AnimeHouse.ViewModels.AdminModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

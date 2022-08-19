@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace AnimeHouse.ViewModels
+namespace AnimeHouse.ViewModels.AdminModels
 {
     public class UserListForAdminViewModel
     {

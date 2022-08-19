@@ -1,5 +1,6 @@
 ﻿using AnimeHouse.Models;
-namespace AnimeHouse.ViewModels
+
+namespace AnimeHouse.ViewModels.AnimeModels
 {
     public class AnimePageViewModel
     {

@@ -1,4 +1,5 @@
 using AnimeHouse.Data;
+using AnimeHouse.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

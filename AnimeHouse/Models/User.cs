@@ -1,9 +1,19 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
-namespace AnimeHouse.Data
-{
-    public class User: IdentityUser
-    {
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-	}
+namespace AnimeHouse.Models
+{
+    public class User : IdentityUser
+    {
+        public ICollection<Anime> FavoriteAnimes {get;set;}
+        public User()
+        {
+            FavoriteAnimes = new List<Anime>();
+        }
+        
+    }
+
+
 }

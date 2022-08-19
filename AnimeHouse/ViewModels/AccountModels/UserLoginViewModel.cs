@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnimeHouse.Models
+namespace AnimeHouse.ViewModels.AccountModels
 {
     public class UserLoginViewModel
     {
         [Required]
-        [Display(Name ="Nickname")]
+        [Display(Name = "Nickname")]
         public string Nickname { get; set; }
 
 
@@ -15,7 +15,7 @@ namespace AnimeHouse.Models
         [Required]
         public string Password { get; set; }
 
-        [Display(Name ="Remember")]
+        [Display(Name = "Remember")]
         public bool RememberMe { get; set; }
 
     }
