@@ -4,6 +4,7 @@ using AnimeHouse.Data;
 using AnimeHouse.ViewModels.AdminModels;
 using AnimeHouse.ViewModels.AnimeModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnimeHouse.Controllers
 {
@@ -103,10 +104,10 @@ namespace AnimeHouse.Controllers
         public async Task<ActionResult> AddToFavorite(int animeId, string userId)
         {
             Anime? anime = await Task.Run(()=>_db.Animes.FirstOrDefault(a => a.Id == animeId));
-            User? user = await _userManager.FindByIdAsync(userId);
+            User? user = _db.Users.Include(u => u.Animes).FirstOrDefault(u => u.Id == userId);
             if (anime != null && user != null)
             {
-                user.FavoriteAnimes.Add(anime);
+                user.Animes.Add(anime);
                 _db.SaveChanges();
                 return Content("Anime was added to your list");
             }

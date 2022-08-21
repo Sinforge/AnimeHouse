@@ -7,11 +7,8 @@ namespace AnimeHouse.Models
 {
     public class User : IdentityUser
     {
-        public ICollection<Anime> FavoriteAnimes {get;set;}
-        public User()
-        {
-            FavoriteAnimes = new List<Anime>();
-        }
+        public List<Anime> Animes {get;set;} = new List<Anime>();
+
         
     }
 

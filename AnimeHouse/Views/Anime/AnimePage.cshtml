@@ -1,6 +1,7 @@
 ﻿@using AnimeHouse.Data
 @using AnimeHouse.ViewModels.AnimeModels;
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @model AnimePageViewModel
 @inject ApplicationContext db
 <!doctype html>
@@ -12,7 +13,7 @@
 		<link rel="stylesheet" href="/css/StyleSheet.css">
 	</head>
 	@{
-		User user =  db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+		User user =  db.Users.Include(u=> u.Animes).FirstOrDefault(u => u.UserName == User.Identity.Name);
 	}
 	<body>
 		<h1>@Model.SearchedAnime.TitleName</h1>
@@ -20,14 +21,14 @@
 		<h2>Episods count: @Model.SearchedAnime.CountEpisodes</h2>
 		@if(User.Identity.IsAuthenticated)
 		{
-			@if(user.FavoriteAnimes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
+			@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
 			{
 				<button >In your favorite</button>
 
 			}
 			else
 			{
-				<p>@user.FavoriteAnimes.FirstOrDefault(a => a.Id == @Model.SearchedAnime.Id) != null)</p>
+				<p>@user.Animes.FirstOrDefault(a => a.Id == @Model.SearchedAnime.Id) != null)</p>
 				 <form asp-action="AddToFavorite" asp-controller="Anime" method="post">
 					 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
 					 <input hidden name="userId" value="@user.Id">

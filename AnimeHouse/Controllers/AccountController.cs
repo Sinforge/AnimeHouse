@@ -111,7 +111,7 @@ namespace AnimeHouse.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Logout()
 		{
-			// удаляем аутентификационные куки
+			// delete auth cookies
 			await _signInManager.SignOutAsync();
 			return RedirectToAction("Main", "Home");
 		}

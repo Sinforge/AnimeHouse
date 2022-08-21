@@ -13,11 +13,8 @@
         public string? ImgName { get; set; }
 
         public int? CountEpisodes { get; set; }
-        public ICollection<User> Users { get; set; }
-        public Anime()
-        {
-            Users = new List<User>();
-        }
+        public List<User> Users { get; set; } = new List<User>();
+
 
     }
 }
