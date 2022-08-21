@@ -5,6 +5,7 @@ using AnimeHouse.ViewModels.AdminModels;
 using AnimeHouse.ViewModels.AnimeModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnimeHouse.Controllers
 {
@@ -101,6 +102,7 @@ namespace AnimeHouse.Controllers
         }
 
 
+        [Authorize]
         public async Task<ActionResult> AddToFavorite(int animeId, string userId)
         {
             Anime? anime = await Task.Run(()=>_db.Animes.FirstOrDefault(a => a.Id == animeId));
@@ -109,10 +111,25 @@ namespace AnimeHouse.Controllers
             {
                 user.Animes.Add(anime);
                 _db.SaveChanges();
-                return Content("Anime was added to your list");
+                return Content("AnimePage");
             }
             else return NotFound();
             
+        }
+
+        [Authorize]
+        public async Task<ActionResult> DeleteFromFavorite(int animeId, string userId)
+        {
+            Anime? anime = await Task.Run(() => _db.Animes.FirstOrDefault(a => a.Id == animeId));
+            User? user = _db.Users.Include(u => u.Animes).FirstOrDefault(u => u.Id == userId);
+            if (anime != null && user != null)
+            {
+                user.Animes.Remove(anime);
+                _db.SaveChanges();
+                return RedirectToAction("AnimePage");
+            }
+            else return NotFound();
+
         }
 
 

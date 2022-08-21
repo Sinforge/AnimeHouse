@@ -1,0 +1,22 @@
+﻿@using AnimeHouse.Data
+@inject ApplicationContext db;
+<!doctype html>
+<html>
+	
+	<head>
+		<title>Home Page</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="/css/StyleSheet.css">
+	</head>
+
+	@{
+		User user =  db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+	}	
+	
+	<body background="/img/background_main.png">
+		<a asp-action="PersonData" asp-controller="Profile">Person Data</a>
+		<a asp-action="FavoriteAnimeList" asp-controller="Profile" asp-route-UserId="@user.Id">List of favorite animes</a>
+
+		
+	</body>
+</html>

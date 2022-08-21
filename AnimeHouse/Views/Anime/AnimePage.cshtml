@@ -23,12 +23,15 @@
 		{
 			@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
 			{
-				<button >In your favorite</button>
+				<form asp-action="DeleteFromFavorite" asp-controller="Anime" method="post">
+					 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
+					 <input hidden name="userId" value="@user.Id">
+					 <input type="submit" value="Delete From favorite">
+				 </form>
 
 			}
 			else
 			{
-				<p>@user.Animes.FirstOrDefault(a => a.Id == @Model.SearchedAnime.Id) != null)</p>
 				 <form asp-action="AddToFavorite" asp-controller="Anime" method="post">
 					 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
 					 <input hidden name="userId" value="@user.Id">

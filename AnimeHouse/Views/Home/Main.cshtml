@@ -24,7 +24,7 @@
 		}
 		<li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
 		@if(User.Identity.IsAuthenticated) {
-			<li><a>@User.Identity.Name</a></li>
+			<li><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
 		
 			<li>
 				<form method="post" asp-controller="Account" asp-action="Logout">

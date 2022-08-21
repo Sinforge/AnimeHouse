@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Anime>
+<!doctype html>
+<html>
+	<head>
+		<title>Home Page</title>
+		<base href="/" />
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="/css/StyleSheet.css">
+	</head>
+	<style>
+			body
+			{
+			  background-image: url("/img/background_main.png");
+			  background-repeat: no-repeat;
+			  background-size: cover;
+			}
+		 </style>
+	<body background="/img/background_main.png">
+		 
+		<h2>Favorite Anime List</h2>
+		<ul>
+		@foreach(var anime in Model) {
+			<li>
+				<div>
+					<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 ><h3>@anime.TitleName</h3></a>
+					<img src="@(@anime.Path + anime.ImgName)" width="300" height="300" alt="Cant found img">
+					<p>@anime.ShortDescription</p>
+				</div>
+			</li>
+		}
+		</ul>
+
+		
+	</body>
+</html>
