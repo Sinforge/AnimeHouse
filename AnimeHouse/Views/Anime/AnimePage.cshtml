@@ -42,10 +42,33 @@
 
 		}
 
-		<video controls="controls" autoplay="autoplay" height="300" width="400">
-			<source  src="animes\KomiSan\episods\episod1.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
-		</video>
-		
+	<video controls="controls" autoplay="autoplay" height="300" width="400">
+		<source  src="animes\KomiSan\episods\episod1.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
+	</video>
+
+	<h3>Comments</h3>
+	@if(!User.Identity.IsAuthenticated) {
+		<h4>Comments can be left by registered users</h4>
+	}
+	else
+	{
+		<h4>Leave Comment</h4>
+		<form asp-action="LeaveСomment" asp-controller="Anime" method="post">
+			<input hidden name="userName" type="text" value="@user.UserName">
+			<input hidden name="animeId" type="number" value="@Model.SearchedAnime.Id">
+			<textarea name="text" cols="30" rows="50"></textarea>
+			<input type="submit" value="Leave">
+		</form>
+	}
+	<h4>All comments</h4>
+	@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
+	{
+		<div>
+			<h5>@comment.UserName</h5><br/>
+			<p>@comment.Text</p>
+		</div><br/>
+	}
+
 	</body>
 </html>
 

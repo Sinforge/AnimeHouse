@@ -90,7 +90,7 @@ namespace AnimeHouse.Controllers
 
         [HttpGet]
         [Route("/Anime/Episods")]
-        public async Task<ActionResult> AnimePage([FromQuery] string title, [FromQuery] int episod)
+        public async Task<IActionResult> AnimePage([FromQuery] string title, [FromQuery] int episod)
         {
             Anime? founded_anime = null;
             await Task.Run(() => { founded_anime = _db.Animes.FirstOrDefault(a => a.TitleName == title); });
@@ -103,7 +103,7 @@ namespace AnimeHouse.Controllers
 
 
         [Authorize]
-        public async Task<ActionResult> AddToFavorite(int animeId, string userId)
+        public async Task<IActionResult> AddToFavorite(int animeId, string userId)
         {
             Anime? anime = await Task.Run(()=>_db.Animes.FirstOrDefault(a => a.Id == animeId));
             User? user = _db.Users.Include(u => u.Animes).FirstOrDefault(u => u.Id == userId);
@@ -118,7 +118,7 @@ namespace AnimeHouse.Controllers
         }
 
         [Authorize]
-        public async Task<ActionResult> DeleteFromFavorite(int animeId, string userId)
+        public async Task<IActionResult> DeleteFromFavorite(int animeId, string userId)
         {
             Anime? anime = await Task.Run(() => _db.Animes.FirstOrDefault(a => a.Id == animeId));
             User? user = _db.Users.Include(u => u.Animes).FirstOrDefault(u => u.Id == userId);
@@ -132,6 +132,21 @@ namespace AnimeHouse.Controllers
 
         }
 
+
+
+
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult LeaveСomment(string userName, int animeId, string text)
+        {
+            Comment comment = new Comment { UserName = userName, AnimeId = animeId, Text = text };
+            _db.Comments.Add(comment);
+            _db.SaveChanges();
+
+            return View("AnimePage");
+
+        }
 
 
     }
