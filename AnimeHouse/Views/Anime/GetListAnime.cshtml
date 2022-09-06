@@ -7,40 +7,52 @@
 		<base href="/" />
 	</head>
 	<body>
+		<h2>Search of animes</h2>
+		<form method="get" asp-action="SearchAnime" asp-controller="Anime">
+			<input name="animeTitle" type="text"  />
+			<input type="submit" value="Отправить"/>
+		</form>
 		<h2>Anime List</h2>
-		<ul>
-		@foreach(var anime in Model) {
-			<li>
-				<div>
-					<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 ><h3>@anime.TitleName</h3></a>
-					<h4>Count of episods: @anime.CountEpisodes</h4>
-					<img src="@(@anime.Path + anime.ImgName)" width="300" height="300" alt="Cant found img">
-					<p>@anime.ShortDescription</p>
-					@if (@User.IsInRole("admin") || @User.IsInRole("moderator"))
-					{
-						<form asp-action="ChangeAnime" asp-controller="Anime" method="post" enctype="multipart/form-data">
-							<label for="Title">Title</label>
-							<input type="text" value="@anime.TitleName" name="Title">
+		@if (Model != null) {
+			<ul>
+
+			@foreach(var anime in Model) {
+				<li>
+					<div>
+						<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 ><h3>@anime.TitleName</h3></a>
+						<h4>Count of episods: @anime.CountEpisodes</h4>
+						<img src="@(@anime.Path + anime.ImgName)" width="300" height="300" alt="Cant found img">
+						<p>@anime.ShortDescription</p>
+						@if (@User.IsInRole("admin") || @User.IsInRole("moderator"))
+						{
+							<form asp-action="ChangeAnime" asp-controller="Anime" method="post" enctype="multipart/form-data">
+								<label for="Title">Title</label>
+								<input type="text" value="@anime.TitleName" name="Title">
 
 
-							<label for="ShortDescription">ShortDescription</label>
-							<input type="text" value="@anime.ShortDescription" name="ShortDescription">
+								<label for="ShortDescription">ShortDescription</label>
+								<input type="text" value="@anime.ShortDescription" name="ShortDescription">
 
-							<label for="Description">Description</label>
-							<input type="text" value="@anime.Description" name="Description">
+								<label for="Description">Description</label>
+								<input type="text" value="@anime.Description" name="Description">
 
 
-							<label for="CountEpisodes">CountEpisodes</label>
-							<input type="number" value="@anime.CountEpisodes" name="CountEpisodes">
+								<label for="CountEpisodes">CountEpisodes</label>
+								<input type="number" value="@anime.CountEpisodes" name="CountEpisodes">
 
-							<input type="file" name="Img">
-							<input type="submit" value="Send">
-						</form>
-					}
-				</div>
-			</li>
-		}
+								<input type="file" name="Img">
+								<input type="submit" value="Send">
+							</form>
+						}
+					</div>
+				</li>
+			}
 		</ul>
-		
-	</body>
+		}
+		else
+		{
+			<h2>We can find nothing</h2>
+		}
+	
+</body>
 </html>

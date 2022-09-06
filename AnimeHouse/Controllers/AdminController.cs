@@ -140,5 +140,45 @@ namespace AnimeHouse.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeAnime(AddAnimeTitleViewModel model)
+        {
+
+            Anime? anime = _db.Animes.FirstOrDefault(a => a.TitleName == model.Title);
+            if (anime == null)
+            {
+                return NotFound();
+            }
+            if (anime.ImgName != null && model.Img != null)
+            {
+                System.IO.File.Delete($@"wwwroot\" + anime.Path + @$"\{anime.ImgName}");
+                // (anime.Path + @$"\{anime.ImgName}");
+
+            }
+            if (model.Img != null)
+            {
+                string FilePath = $@"wwwroot\" + anime.Path + @$"\{model.Img.FileName}";
+                using (var fileStream = new FileStream(FilePath, FileMode.Create))
+                {
+                    await model.Img.CopyToAsync(fileStream);
+                }
+                anime.ImgName = model.Img.FileName;
+            }
+
+
+
+            //Change variables of record
+            anime.Description = model.Description ?? anime.Description;
+            anime.ShortDescription = model.ShortDescription ?? anime.Description;
+            anime.CountEpisodes = model.CountEpisodes ?? anime.CountEpisodes;
+
+            anime.TitleName = model.Title ?? anime.TitleName;
+            _db.SaveChanges();
+
+            return View("DataSuccessfulAdd", "Home");
+
+
+        }
     }
 }

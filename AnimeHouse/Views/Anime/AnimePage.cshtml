@@ -64,7 +64,7 @@
 	@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
 	{
 		<div>
-			<h5>@comment.UserName</h5><br/>
+			<h5>@comment.UserName</h5>
 			<p>@comment.Text</p>
 		</div><br/>
 	}
