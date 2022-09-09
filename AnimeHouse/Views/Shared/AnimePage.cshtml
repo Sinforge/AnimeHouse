@@ -62,12 +62,29 @@
 		</form>
 	}
 	<h4>All comments</h4>
-	@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
-	{
-		<div>
-			<h5>@comment.UserName</h5>
-			<p>@comment.Text</p>
-		</div><br/>
+	@if (User.IsInRole("admin") || @User.IsInRole("moderator")) {
+		@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
+		{
+			<div>
+				<form method="post" asp-action="DeleteComment" asp-controller="Admin">
+					<input value="@comment.UserName" name="userName" hidden>
+					<input value="@Model.SearchedAnime.Id" name="animeId" hidden>
+					<input value="@comment.Text" name="text" hidden>
+					<input type="submit" value="Удалить">
+				</form>
+				<h5>@comment.UserName</h5>
+				<p>@comment.Text</p>
+			</div><br/>
+		}
+	}
+	else {
+		@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
+		{
+			<div>
+				<h5>@comment.UserName</h5>
+				<p>@comment.Text</p>
+			</div><br/>
+		}
 	}
 
 	</body>

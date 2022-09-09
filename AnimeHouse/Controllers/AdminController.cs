@@ -4,6 +4,7 @@ using AnimeHouse.ViewModels.AdminModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using AnimeHouse.ViewModels.AnimeModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace AnimeHouse.Controllers
@@ -179,6 +180,18 @@ namespace AnimeHouse.Controllers
             return View("DataSuccessfulAdd", "Home");
 
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment(string userName, int animeId, string text)
+        {
+            Comment? finded_comment = await _db.Comments.FirstOrDefaultAsync(c => c.UserName == userName && c.AnimeId == animeId && c.Text == text);
+            if (finded_comment != null)
+            {
+                _db.Comments.Remove(finded_comment);
+                _db.SaveChanges();
+            }
+             return View("AnimePage", new  AnimePageViewModel { Episod = 1, SearchedAnime = await _db.Animes.FirstOrDefaultAsync(a => a.Id == animeId)});
         }
     }
 }
