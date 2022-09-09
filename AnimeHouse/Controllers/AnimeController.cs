@@ -117,7 +117,7 @@ namespace AnimeHouse.Controllers
             _db.Comments.Add(comment);
             _db.SaveChanges();
 
-            return View("AnimePage");
+            return View("AnimePage", _db.Animes.FirstOrDefault(a => a.Id = animeId));
 
         }
 

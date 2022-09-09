@@ -142,7 +142,7 @@ namespace AnimeHouse.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangeAnime(AddAnimeTitleViewModel model)
+        public async Task<IActionResult> ChangeAnime([FromForm] AddAnimeTitleViewModel model)
         {
 
             Anime? anime = _db.Animes.FirstOrDefault(a => a.TitleName == model.Title);
