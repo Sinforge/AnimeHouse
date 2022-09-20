@@ -3,31 +3,62 @@
 <html>
 	<head>
 		<title>Home Page</title>
+				<link rel="stylesheet" href="/css/StyleSheet.css">
+
 		<meta charset="utf-8" />
 	</head>
-	<body>
+	<body class="reg_log">
+		<header>
+			<nav>
+		 
+				<ul>
+				  <li><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+				{
+					<li><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+				}
+				<li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				@if(User.Identity.IsAuthenticated) {
+					<li><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+		
+					<li>
+						<form method="post" asp-controller="Account" asp-action="Logout">
+							<input type="submit" value="Выход" />
+						</form>
+					</li>
+				}
+				else {
+					<li><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+				}
+				</ul>
+			</nav>
+		</header>
 		<h2>Login</h2>
-		<form method="post" asp-controller="Account" asp-action="Login">
-			<div asp-validation-summary="ModelOnly">			</div>
+		<div class="center_form">
+			<form method="post" asp-controller="Account" asp-action="Login">
+				<div asp-validation-summary="ModelOnly"></div>
 
-				<div>
-					<label asp-for="Nickname"></label><br />
-					<input asp-for="Nickname" />
-					<span asp-validation-for="Nickname"></span>
-				</div>
-				<div>
-					<label asp-for="Password"></label><br />
-					<input asp-for="Password" />
-					<span asp-validation-for="Password"></span>
-				</div>
-				<div>
-					<label asp-for="RememberMe"></label><br />
-					<input asp-for="RememberMe" />
-				</div>
-				<div>
-					<input type="submit" value="Login">
-				</div>
-		</form>
+					<div class="text-field">
+						<label asp-for="Nickname" class="text-field__label"></label><br />
+						<input asp-for="Nickname" class="text-field__input" />
+						<span asp-validation-for="Nickname" class="span_errors"></span>
+					</div>
+					<div class="text-field">
+						<label asp-for="Password" class="text-field__label"></label><br />
+						<input asp-for="Password" class="text-field__input" />
+						<span asp-validation-for="Password"  class="span_errors"></span>
+					</div>
+					<div class="text-field">
+						<label asp-for="RememberMe" class="text-field__label"></label>
+						<input asp-for="RememberMe" class="text-field__input"  />
+					</div>
+					<div class="text-field">
+						<button type="submit" class="form-button">Login</button>
+					</div>
+			</form>
+		</div>
 		<script src="~/js/jquery-3.5.1.min.js"></script>
 		<script src="~/js/jquery.validate.min.js"></script>
 		<script src="~/js/jquery.validate.unobtrusive.min.js"></script>

@@ -17,6 +17,33 @@
 		User user =  db.Users.Include(u=> u.Animes).FirstOrDefault(u => u.UserName == User.Identity.Name);
 	}
 	<body>
+		<header>
+			<nav>
+		 
+				<ul>
+				  <li><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+				{
+					<li><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+				}
+				<li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				@if(User.Identity.IsAuthenticated) {
+					<li><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+		
+					<li>
+						<form method="post" asp-controller="Account" asp-action="Logout">
+							<input type="submit" value="Выход" />
+						</form>
+					</li>
+				}
+				else {
+					<li><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+				}
+				</ul>
+			</nav>
+		</header>
 		<h1>@Model.SearchedAnime.TitleName</h1>
 		<h2>@Model.SearchedAnime.Description</h2>
 		<h2>Episods count: @Model.SearchedAnime.CountEpisodes</h2>
@@ -53,6 +80,7 @@
 	}
 	else
 	{
+
 		<h4>Leave Comment</h4>
 		<form asp-action="LeaveСomment" asp-controller="Anime" method="post">
 			<input hidden name="userName" type="text" value="@user.UserName">

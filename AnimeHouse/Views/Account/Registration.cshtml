@@ -3,39 +3,69 @@
 <html>
 	<head>
 		<title>Home Page</title>
+				<link rel="stylesheet" href="/css/StyleSheet.css">
+
 		<meta charset="utf-8" />
 	</head>
-	<body>
-		<h2>Регистрация</h2>
-		@using (Html.BeginForm(FormMethod.Post))
-		{
-		<div asp-validation-summary="All">
-			<div>
-					<label asp-for="Email">Email</label><br />
-					<input type="email" asp-for="Email" />
-					<span asp-validation-for="Email" />
-			</div>
-			<div>
+	<body class="reg_log">
+		<header>
+			<nav>
+		 
+				<ul>
+				  <li><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+				{
+					<li><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+				}
+				<li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				@if(User.Identity.IsAuthenticated) {
+					<li><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+		
+					<li>
+						<form method="post" asp-controller="Account" asp-action="Logout">
+							<input type="submit" value="Выход" />
+						</form>
+					</li>
+				}
+				else {
+					<li><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+				}
+				</ul>
+			</nav>
+		</header>
+		<div class="center_form">
+			<h2>Регистрация</h2>
+			<form method="post">
+					<div class="text-field">
+							<label asp-for="Email" class="text-field__label">Email</label><br />
+							<input type="email" asp-for="Email" class="text-field__input" />
+							<span asp-validation-for="Email" class="span_erros" />
+					</div>
+					<div class="text-field">
 
-					<label asp-for="Nickname">Nickname</label><br />
-					<input type="text" asp-for="Nickname" />
-					<span asp-validation-for="Nickname" />
-			</div>
-			<div>
+							<label asp-for="Nickname" class="text-field__label">Nickname</label><br />
+							<input type="text" asp-for="Nickname" class="text-field__input" />
+							<span asp-validation-for="Nickname" class="span_erros"/>
+					</div>
+					<div class="text-field">
 
-					<label asp-for="Password">Password</label><br />
-					<input type="password" asp-for="Password" />
-					<span asp-validation-for="Password" />
-			</div>
-			<div>
+							<label asp-for="Password" class="text-field__label">Password</label><br />
+							<input type="password" asp-for="Password" class="text-field__input"  />
+							<span asp-validation-for="Password" class="span_erros"/>
+					</div>
+					<div class="text-field">
 
-					<label asp-for="PasswordConfirm">Password</label><br />
-					<input type="password" asp-for="PasswordConfirm" />
-					<span asp-validation-for="PasswordConfirm" />
-			</div>
-			<input type="submit" value="Send">
+							<label asp-for="PasswordConfirm" class="text-field__label">Password Confirm</label><br />
+							<input type="password" asp-for="PasswordConfirm" class="text-field__input" />
+							<span asp-validation-for="PasswordConfirm" class="span_erros" />
+					</div>
+					<div class="text-field">
+						<button type="submit" class="form-button">Register</button>
+					</div>
+			</form>
 		</div>
-		}
 		<script src="~/js/jquery-3.5.1.min.js"></script>
 		<script src="~/js/jquery.validate.min.js"></script>
 		<script src="~/js/jquery.validate.unobtrusive.min.js"></script>

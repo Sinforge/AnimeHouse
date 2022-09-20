@@ -9,32 +9,58 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
-		<h2>User list
-		</h2>
-		<table>
-			<tr>
-				<td>User Id</td>
-				<td>User Email</td>
-				<td>User Nickname</td>
-				<td colspan="3">User Roles</td>
-			</tr>
-			@foreach(var User in Model) {
-					<tr>
-						<td>@User.UserId</td>
-						<td>@User.UserEmail</td>
-						<td>@User.UserNickname</td>
-						<td>@foreach (var role in @User.UserRoles)
-							{
-								<p>@role</p>
-							}
-						</td>
-						<td>
-							<form asp-action="EditRole" asp-route-id="@User.UserId"  asp-controller="Admin" method="get">
-								<input type="submit" value="Change">
-							</form>
-						</td>
-					</tr>
-			}
-		</table>
+		<header>
+			<nav>
+		 
+				<ul>
+				  <li><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+				{
+					<li><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+				}
+				<li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				@if(User.Identity.IsAuthenticated) {
+					<li><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+		
+					<li>
+						<form method="post" asp-controller="Account" asp-action="Logout">
+							<input type="submit" value="Выход" />
+						</form>
+					</li>
+				}
+				else {
+					<li><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+				}
+				</ul>
+			</nav>
+		</header>
+			<h2>User list</h2>
+			<table>
+				<tr>
+					<td>User Id</td>
+					<td>User Email</td>
+					<td>User Nickname</td>
+					<td colspan="3">User Roles</td>
+				</tr>
+				@foreach(var User in Model) {
+						<tr>
+							<td>@User.UserId</td>
+							<td>@User.UserEmail</td>
+							<td>@User.UserNickname</td>
+							<td>@foreach (var role in @User.UserRoles)
+								{
+									<p>@role</p>
+								}
+							</td>
+							<td>
+								<form asp-action="EditRole" asp-route-id="@User.UserId"  asp-controller="Admin" method="get">
+									<input type="submit" value="Change">
+								</form>
+							</td>
+						</tr>
+				}
+			</table>
 	</body>
 </html>

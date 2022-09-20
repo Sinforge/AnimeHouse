@@ -4,7 +4,6 @@
     padding: 0;
     overflow: hidden;
     background-color: #E0B863;
-    position: fixed;
     top: 0;
     width: 100%;
 }
@@ -35,3 +34,69 @@ li {
 .active {
     background-color: darkorange;
 }
+nav {
+    margin-bottom: auto
+}
+#greetings {
+    margin-left: 100px;
+    margin-top: 70px;
+}
+
+
+.reg_log {
+    text-align: center;
+    background-color: bisque;
+}
+.center_form {
+    padding: 50px 100px 50px 100px;
+    margin-top: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: burlywood;
+    border-radius: 30px 40px;
+}
+.text-field {
+    margin-bottom: 1rem;
+}
+
+
+.text-field__label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.text-field__input {
+    display: block;
+    width: 100%;
+    height: calc(1.5rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-button {
+    appearance: none;
+    padding: 10px 20px 10px 20px;
+    border: 0;
+    border-radius: 0;
+    background: #000000;
+    color:white;
+    font-size: 30px;
+
+
+}
+
+.span_erros {
+    color: orangered;
+}
+
