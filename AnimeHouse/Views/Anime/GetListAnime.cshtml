@@ -4,9 +4,10 @@
 	<head>
 		<title>Home Page</title>
 		<meta charset="utf-8" />
+				<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 				<link rel="stylesheet" href="/css/StyleSheet.css">
 
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 		<base href="/" />
 	</head>
@@ -15,26 +16,26 @@
 		<header>
 			<nav>
 		 
-				<ul>
-				  <li><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				<ul class="nav_bar">
+				  <li class="nav-bar-element"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
 				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 				{
-					<li><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
-					<li><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+					<li  class="nav-bar-element"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li  class="nav-bar-element"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
 				}
-				<li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				<li  class="nav-bar-element"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
 				@if(User.Identity.IsAuthenticated) {
-					<li><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+					<li  class="nav-bar-element"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
 		
-					<li>
+					<li  class="nav-bar-element">
 						<form method="post" asp-controller="Account" asp-action="Logout">
 							<input type="submit" value="Выход" />
 						</form>
 					</li>
 				}
 				else {
-					<li><a asp-controller="Account" asp-action="Login">Login</a></li>
-					<li><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+					<li  class="nav-bar-element"><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li  class="nav-bar-element"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
 				}
 				</ul>
 			</nav>
@@ -45,46 +46,31 @@
 			<input type="submit" value="Отправить"/>
 		</form>
 		<h2>Anime List</h2>
-		@if (Model != null) {
-			<ul>
+		<div class="anime-list">
+			@if (Model != null) {
+				<ul>
 
-			@foreach(var anime in Model) {
-				<li>
-					<div>
-						<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 ><h3>@anime.TitleName</h3></a>
-						<h4>Count of episods: @anime.CountEpisodes</h4>
-						<img src="@(@anime.Path + anime.ImgName)" width="300" height="300" alt="Cant found img">
-						<p>@anime.ShortDescription</p>
-						@if (@User.IsInRole("admin") || @User.IsInRole("moderator"))
-						{
-							<form asp-action="ChangeAnime" asp-controller="Admin" method="post" enctype="multipart/form-data">
-								<label for="Title">Title</label>
-								<input type="text" value="@anime.TitleName" name="Title">
-
-
-								<label for="ShortDescription">ShortDescription</label>
-								<input type="text" value="@anime.ShortDescription" name="ShortDescription">
-
-								<label for="Description">Description</label>
-								<input type="text" value="@anime.Description" name="Description">
-
-
-								<label for="CountEpisodes">CountEpisodes</label>
-								<input type="number" value="@anime.CountEpisodes" name="CountEpisodes">
-
-								<input type="file" src="/animes/@anime.TitleName/@anime.ImgName" name="Img">
-								<input type="submit" value="Send">
-							</form>
-						}
-					</div>
-				</li>
+				@foreach(var anime in Model) {
+					<li>
+						<div class="anime-list-item">
+							<div class="anime-list-item-img">
+								<img src="@(@anime.Path + anime.ImgName)" width="200" height="250" alt="Cant found img">
+							</div>
+							<div class="anime-list-item-info">
+								<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 >@anime.TitleName</a>
+								<p>Count of episods: @anime.CountEpisodes</p>
+								<p>@anime.ShortDescription</p>
+							</div>
+						</div>
+					</li>
+				}
+			</ul>
 			}
-		</ul>
-		}
-		else
-		{
-			<h2>We can find nothing</h2>
-		}
+			else
+			{
+				<h2>We can find nothing</h2>
+			}
+		</div>
 	
 </body>
 </html>

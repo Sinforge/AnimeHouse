@@ -11,26 +11,26 @@
 		<header>
 			<nav>
 		 
-				<ul>
-				  <li><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				<ul class="nav_bar">
+				  <li  class="nav-bar-element"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
 				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 				{
-					<li><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
-					<li><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+					<li  class="nav-bar-element"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li  class="nav-bar-element"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
 				}
-				<li><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				<li  class="nav-bar-element"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
 				@if(User.Identity.IsAuthenticated) {
-					<li><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+					<li  class="nav-bar-element"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
 		
-					<li>
+					<li  class="nav-bar-element">
 						<form method="post" asp-controller="Account" asp-action="Logout">
 							<input type="submit" value="Выход" />
 						</form>
 					</li>
 				}
 				else {
-					<li><a asp-controller="Account" asp-action="Login">Login</a></li>
-					<li><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+					<li  class="nav-bar-element"><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li  class="nav-bar-element"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
 				}
 				</ul>
 			</nav>
