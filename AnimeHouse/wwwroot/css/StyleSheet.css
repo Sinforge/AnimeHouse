@@ -137,3 +137,30 @@ nav {
 body {
     background-color:rgb(246,64,64) ;
 }
+
+
+.anime {
+    margin: 30px 30px 0px 30px;
+    background: grey;
+
+    column-count: 1;
+}
+
+
+
+#anime-description {
+    width: 70%;
+    float:right;
+    font-size: 20px;
+}
+
+#anime-poster {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 20%;
+    float:left;
+}
+#anime-poster img {
+    width: 200px;
+    height: 300px;
+}

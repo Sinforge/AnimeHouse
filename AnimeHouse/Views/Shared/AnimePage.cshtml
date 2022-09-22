@@ -44,36 +44,45 @@
 				</ul>
 			</nav>
 		</header>
-		<h1>@Model.SearchedAnime.TitleName</h1>
-		<h2>@Model.SearchedAnime.Description</h2>
-		<h2>Episods count: @Model.SearchedAnime.CountEpisodes</h2>
-		@if(User.Identity.IsAuthenticated)
-		{
-			@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
-			{
-				<form asp-action="DeleteFromFavorite" asp-controller="Anime" method="post">
-					 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
-					 <input hidden name="userId" value="@user.Id">
-					 <input type="submit" value="Delete From favorite">
-				 </form>
 
-			}
-			else
-			{
-				 <form asp-action="AddToFavorite" asp-controller="Anime" method="post">
-					 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
-					 <input hidden name="userId" value="@user.Id">
-					 <input type="submit" value="Add to favorite">
-				 </form>
-			}
+		<div class="anime" >
+			<div id="anime-poster">
+				<img src="@(@Model.SearchedAnime.Path + @Model.SearchedAnime.ImgName)" />
+				@if(User.Identity.IsAuthenticated)	{
+						@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
+						{
+							<form asp-action="DeleteFromFavorite" asp-controller="Anime" method="post">
+								 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
+								 <input hidden name="userId" value="@user.Id">
+								 <input type="submit" value="Delete From favorite">
+							 </form>
+
+						}
+						else
+						{
+							 <form asp-action="AddToFavorite" asp-controller="Anime" method="post">
+								 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
+								 <input hidden name="userId" value="@user.Id">
+								 <input type="submit" value="Add to favorite">
+							 </form>
+						}
 
 
-		}
+				}
+			</div>
+			<div id="anime-description">
+				<h1>@Model.SearchedAnime.TitleName</h1>
+				<p>@Model.SearchedAnime.Description</p>
+			</div>
 
-	<video controls="controls" autoplay="autoplay" height="300" width="400">
-		<source  src="animes\KomiSan\episods\episod1.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
-	</video>
+		</div>
 
+		
+	<div>
+		<video controls="controls" autoplay="autoplay" height="300" width="400">
+			<source  src="animes\KomiSan\episods\episod1.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
+		</video>
+	</div>
 	<h3>Comments</h3>
 	@if(!User.Identity.IsAuthenticated) {
 		<h4>Comments can be left by registered users</h4>
