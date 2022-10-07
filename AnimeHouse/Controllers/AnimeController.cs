@@ -117,7 +117,7 @@ namespace AnimeHouse.Controllers
             _db.Comments.Add(comment);
             _db.SaveChanges();
 
-            return View("AnimePage", new AnimePageViewModel { SearchedAnime = _db.Animes.FirstOrDefault(a => a.Id == animeId), Episod= 1 });
+            return StatusCode(200);
 
         }
 

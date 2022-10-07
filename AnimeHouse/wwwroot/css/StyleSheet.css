@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #E0B863;
+    background-color: #240090;
     top: 0;
     width: 100%;
 }
@@ -135,21 +135,30 @@ nav {
 
 
 body {
-    background-color:rgb(246,64,64) ;
+    background-color: #3500D3;
 }
 
 
 .anime {
     margin: 30px 30px 0px 30px;
-    background: grey;
-
+    background: #282828;
+    color: white;
+    display: flex;
     column-count: 1;
+    flex-direction: row;
+    
+    
+}
+@media(width: 835px) {
+    .anime {
+        background-color: black;
+    }
 }
 
 
 
 #anime-description {
-    width: 70%;
+    width: 75%;
     float:right;
     font-size: 20px;
 }
@@ -161,6 +170,44 @@ body {
     float:left;
 }
 #anime-poster img {
+    z-index: 100;   
     width: 200px;
     height: 300px;
+}
+
+
+#anime-video-player {
+
+}
+
+.video-player-block {
+    padding: 40px,40px,40px,40px;
+    top: 0;
+    left: 0;
+    background-color: #282828;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin: 5px 30px 0px 30px;
+    justify-content: center;
+    overflow: auto;
+}
+.video-player-block video {
+    display:block;
+    width: 700px;
+    height: 400px;
+    border: none;
+}
+
+.comments-block {
+    padding: 40px,40px,40px,40px;
+    top: 0;
+    left: 0;
+    background-color: #282828;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin: 5px 30px 0px 30px;
+    justify-content: center;
+    overflow: auto;
 }
