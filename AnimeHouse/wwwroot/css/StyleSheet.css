@@ -102,7 +102,7 @@ nav {
 
 
 .anime-list {
-    background: rgb(230,233,230);
+    background-color: #0C0032;
     padding-top: 30px;
     padding-bottom: 30px;
     margin-left: 100px;
@@ -112,6 +112,7 @@ nav {
 .anime-list-item {
     margin-top: 20px;
     display: flex;
+    color: white;
     flex-direction: row;
 
 }
@@ -120,9 +121,9 @@ nav {
     font-size: 25px;
     flex-direction: column;
 }
-.anime-list-item-info a {
-        color: rgb(211,153,131);
-}
+    .anime-list-item-info a {
+        color: #3500D3;
+    }
 
 .anime-list-item-img {
     margin-right: 30px;
@@ -130,6 +131,7 @@ nav {
 
 
 .anime-list ul {
+    background-color: #0C0032;
     list-style-type: none;
 }
 
@@ -180,34 +182,36 @@ body {
 
 }
 
-.video-player-block {
-    padding: 40px,40px,40px,40px;
-    top: 0;
-    left: 0;
-    background-color: #282828;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    margin: 5px 30px 0px 30px;
-    justify-content: center;
-    overflow: auto;
-}
-.video-player-block video {
-    display:block;
-    width: 700px;
-    height: 400px;
-    border: none;
-}
-
 .comments-block {
     padding: 40px,40px,40px,40px;
     top: 0;
     left: 0;
     background-color: #282828;
     display: flex;
-    align-items: center;
-    align-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;   
     margin: 5px 30px 0px 30px;
-    justify-content: center;
     overflow: auto;
+}
+.comments-block div {
+        padding-left: 10px;
+       padding-right: 10px;}
+
+.send-comment-block {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.comment-block {
+
+}
+figure {
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+}
+figure img {
+    width: 50px;
+    height: 50px;
 }

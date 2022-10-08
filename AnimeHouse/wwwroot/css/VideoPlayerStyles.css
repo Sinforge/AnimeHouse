@@ -1,0 +1,176 @@
+﻿.video-player-block {
+    padding: 40px,40px,40px,40px;
+    background-color: #282828;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 5px 30px 0px 30px;
+    justify-content: center;
+    overflow: auto;
+}
+
+    .video-player-block .player {
+        max-width: 850px;
+        width: 100%;
+    }
+
+        .video-player-block .player .video {
+            max-width: 100%;
+            border-radius: 30px, 0px;
+            width: 700px;
+            height: 400px;
+        }
+
+    .video-player-block .controlls {
+        display: flex;
+        padding: 20px, 40px;
+        align-content: flex-start;
+        margin-top: -5px;
+    }
+
+    .video-player-block .video-stop {
+        margin-left: 20px;
+        margin: 0;
+        width: fit-content;
+        cursor: pointer;
+        display: inline-flex;
+    }
+
+    .video-player-block .video-play {
+        cursor: pointer;
+        display: inline-flex;
+        width: fit-content;
+        margin: 0;
+    }
+
+    .video-player-block .video-progress {
+        display: inline-flex;
+    }
+    .video-player-block .video-time {
+        display: inline-flex;
+    }
+
+
+
+/*------------------------------------------------------------------Input range styles--------------------------------------------------------------------------*/
+
+
+
+
+
+input[type=range] {
+    -webkit-appearance: none; /* Скрывает слайдер, чтобы можно было создать свой */
+    width: 100%; /* Указание параметра ширины требуется для Firefox. */
+}
+
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+
+    input[type=range]:focus {
+        outline: none; /* Убирает голубую границу у элемента. Хотя, возможно, и стоит создавать некоторое оформления для состояния фокуса в целях обеспечения доступности. */
+    }
+
+    input[type=range]::-ms-track {
+        width: 100%;
+        cursor: pointer;
+        background: transparent; /* Скрывает слайдер, чтобы можно было добавить собственные стили. */
+        border-color: transparent;
+        color: transparent;
+    }
+
+    /*---------Ползунок--------------*/
+
+    /* Специальные правила для браузеров на движках WebKit/Blink */
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid #ff0000;
+        height: 16px;
+        width: 16px;
+        border-radius: 10px;
+        background: #ffffff;
+        padding: 0px;
+        cursor: pointer;
+        margin-top: -14px; /* Вам нужно указать значение для поля в Chrome, но в Firefox и IE это происходит автоматически */
+        box-shadow: 1px 1px 1px #b6ff00, 0px 0px 1px #ff6a00; /* Добавляем классные эффекты для слайдера! */
+    }
+
+    /* Тоже самое для Firefox */
+    input[type=range]::-moz-range-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 36px;
+        width: 16px;
+        border-radius: 3px;
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+    /* Тоже самое для IE */
+    input[type=range]::-ms-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 36px;
+        width: 16px;
+        border-radius: 3px;
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+    /*-----Строка диапозона------------*/
+    input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 4px;
+        cursor: pointer;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: grey;
+        border-radius: 10px;
+        padding: 0px;
+        margin-bottom: 20px;
+        border: 0.2px solid #010101;
+    }
+
+ 
+
+    input[type=range]::-moz-range-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: #3071a9;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+    }
+
+    input[type=range]::-ms-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        border-width: 16px 0;
+        color: transparent;
+    }
+
+    input[type=range]::-ms-fill-lower {
+        background: #2a6495;
+        border: 0.2px solid #010101;
+        border-radius: 2.6px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    }
+
+    input[type=range]:focus::-ms-fill-lower {
+        background: #3071a9;
+    }
+
+    input[type=range]::-ms-fill-upper {
+        background: #3071a9;
+        border: 0.2px solid #010101;
+        border-radius: 2.6px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    }
+
+    input[type=range]:focus::-ms-fill-upper {
+        background: #367ebd;
+    }
+

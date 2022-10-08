@@ -111,13 +111,13 @@ namespace AnimeHouse.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult LeaveСomment(string userName, int animeId, string text)
+        public IActionResult LeaveСomment([FromForm] string userName, [FromForm]int animeId, [FromForm] string text)
         {
             Comment comment = new Comment { UserName = userName, AnimeId = animeId, Text = text };
             _db.Comments.Add(comment);
             _db.SaveChanges();
+            return View("AnimePage", new AnimePageViewModel { SearchedAnime = _db.Animes.FirstOrDefault(a => a.Id == animeId), Episod = 1 });
 
-            return StatusCode(200);
 
         }
 
