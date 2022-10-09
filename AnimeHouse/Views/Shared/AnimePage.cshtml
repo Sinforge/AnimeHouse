@@ -2,6 +2,7 @@
 @using AnimeHouse.ViewModels.AnimeModels;
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.EntityFrameworkCore
+
 @model AnimePageViewModel
 @inject ApplicationContext db
 <!doctype html>
@@ -10,8 +11,10 @@
 		<base href="/" />		
 		<title>Home Page</title>
 		<meta charset="utf-8" />
+		<script src="~/js/jquery-3.6.1.js"></script>
 		<link rel="stylesheet" href="/css/StyleSheet.css">
 		<link rel="stylesheet" href="/css/VideoPlayerStyles.css" />
+		<script src="~/js/video-script.js"></script>
 	</head>
 	@{
 		User user =  db.Users.Include(u=> u.Animes).FirstOrDefault(u => u.UserName == User.Identity.Name);
@@ -77,21 +80,28 @@
 
 		</div>
 
-		
+
+
 	<div class="video-player-block">
 		<div class="player">
-			<video class="video" id="myvideo" src="~/animes/Gravity Falls/episods/space.mp4" height="300" width="400">
+			<video class="video" preload="auto" id="myvideo" src="~/animes/Gravity Falls/episods/space.mp4" height="300" width="400">
 			</video>
 			<div id="controlls">
-				<div class="video-play"><img width="20px" height="20px" class="play-button" src="~/img/play-button.png" alt="play"></img></div>
-				<div class="video-stop"><img  width="20px" height="20px" class="play-button" src="~/img/pause.png" alt="pause" /></div>
+				<div class="video-play"><button id="play-pause" style="color: orange"><img style="background-image: none;" id="play-pause-img" width="20px" height="20px" class="play-button" src="/img/play-button.png" alt="play"/></button><</div>
 				<div class="video-progress">
-					<input type="range" class="progress"/>
+					<!--<output for="fader" id="volume">0</output>-->
+					<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
 				</div>
-				<div class="video-time">00.00</div>
+				<div class="video-time">
+					<span id="currenttime">00:00</span> / 
+					<span id="duration">00:00</span>
+				</div>
 			</div>
 		</div>
 	</div>
+		<script>
+		</script>
+	
 	<div class="comments-block">
 		<div>
 			<h2>Comments</h2>
