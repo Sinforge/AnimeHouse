@@ -10,7 +10,7 @@
 
     var video = controls.video[0];
     var imgbutton = $("#play-pause-img");
-
+    video.addEventListener("canplaythrough", () => controls.progress.attr("max", video.duration));
     controls.playpause.click(function () {
         if (video.paused) {
             video.play();
@@ -31,7 +31,7 @@
     video.addEventListener("canplay", function () {
         controls.hasHours = (video.duration / 3600) >= 1.0;
         controls.duration.text(formatTime(video.duration, controls.hasHours));
-        controls.currentTime.text(formatTime(0), controls.hasHours)
+        controls.currentTime.text(formatTime(0), controls.hasHours);
     }, false);
     function formatTime(time, hours) {
         if (hours) {
@@ -59,9 +59,13 @@
 
     video.addEventListener("timeupdate", function () {
         controls.currentTime.text(formatTime(video.currentTime, controls.hasHours));
-        var progress = (Math.floor(video.currentTime) / Math.floor(video.duration)) * 10000;
-        controls.progress.attr("value", progress);
+        var progress = video.currentTime;
+        document.getElementById("fader").value = progress;
+    });
 
+    controls.progress.change(function () {
+        video.currentTime = document.getElementById("fader").value;
+        constrols.currentTime.text(formatTime(video.currentTime, controls.hasHours));
     });
 });
 
