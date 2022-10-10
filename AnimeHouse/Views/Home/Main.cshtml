@@ -5,16 +5,9 @@
 		<title>Home Page</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="/css/StyleSheet.css">
+		<link rel="stylesheet" href="/css/Carusuel.css" />
 	</head>
-	<style>
-			body
-			{
-			  background-image: url("/img/background_main.png");
-			  background-repeat: no-repeat;
-			  background-size: cover;
-			}
-		 </style>
-	<body background="/img/background_main.png">
+	<body>
 		<header>
 			<nav>
 		 
@@ -44,13 +37,38 @@
 		</header>
 
 		<main>
+			<div class="slideshow-containter">
+				<div class="slide fade">
+					<img width="200px" height="300px" src="~/img/graviti falls.jpg"/>
+				</div>
+				<div class="slide fade">
+
+					<img width="200px" height="300px" src="~/img/demon_slayer.jpg"/>
+				</div>
+				<div class="slide fade">
+					<img width="200px" height="300px" src="~/img/One_piece.jfif"/>
+				</div>
+				<a class="prev" onclick="changeSlide(-1)">&#10094</a>
+				<a  class="next" onclick="changeSlide(1)">&#10095</a>
+				<div style="text-align: center;">
+					<span class="dot" onclick="thisSlide(1)"></span>
+					<span class="dot" onclick="thisSlide(2)"></span>
+					<span class="dot" onclick="thisSlide(3)"></span>
+
+				</div>	
+			</div>
+			<br />
+			
 			<section id="greetings">
 				<h1>Welcome to the AnimeHouse.</h1>
 				<p>
 					This is a platform for watching any animated series and for communicating this topic
 				</p>
-			</sectio>
+			</section>
 		</main>
+		
+		
+		<script src="~/js/Carusuel.js"></script>
 
 		
 	</body>
