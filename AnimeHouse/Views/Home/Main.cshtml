@@ -6,6 +6,7 @@
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="/css/StyleSheet.css">
 		<link rel="stylesheet" href="/css/Carusuel.css" />
+		<link rel="stylesheet" href="/css//Maincss.css" />
 	</head>
 	<body>
 		<header>
@@ -36,7 +37,7 @@
 			</nav>
 		</header>
 
-		<main>
+		<main >
 			<div class="slideshow-containter">
 				<div class="slide fade">
 					<img width="200px" height="300px" src="~/img/graviti falls.jpg"/>
@@ -48,16 +49,13 @@
 				<div class="slide fade">
 					<img width="200px" height="300px" src="~/img/One_piece.jfif"/>
 				</div>
-				<a class="prev" onclick="changeSlide(-1)">&#10094</a>
-				<a  class="next" onclick="changeSlide(1)">&#10095</a>
-				<div style="text-align: center;">
+				<div class="dot-container">
 					<span class="dot" onclick="thisSlide(1)"></span>
 					<span class="dot" onclick="thisSlide(2)"></span>
 					<span class="dot" onclick="thisSlide(3)"></span>
 
 				</div>	
 			</div>
-			<br />
 			
 			<section id="greetings">
 				<h1>Welcome to the AnimeHouse.</h1>

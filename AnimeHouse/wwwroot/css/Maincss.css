@@ -1,0 +1,7 @@
+﻿main {
+    margin: 30px 30px 0 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
