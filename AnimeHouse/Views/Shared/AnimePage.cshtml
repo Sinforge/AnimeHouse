@@ -21,141 +21,146 @@
 	}
 	<body>
 		<header>
+			<input  type="checkbox" id="burger"/>
+			<label for="burger">&#8801</label>
 			<nav>
-		 
+				
 				<ul class="nav_bar">
-				  <li  class="nav-bar-element"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
-				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
-				{
-					<li  class="nav-bar-element"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
-					<li class="nav-bar-element"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
-				}
-				<li  class="nav-bar-element"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
-				@if(User.Identity.IsAuthenticated) {
-					<li  class="nav-bar-element"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+						<li class="nav-bar-element"><p>AnimeHouse</p></li>
+						 <li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+							@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+							{
+								<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+								<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+							}
+							<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+							@if(User.Identity.IsAuthenticated) {
+								<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
 		
-					<li  class="nav-bar-element">
-						<form method="post" asp-controller="Account" asp-action="Logout">
-							<input type="submit" value="Выход" />
-						</form>
-					</li>
-				}
-				else {
-					<li  class="nav-bar-element"><a asp-controller="Account" asp-action="Login">Login</a></li>
-					<li  class="nav-bar-element"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
-				}
+								<li  class="nav-bar-element page-controllers">
+									<form method="post" asp-controller="Account" asp-action="Logout">
+										<input type="submit" value="Выход" />
+									</form>
+								</li>
+							}
+							else {
+								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
+								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+							}
+					 
 				</ul>
 			</nav>
 		</header>
+		<main>
+			<div class="anime" >
+				<div id="anime-poster">
+					<img src="@(@Model.SearchedAnime.Path + @Model.SearchedAnime.ImgName)" />
+					@if(User.Identity.IsAuthenticated)	{
+							@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
+							{
+								<form asp-action="DeleteFromFavorite" asp-controller="Anime" method="post">
+									 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
+									 <input hidden name="userId" value="@user.Id">
+									 <input type="submit" value="Delete From favorite">
+								 </form>
 
-		<div class="anime" >
-			<div id="anime-poster">
-				<img src="@(@Model.SearchedAnime.Path + @Model.SearchedAnime.ImgName)" />
-				@if(User.Identity.IsAuthenticated)	{
-						@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
-						{
-							<form asp-action="DeleteFromFavorite" asp-controller="Anime" method="post">
-								 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
-								 <input hidden name="userId" value="@user.Id">
-								 <input type="submit" value="Delete From favorite">
-							 </form>
-
-						}
-						else
-						{
-							 <form asp-action="AddToFavorite" asp-controller="Anime" method="post">
-								 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
-								 <input hidden name="userId" value="@user.Id">
-								 <input type="submit" value="Add to favorite">
-							 </form>
-						}
-
-
-				}
-			</div>
-			<div id="anime-description">
-				<h1>@Model.SearchedAnime.TitleName</h1>
-				<p>@Model.SearchedAnime.Description</p>
-			</div>
-
-		</div>
+							}
+							else
+							{
+								 <form asp-action="AddToFavorite" asp-controller="Anime" method="post">
+									 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
+									 <input hidden name="userId" value="@user.Id">
+									 <input type="submit" value="Add to favorite">
+								 </form>
+							}
 
 
-
-	<div class="video-player-block">
-		<div class="player">
-			<video class="video" preload="auto" id="myvideo" src="~/animes/Gravity Falls/episods/space.mp4" height="300" width="400">
-			</video>
-			<div id="controlls">
-				<div class="video-play"><button id="play-pause" style="color: orange"><img style="background-image: none;" id="play-pause-img" width="20px" height="20px" class="play-button" src="/img/play-button.png" alt="play"/></button><</div>
-				<div class="video-progress">
-					<!--<output for="fader" id="volume">0</output>-->
-					<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
+					}
 				</div>
-				<div class="video-time">
-					<span id="currenttime">00:00</span> / 
-					<span id="duration">00:00</span>
+				<div id="anime-description">
+					<h1>@Model.SearchedAnime.TitleName</h1>
+					<p>@Model.SearchedAnime.Description</p>
+				</div>
+
+			</div>
+
+
+
+		<div class="video-player-block">
+			<div class="player">
+				<video class="video" preload="auto" id="myvideo" src="~/animes/Gravity Falls/episods/space.mp4" height="300" width="400">
+				</video>
+				<div id="controlls">
+					<div class="video-play"><button id="play-pause" style="color: orange"><img style="background-image: none;" id="play-pause-img" width="20px" height="20px" class="play-button" src="/img/play-button.png" alt="play"/></button><</div>
+					<div class="video-progress">
+						<!--<output for="fader" id="volume">0</output>-->
+						<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
+					</div>
+					<div class="video-time">
+						<span id="currenttime">00:00</span> / 
+						<span id="duration">00:00</span>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-		<script>
-		</script>
+			<script>
+			</script>
 	
-	<div class="comments-block">
-		<div>
-			<h2>Comments</h2>
-		</div>
-
-		@if(!User.Identity.IsAuthenticated) {
-		}
-		else
-		{
-
-			<div class="send-comment-block">
-				<form asp-action="LeaveСomment" asp-controller="Anime" method="post">
-					<input hidden id = "userName" name="userName" type="text" value="@user.UserName">
-					<input hidden  id = "animeId" name="animeId" type="number" value="@Model.SearchedAnime.Id">
-					<textarea id="text" name="text" cols="50" rows="5"></textarea>
-					<input type="submit" value="Leave">
-				</form>
+		<div class="comments-block">
+			<div>
+				<h2>Comments</h2>
 			</div>
-		}
-		@if (User.IsInRole("admin") || @User.IsInRole("moderator")) {
-			<div class="comments-list">
-			@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
+
+			@if(!User.Identity.IsAuthenticated) {
+			}
+			else
 			{
-				<div class="author-comment">
-					<figure >
-						<img src="~/img/DefaultUserImg.png">
-					</figure>
-					<form method="post" asp-action="DeleteComment" asp-controller="Admin">
-						<input value="@comment.UserName" name="userName" hidden>
-						<input value="@Model.SearchedAnime.Id" name="animeId" hidden>
-						<input value="@comment.Text" name="text" hidden>
-						<input  type="submit" value="Удалить">
+
+				<div class="send-comment-block">
+					<form asp-action="LeaveСomment" asp-controller="Anime" method="post">
+						<input hidden id = "userName" name="userName" type="text" value="@user.UserName">
+						<input hidden  id = "animeId" name="animeId" type="number" value="@Model.SearchedAnime.Id">
+						<textarea id="text" name="text" cols="50" rows="5"></textarea>
+						<input type="submit" value="Leave">
 					</form>
-					<h5>@comment.UserName</h5>
-					<p>@comment.Text</p>
-				</div><br/>
+				</div>
 			}
-			</div>
-		}
-		else {
-			<div class="comments-list">
-			@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
-			{
-				<div class="author-comment">
-					<figure >
-						<img src="~/img/DefaultUserImg.png">
-					</figure>
-					<h5>@comment.UserName</h5>
-					<p>@comment.Text</p>
-				</div><br/>
+			@if (User.IsInRole("admin") || @User.IsInRole("moderator")) {
+				<div class="comments-list">
+				@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
+				{
+					<div class="author-comment">
+						<figure >
+							<img src="~/img/DefaultUserImg.png">
+						</figure>
+						<form method="post" asp-action="DeleteComment" asp-controller="Admin">
+							<input value="@comment.UserName" name="userName" hidden>
+							<input value="@Model.SearchedAnime.Id" name="animeId" hidden>
+							<input value="@comment.Text" name="text" hidden>
+							<input  type="submit" value="Удалить">
+						</form>
+						<h5>@comment.UserName</h5>
+						<p>@comment.Text</p>
+					</div><br/>
+				}
+				</div>
 			}
-			</div>
-		}
-	</div>
+			else {
+				<div class="comments-list">
+				@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
+				{
+					<div class="author-comment">
+						<figure >
+							<img src="~/img/DefaultUserImg.png">
+						</figure>
+						<h5>@comment.UserName</h5>
+						<p>@comment.Text</p>
+					</div><br/>
+				}
+				</div>
+			}
+		</div>
+	</main>
 	</body>
 </html>
 

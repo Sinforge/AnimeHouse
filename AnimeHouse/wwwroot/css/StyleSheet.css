@@ -6,11 +6,18 @@
     background-color: #240090;
     top: 0;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+*{
+    font-family: 'Times New Roman', Times, serif;
 }
 
-.nav-bar-element {
-    float: left;
-}
 
 .nav-bar-element a {
     display: block;
@@ -19,6 +26,10 @@
     padding: 14px 16px;
     text-decoration: none;
  }
+.nav-bar-element {
+    text-align: center;
+    color: white;
+}
 .nav-bar-element input {
         display: block;
         background-color: #E0B863;
@@ -28,11 +39,11 @@
     }
 
 .nav-bar-element a:hover:not(.active) {
-   background-color: grey;
-   }
+        background-color: rgb(12,0,50);
+ }
 
 .active {
-    background-color: darkorange;
+    background-color: #282828;
 }
 nav {
     margin-bottom: auto
@@ -105,21 +116,23 @@ nav {
     background-color: #0C0032;
     padding-top: 30px;
     padding-bottom: 30px;
-    margin-left: 100px;
-    margin-right: 100px;
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    min-width: 350px;
+    justify-content: center;
 }
 
 .anime-list-item {
+    margin-left: 40px;
     margin-top: 20px;
-    display: flex;
     color: white;
-    flex-direction: row;
+    width: fit-content;
 
 }
 .anime-list-item-info {
-    display: flex;
-    font-size: 25px;
-    flex-direction: column;
+    text-align:center;
 }
     .anime-list-item-info a {
         color: #3500D3;
@@ -139,37 +152,43 @@ nav {
 body {
     background-color: #3500D3;
 }
-
-
 .anime {
     margin: 30px 30px 0px 30px;
     background: #282828;
     color: white;
     display: flex;
-    column-count: 1;
-    flex-direction: row;
-    
-    
 }
-@media(width: 835px) {
+
+
+
+@media (min-width: 768px) {
     .anime {
-        background-color: black;
+        margin: 30px 30px 0px 30px;
+        background: #282828;
+        color: white;
+    }
+}
+@media (max-width: 768px) {
+    .anime {
+        flex-direction: column;
+
+    }
+    #anime-poster{
+        justify-self: center;
+        align-self: center;
     }
 }
 
 
-
 #anime-description {
-    width: 75%;
-    float:right;
     font-size: 20px;
+    margin-left: 10px;
 }
 
 #anime-poster {
     margin-top: 20px;
     margin-left: 20px;
-    width: 20%;
-    float:left;
+    width: fit-content;
 }
 #anime-poster img {
     z-index: 100;   
@@ -213,6 +232,40 @@ figure {
 }
 figure img {
     margin: 0;
-    width: 50px;
+    width: 50px;    
     height: 50px;
+}
+
+/*-------------------------Navbar position-----------------------------------------*/
+
+#burger, label[for="burger"] {
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        width: 100%;
+    }
+    label[for="burger"] {
+        display:block;
+        font-size: 30px;
+        position: sticky;
+        width: fit-content;
+    }
+    .page-controllers{
+        display: none;
+
+
+    
+    }
+
+    .nav_bar {
+        flex-direction:column;
+    }
+    #burger:checked + label + nav  .page-controllers {
+        display: block;
+    }
+    #burger:checked + label{
+        transform: rotate(90deg);
+    }
 }
