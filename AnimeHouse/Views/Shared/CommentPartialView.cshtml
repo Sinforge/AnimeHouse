@@ -1,6 +1,5 @@
 ﻿@using AnimeHouse.Models;
 @model IEnumerable<Comment>
-<div class="comments-list">
 				@foreach (var comment in Model)
 				{
 					<div class="author-comment">
@@ -11,4 +10,3 @@
 						<p>@comment.Text</p>
 					</div><br/>
 				}
-</div>

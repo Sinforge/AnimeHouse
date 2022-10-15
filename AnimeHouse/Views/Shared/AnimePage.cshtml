@@ -117,29 +117,29 @@
 			else
 			{
 
-				<div class="send-comment-block">
-					<form>
+				<div  class="send-comment-block">
+					<form id="send_comment_form">
 						<input hidden id = "userName" name="userName" type="text" value="@user.UserName">
 						<input hidden  id = "animeId" name="animeId" type="number" value="@Model.SearchedAnime.Id">
 						<textarea id="text" name="text" cols="50" rows="5"></textarea>
-						<input id="send_comment" type="button" value="Leave">
+						<button id="send_comment">Leave</button>
 					</form>
 				</div>
 			}
 		
 			@if (User.IsInRole("admin") || @User.IsInRole("moderator")) {
-				<div class="comments-list">
+				<div id="list_of_comments" class="comments-list">
 				@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
 				{
 					<div class="author-comment">
 						<figure >
 							<img src="~/img/DefaultUserImg.png">
 						</figure>
-						<form method="post" asp-action="DeleteComment" asp-controller="Admin">
+						<form>
 							<input value="@comment.UserName" name="userName" id="userNameForm" hidden>
 							<input value="@Model.SearchedAnime.Id" name="animeId" id="animeIdForm" hidden>
 							<input value="@comment.Text" name="text" hidden>
-							<input id="send_comment" type="button" value="Удалить">
+							<input type="button" value="Удалить">
 						</form>
 						<h5>@comment.UserName</h5>
 						<p>@comment.Text</p>
@@ -153,18 +153,17 @@
                             let userName = $('#userName').val();
                             let animeId = $('#animeId').val();
                             let text = $('#text').val().replace(' ', '^');
+                            console.log($("#send_comment_form").serialize());
                             console.log(userName, animeId, text);
                             $.ajax({
                                 url: "/Anime/LeaveComment",
                                 type: "POST",
-                                dataType: "json",
-                                data: JSON.stringify({ userName: userName, animeId: animeId, text: text}),
-                                contentType: "application/json; charset=utf-8",
+                                data: $("#send_comment_form").serialize(),
                                 success: function(response) {
-                                    if (response == 'True') {
-                                        $('.comment-list').html(response);
-                                    }
-                                }
+                                      console.log(response);
+                                      $("#list_of_comments").html(response);
+									  
+                                 }
                             });
                         });
 						 
@@ -174,7 +173,7 @@
 				</script>
 			}
 			else {
-				<div class="comments-list">
+				<div id="list_of_comments" class="comments-list">
 				@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
 				{
 					<div class="author-comment">

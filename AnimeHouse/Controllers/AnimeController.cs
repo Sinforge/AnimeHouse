@@ -110,13 +110,14 @@ namespace AnimeHouse.Controllers
 
 
         [Authorize]
-        [HttpPost]
-        [Route("/Anime/Episods")]
-        public IActionResult LeaveComment([FromQuery] string userName, [FromQuery] int animeId, [FromQuery] string text)
+        [HttpPost]  
+        [Route("/Anime/LeaveComment")]
+        public IActionResult LeaveComment(string userName, int animeId, string text)
         {
             Comment comment = new Comment { UserName = userName, AnimeId = animeId, Text = text.Replace('^', ' ') };
             _db.Comments.Add(comment);
             _db.SaveChanges();
+            Console.WriteLine("Im here");
             var allComments = from com in _db.Comments where com.AnimeId == animeId select com;
             return PartialView("CommentPartialView", allComments);
 
