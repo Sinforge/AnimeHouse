@@ -1,0 +1,14 @@
+﻿@using AnimeHouse.Models;
+@model IEnumerable<Comment>
+<div class="comments-list">
+				@foreach (var comment in Model)
+				{
+					<div class="author-comment">
+						<figure >
+							<img src="~/img/DefaultUserImg.png">
+						</figure>
+						<h5>@comment.UserName</h5>
+						<p>@comment.Text</p>
+					</div><br/>
+				}
+</div>

@@ -111,12 +111,14 @@ namespace AnimeHouse.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult LeaveСomment([FromForm] string userName, [FromForm]int animeId, [FromForm] string text)
+        [Route("/Anime/Episods")]
+        public IActionResult LeaveComment([FromQuery] string userName, [FromQuery] int animeId, [FromQuery] string text)
         {
-            Comment comment = new Comment { UserName = userName, AnimeId = animeId, Text = text };
+            Comment comment = new Comment { UserName = userName, AnimeId = animeId, Text = text.Replace('^', ' ') };
             _db.Comments.Add(comment);
             _db.SaveChanges();
-            return View("AnimePage", new AnimePageViewModel { SearchedAnime = _db.Animes.FirstOrDefault(a => a.Id == animeId), Episod = 1 });
+            var allComments = from com in _db.Comments where com.AnimeId == animeId select com;
+            return PartialView("CommentPartialView", allComments);
 
 
         }
