@@ -56,22 +56,20 @@
 				<div id="anime-poster">
 					<img src="@(@Model.SearchedAnime.Path + @Model.SearchedAnime.ImgName)" />
 					@if(User.Identity.IsAuthenticated)	{
+						<form id="add-delete-favorite-form">
+							<input name="userId" type="text" value="@user.Id" hidden>
+							<input name="animeId" type="number" value="@Model.SearchedAnime.Id" hidden>
+
+						</form>
 							@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
 							{
-								<form asp-action="DeleteFromFavorite" asp-controller="Anime" method="post">
-									 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
-									 <input hidden name="userId" value="@user.Id">
-									 <input type="submit" value="Delete From favorite">
-								 </form>
+								<button id="add-delete-favorite">Delete from favorite</button>
 
 							}
 							else
 							{
-								 <form asp-action="AddToFavorite" asp-controller="Anime" method="post">
-									 <input hidden name="animeId" value="@Model.SearchedAnime.Id" >
-									 <input hidden name="userId" value="@user.Id">
-									 <input type="submit" value="Add to favorite">
-								 </form>
+								<button id="add-delete-favorite">Add to favorite</button>
+
 							}
 
 
@@ -135,42 +133,18 @@
 						<figure >
 							<img src="~/img/DefaultUserImg.png">
 						</figure>
-						<form>
+						<form id="delete_comment_form">
 							<input value="@comment.UserName" name="userName" id="userNameForm" hidden>
 							<input value="@Model.SearchedAnime.Id" name="animeId" id="animeIdForm" hidden>
 							<input value="@comment.Text" name="text" hidden>
-							<input type="button" value="Удалить">
+							<input type="button" id="delete_user_comment" value="Удалить">
 						</form>
 						<h5>@comment.UserName</h5>
 						<p>@comment.Text</p>
 					</div><br/>
 				}
 				</div>
-				<script>
-					$(document).ready(function() {
-                        $('#send_comment').click(function(e) {
-                            e.preventDefault();
-                            let userName = $('#userName').val();
-                            let animeId = $('#animeId').val();
-                            let text = $('#text').val().replace(' ', '^');
-                            console.log($("#send_comment_form").serialize());
-                            console.log(userName, animeId, text);
-                            $.ajax({
-                                url: "/Anime/LeaveComment",
-                                type: "POST",
-                                data: $("#send_comment_form").serialize(),
-                                success: function(response) {
-                                      console.log(response);
-                                      $("#list_of_comments").html(response);
-									  
-                                 }
-                            });
-                        });
-						 
-					});
 
-
-				</script>
 			}
 			else {
 				<div id="list_of_comments" class="comments-list">

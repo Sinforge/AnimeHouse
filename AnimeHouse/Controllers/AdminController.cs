@@ -183,6 +183,7 @@ namespace AnimeHouse.Controllers
         }
 
         [HttpPost]
+        [Route("/Admin/DeleteComment")]
         public async Task<IActionResult> DeleteComment(string userName, int animeId, string text)
         {
             Comment? finded_comment = await _db.Comments.FirstOrDefaultAsync(c => c.UserName == userName && c.AnimeId == animeId && c.Text == text);
@@ -191,7 +192,8 @@ namespace AnimeHouse.Controllers
                 _db.Comments.Remove(finded_comment);
                 _db.SaveChanges();
             }
-             return View("AnimePage", new  AnimePageViewModel { Episod = 1, SearchedAnime = await _db.Animes.FirstOrDefaultAsync(a => a.Id == animeId)});
+            var allComments = from com in _db.Comments where com.AnimeId == animeId select com;
+            return PartialView("CommentPartialView", allComments);
         }
     }
 }

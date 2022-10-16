@@ -76,7 +76,10 @@ namespace AnimeHouse.Controllers
 
 
         [Authorize]
-        public async Task<IActionResult> AddToFavorite(int animeId, string userId)
+        [HttpPost]
+        [Route("/Anime/AddToFavorite")]
+
+        public async Task<ActionResult> AddToFavorite(int animeId, string userId)
         {
             Anime? anime = await Task.Run(()=>_db.Animes.FirstOrDefault(a => a.Id == animeId));
             User? user = _db.Users.Include(u => u.Animes).FirstOrDefault(u => u.Id == userId);
@@ -84,14 +87,15 @@ namespace AnimeHouse.Controllers
             {
                 user.Animes.Add(anime);
                 _db.SaveChanges();
-                return Content("AnimePage");
+                return StatusCode(200);
             }
-            else return NotFound();
-            
+            return StatusCode(404);
         }
 
         [Authorize]
-        public async Task<IActionResult> DeleteFromFavorite(int animeId, string userId)
+        [HttpPost]
+        [Route("/Anime/DeleteFromFavorite")]
+        public async Task<ActionResult> DeleteFromFavorite(string userId, int animeId)
         {
             Anime? anime = await Task.Run(() => _db.Animes.FirstOrDefault(a => a.Id == animeId));
             User? user = _db.Users.Include(u => u.Animes).FirstOrDefault(u => u.Id == userId);
@@ -99,9 +103,9 @@ namespace AnimeHouse.Controllers
             {
                 user.Animes.Remove(anime);
                 _db.SaveChanges();
-                return RedirectToAction("AnimePage");
+                return StatusCode(200);
             }
-            else return NotFound();
+            return StatusCode(406);
 
         }
 
