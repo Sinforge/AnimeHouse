@@ -38,8 +38,8 @@ namespace AnimeHouse.Controllers
                 return View("GetListAnime");
             }
             string NormalizedTitle = animeTitle.ToLower();
-            IEnumerable<Anime> finded_anime = from anime in _db.Animes where anime.TitleName.ToLower().Contains(NormalizedTitle) select anime;
-            return View("GetListAnime", finded_anime);
+            IEnumerable<Anime> findedAnimes = from anime in _db.Animes where anime.TitleName.ToLower().Contains(NormalizedTitle) select anime;
+            return PartialView("SearchedAnimePartialView", findedAnimes);
         }
 
        

@@ -1,0 +1,21 @@
+﻿@using AnimeHouse.Models
+@model IEnumerable<Anime> 
+@if (Model != null) {
+
+	@foreach(var anime in Model) {
+		<div class="anime-list-item">
+
+			<div class="anime-list-item-img">
+				<img src="@(@anime.Path + anime.ImgName)" width="200" height="250" alt="Cant found img">
+			</div>
+			<div class="anime-list-item-info">
+				<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1>@anime.TitleName</a>
+			</div>
+		</div>
+		}
+	}
+else
+{
+	<h2>We can find nothing</h2>
+
+}
