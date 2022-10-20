@@ -14,37 +14,50 @@
 	</head>
 	
 	<body>
-		<header>
-			<input  type="checkbox" id="burger"/>
-			<label for="burger">&#8801</label>
-			<nav>
+	<header>
+		<input  type="checkbox" id="burger"/>
+		<label for="burger">&#8801</label>
+		<nav>
 				
-				<ul class="nav_bar">
-						<li class="nav-bar-element"><p>AnimeHouse</p></li>
-						 <li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
-							@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
-							{
-								<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
-								<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
-							}
-							<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
-							@if(User.Identity.IsAuthenticated) {
-								<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+			<ul class="nav_bar">
+				<li class="nav-bar-element"><p>AnimeHouse</p></li>
+				<li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+				{
+					<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+				}
+				<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				@if(User.Identity.IsAuthenticated) {
+					<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
 		
-								<li  class="nav-bar-element page-controllers">
-									<form method="post" asp-controller="Account" asp-action="Logout">
-										<input type="submit" value="Выход" />
-									</form>
-								</li>
-							}
-							else {
-								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
-								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
-							}
-					 
-				</ul>
-			</nav>
-		</header>
+					<li  class="nav-bar-element page-controllers">
+						<form method="post" asp-controller="Account" asp-action="Logout">
+							<input type="submit" value="Выход" />
+						</form>
+					</li>
+				}
+				else {
+					<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+				}
+				<li   class="nav-bar-element page-controllers" id="notice"><label for="notice_box"><img src="/img/bell.png" width="30px" height="30px"></label></li>
+
+			</ul>
+		</nav>
+	</header>
+	<input style="display: none" type="checkbox" id="notice_box" />
+	<div class="open-notice">
+		<p>aobba</p>
+		<p>aobba</p>
+		<p>aobba</p>
+		<p>aobba</p>
+		<p>aobba</p>
+		<p>aobba</p>
+		<p>aobba</p>
+
+		<p>aobba</p>
+	</div>
 		<main style="display: flex; flex-direction: column; justify-items: center; justify-content: center; align-items: center;">
 			<h2>Search of animes</h2>
 			<form id="search_anime">

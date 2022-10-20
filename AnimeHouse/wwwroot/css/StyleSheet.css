@@ -25,6 +25,10 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+
+    transition-duration: 0.5s;
+    transition-property: all;
+    transition-timing-function: ease;
  }
 .nav-bar-element {
     text-align: center;
@@ -32,15 +36,24 @@
 }
 .nav-bar-element input {
         display: block;
-        background-color: #E0B863;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
     }
 
-.nav-bar-element a:hover:not(.active) {
+    .nav-bar-element a:hover:not(.active) {
         background-color: rgb(12,0,50);
- }
+        color: #240090;
+        background-color: white;
+        border: 6px solid #0C0032;
+        border-radius: 10px;
+        transform: scale(.8);
+    }
+#notice {
+    margin-left: auto;
+    margin-right: 30px;
+
+    }
 
 .active {
     background-color: #282828;
@@ -268,4 +281,18 @@ figure img {
     #burger:checked + label{
         transform: rotate(90deg);
     }
+}
+
+.open-notice {
+    display: none;
+    position: absolute;
+    right: 0;
+    height: 40%;
+    width: 30%;
+    z-index:2; 
+    background-color: grey;
+}
+
+#notice_box:checked + .open-notice {
+    display: block;
 }
