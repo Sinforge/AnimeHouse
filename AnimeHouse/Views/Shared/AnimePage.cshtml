@@ -86,23 +86,28 @@
 
 
 
-		<div class="video-player-block">
-			<div class="player">
-				<video class="video" preload="auto" id="myvideo" src="~/animes/Gravity Falls/episods/space.mp4" height="300" width="400">
-				</video>
-				<div id="controlls">
-					<div class="video-play"><button id="play-pause" style="color: orange"><img style="background-image: none;" id="play-pause-img" width="20px" height="20px" class="play-button" src="/img/play-button.png" alt="play"/></button><</div>
-					<div class="video-progress">
-						<!--<output for="fader" id="volume">0</output>-->
-						<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
-					</div>
-					<div class="video-time">
-						<span id="currenttime">00:00</span> 
-						<span id="duration">00:00</span>
+			<div class="video-player-block">
+				
+				<div class="player">
+					<video class="video" preload="auto" id="myvideo" src="~/animes/Gravity Falls/episods/space.mp4" height="300" width="400">
+					</video>
+					<div id="controlls">
+						<div class="video-play"><button id="play-pause" style="color: orange"><img style="background-image: none;" id="play-pause-img" width="20px" height="20px" class="play-button" src="/img/play-button.png" alt="play"/></button><</div>
+						<div class="video-progress">
+							<!--<output for="fader" id="volume">0</output>-->
+							<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
+						</div>
+						<div class="video-time">
+							<span id="currenttime">00:00</span>
+							<span id="duration">00:00</span>
+						</div>
 					</div>
 				</div>
+				<div class="hidden-block">
+					<p>Text here</p>
+				</div>
 			</div>
-		</div>
+			
 			<script>
 			</script>
 	

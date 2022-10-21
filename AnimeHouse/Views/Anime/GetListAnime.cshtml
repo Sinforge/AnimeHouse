@@ -48,15 +48,9 @@
 	</header>
 	<input style="display: none" type="checkbox" id="notice_box" />
 	<div class="open-notice">
-		<p>aobba</p>
-		<p>aobba</p>
-		<p>aobba</p>
-		<p>aobba</p>
-		<p>aobba</p>
-		<p>aobba</p>
-		<p>aobba</p>
-
-		<p>aobba</p>
+		<div class="notice-info">Don't forget to upgrade your premium subscription</div>
+		<div class="notice-info">Add 2FA to save your account</div>
+		<div class="notice-info">Leave comments and add favorites animes</div>
 	</div>
 		<main style="display: flex; flex-direction: column; justify-items: center; justify-content: center; align-items: center;">
 			<h2>Search of animes</h2>
@@ -65,27 +59,35 @@
 				<input type="submit" id="search"value="Search"/>
 			</form>
 			<h2>Anime List</h2>
-			<div id="anime_list" class="anime-list">
-				@if (Model != null) {
+				<div id="anime_list" class="anime-list">
+					@if (Model != null) {
 
-					@foreach(var anime in Model) {
-				
-							<div class="anime-list-item">
-								<div class="anime-list-item-img">
-									<img src="@(@anime.Path + anime.ImgName)" width="200" height="250" alt="Cant found img">
-								</div>
-								<div class="anime-list-item-info">
-									<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 >@anime.TitleName</a>
+						@foreach(var anime in Model) {
+
+							<div class="anime-container">
+								<div class="anime-list-item">
+									<div class="anime-list-item-img">
+										<img src="@(@anime.Path + anime.ImgName)" width="200" height="250" alt="Cant found img">
+									</div>
+									<div class="anime-list-item-info">
+										<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 >@anime.TitleName</a>
+										<div class="short-desc" >
+											<p>Count episods</p>
+											<p>Short desc</p>
+											</div>
+									</div>
 								</div>
 							</div>
+							
+						}
 					}
-				}
-				else
-				{
-					<h2>We can find nothing</h2>
-				}
+					else
+					{
+						<h2>We can find nothing</h2>
+					}
+			</div>
+			
 
-		</div>
 		</main>
 		
 	

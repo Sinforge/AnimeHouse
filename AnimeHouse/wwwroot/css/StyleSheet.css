@@ -128,6 +128,7 @@ nav {
 .anime-list {
     background-color: #0C0032;
     padding-top: 30px;
+    overflow: hidden;
     padding-bottom: 30px;
     display: flex;
     flex-direction:row;
@@ -141,10 +142,15 @@ nav {
     margin-left: 40px;
     margin-top: 20px;
     color: white;
-    width: fit-content;
+    width: inherit;
+    height: 300px;
+
 
 }
 .anime-list-item-info {
+    margin-top: 0px;
+    transition-timing-function: linear;
+    transition-duration: 0.5s;
     text-align:center;
 }
     .anime-list-item-info a {
@@ -152,7 +158,10 @@ nav {
     }
 
 .anime-list-item-img {
+    margin-top: 50px;
     margin-right: 30px;
+    transition-timing-function: linear;
+    transition-duration: 0.5s;
 }
 
 
@@ -255,7 +264,7 @@ figure img {
     display: none;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 750px) {
     body {
         width: 100%;
     }
@@ -281,18 +290,112 @@ figure img {
     #burger:checked + label{
         transform: rotate(90deg);
     }
+    #burger:not(:checked) .open-notice {
+        display: none;
+
+    }
 }
 
 .open-notice {
     display: none;
     position: absolute;
-    right: 0;
+    right: 15px;
+    top: 60px;
     height: 40%;
     width: 30%;
+    border-radius: 15px;
     z-index:2; 
-    background-color: grey;
+    background-color: white;
+}
+
+#notice_box:checked {
+    background: grey;
+}
+.notice-info {
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    border-bottom: solid #3500D3;
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    transition-timing-function: linear;
 }
 
 #notice_box:checked + .open-notice {
-    display: block;
+    align-content: flex-start;
+    display: flex;
+    flex-direction: column;
 }
+
+.notice-info:hover {
+    margin: 0;
+    background-color: #3500D3;
+    border-radius: 20px 20px;
+    color: white;
+}
+
+@media screen and (max-width: 750px) {
+    .open-notice {
+        width: 100%;
+        height: fit-content;
+        top: 450px;
+        right: 0;
+    }
+}
+.short-desc {
+    display: none;
+    opacity: .1;
+}
+.anime-list-item:hover {
+    overflow: visible;
+    display: block;
+    
+}
+.anime-list-item:hover .short-desc {
+    display: block;
+    opacity: 1;
+    color: black;
+    width: 100%;
+}
+.anime-list-item:hover .anime-list-item-info {
+    margin: 0;
+    transform: translateY(-50px);
+}
+.anime-list-item:hover .anime-list-item-img {
+    transform: translateY(-50px);
+}
+
+.anime-container {
+    background-color: white; margin-left: 10px; margin-bottom: 10px; overflow: visible;
+}
+
+.hidden-block {
+    width: 400px;
+    height: 200px;
+    display: block;
+    transform: translateX(1px);
+    color: white;
+    position: absolute;
+    transform: translateY(0px);
+    visibility: collapse;
+}
+
+.player:hover + .hidden-block {
+    background-color:red;
+    visibility: visible;
+    transform: translate(100px, -150px);
+    transition:.5s;
+    color: white;
+    content: "Text here";
+}
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+
