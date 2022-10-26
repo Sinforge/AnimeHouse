@@ -45,7 +45,6 @@
         background-color: rgb(12,0,50);
         color: #240090;
         background-color: white;
-        border: 6px solid #0C0032;
         border-radius: 10px;
         transform: scale(.8);
     }
@@ -69,14 +68,13 @@ nav {
 
 .reg_log {
     text-align: center;
-    background-color: bisque;
+    background-color: white;
 }
 .center_form {
     padding: 50px 100px 50px 100px;
     margin-top: 30px;
     display: inline-block;
     vertical-align: middle;
-    background-color: burlywood;
     border-radius: 30px 40px;
 }
 .text-field {
@@ -113,11 +111,9 @@ nav {
     padding: 10px 20px 10px 20px;
     border: 0;
     border-radius: 0;
-    background: #000000;
-    color:white;
+    background: rgba(100, 1, 5, 0.05);
+    color: black;
     font-size: 30px;
-
-
 }
 
 .span_erros {
@@ -126,7 +122,7 @@ nav {
 
 
 .anime-list {
-    background-color: #0C0032;
+    background-color: grey;
     padding-top: 30px;
     overflow: hidden;
     padding-bottom: 30px;
@@ -144,6 +140,7 @@ nav {
     color: white;
     width: inherit;
     height: 300px;
+
 
 
 }
@@ -351,6 +348,8 @@ figure img {
     display: block;
     
 }
+
+
 .anime-list-item:hover .short-desc {
     display: block;
     opacity: 1;
@@ -366,8 +365,9 @@ figure img {
 }
 
 .anime-container {
-    background-color: white; margin-left: 10px; margin-bottom: 10px; overflow: visible;
+    background-color: white; margin-left: 10px; margin-bottom: 10px; overflow: visible; transition: 1.5s;
 }
+
 
 .hidden-block {
     width: 400px;
@@ -399,3 +399,8 @@ figure img {
 }
 
 
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

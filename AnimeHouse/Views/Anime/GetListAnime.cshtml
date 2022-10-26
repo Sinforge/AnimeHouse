@@ -22,6 +22,7 @@
 			<ul class="nav_bar">
 				<li class="nav-bar-element"><p>AnimeHouse</p></li>
 				<li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				<li class="nav-bar-element page-controllers"><a class="active" asp-action="DevelopersPage" asp-controller="Home">DevPage</a></li>
 				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 				{
 					<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
@@ -60,11 +61,11 @@
 			</form>
 			<h2>Anime List</h2>
 				<div id="anime_list" class="anime-list">
-					@if (Model != null) {
-
+					@if (Model != null)
+					{
+						int pos = 0;
 						@foreach(var anime in Model) {
-
-							<div class="anime-container">
+							<div class="anime-container" id="@pos">
 								<div class="anime-list-item">
 									<div class="anime-list-item-img">
 										<img src="@(@anime.Path + anime.ImgName)" width="200" height="250" alt="Cant found img">
@@ -74,11 +75,12 @@
 										<div class="short-desc" >
 											<p>Count episods</p>
 											<p>Short desc</p>
-											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							
+							pos++;
+
 						}
 					}
 					else
