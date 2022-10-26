@@ -4,45 +4,49 @@
 	<head>
 		<title>Home Page</title>
 				<link rel="stylesheet" href="/css/StyleSheet.css">
-
+				<link rel="stylesheet" href="/css/style.css" />
 		<meta charset="utf-8" />
 	</head>
 	<body class="reg_log">
-		<header>
-			<input  type="checkbox" id="burger"/>
-			<label for="burger">&#8801</label>
-			<nav>
+	<header>
+		<input  type="checkbox" id="burger"/>
+		<label for="burger">&#8801</label>
+		<nav>
 				
-				<ul class="nav_bar">
-						<li class="nav-bar-element"><p>AnimeHouse</p></li>
-						 <li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
-							@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
-							{
-								<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
-								<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
-							}
-							<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
-							@if(User.Identity.IsAuthenticated) {
-								<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+			<ul class="nav_bar">
+				<li class="nav-bar-element"><p>AnimeHouse</p></li>
+				<li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+				{
+					<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+				}
+				<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				@if(User.Identity.IsAuthenticated) {
+					<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
 		
-								<li  class="nav-bar-element page-controllers">
-									<form method="post" asp-controller="Account" asp-action="Logout">
-										<input type="submit" value="Выход" />
-									</form>
-								</li>
-							}
-							else {
-								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
-								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
-							}
+					<li  class="nav-bar-element page-controllers">
+						<form method="post" asp-controller="Account" asp-action="Logout">
+							<input type="submit" value="Выход" />
+						</form>
+					</li>
+				}
+				else {
+					<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+				}
 					 
-				</ul>
-			</nav>
-		</header>
-		<h2>Login</h2>
-		<div class="center_form">
-			<form method="post" asp-controller="Account" asp-action="Login">
-				<div asp-validation-summary="ModelOnly"></div>
+			</ul>
+		</nav>
+	</header>
+	<main>
+
+
+
+		<div class="login-form center_form">
+			<div class="input-block">
+				<form method="post" asp-controller="Account" asp-action="Login">
+					<div asp-validation-summary="ModelOnly"></div>
 
 					<div class="text-field">
 						<label asp-for="Nickname" class="text-field__label"></label><br />
@@ -61,8 +65,16 @@
 					<div class="text-field">
 						<button type="submit" class="form-button">Login</button>
 					</div>
-			</form>
+				</form>
+			</div>
+			<div class="block" id="block1"></div>
+			<div  class="block" id="block2"></div>
+			<div   class="block"id="block3"></div>
+			<div  class="block" id="block4"></div>
+			<div class="block" id="block5"></div>
 		</div>
+	</main>
+
 		<script src="~/js/jquery-3.5.1.min.js"></script>
 		<script src="~/js/jquery.validate.min.js"></script>
 		<script src="~/js/jquery.validate.unobtrusive.min.js"></script>
