@@ -33,5 +33,10 @@ namespace AnimeHouse.Controllers
         {
 			return View();
         }
+
+        public IActionResult DevelopersPage()
+        {
+            return View("Index");
+        }
 	}
 }

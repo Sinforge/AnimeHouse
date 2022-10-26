@@ -1,0 +1,332 @@
+
+.cards-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px 0;
+}
+.cards-container .card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:200px;
+    height:300px;
+    margin-left: 100px;
+}
+.cards-container .card::before {
+    content: '';
+    transition: 0.5s;
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 50%;
+    height: 100%;
+    border-radius: 4px;
+    text-decoration: none;
+    transform: skewX(20deg);
+    filter: blur(2px);
+}
+
+.cards-container .card::after {
+    content: '';
+    transition: 0.5s;
+    border-radius: 5px;
+    border-color: black;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    text-decoration: none;
+    background-color: white;
+    transform: skewX(20deg);
+    filter: blur(2px);
+}
+.cards-container .card:hover::after,
+.cards-container .card:hover::before
+{
+    transform: skewX(0deg);
+    width: 60%;
+}
+
+
+.cards-container .card:nth-child(1)::before,
+.cards-container .card:nth-child(1)::after {
+    background: linear-gradient(315deg,  #4cff00, #0b5ed7);
+}
+.cards-container .card:nth-child(2)::before,
+.cards-container .card:nth-child(2)::after {
+    background: linear-gradient(400deg,  #6f42c1, #323539);
+}
+.cards-container .card:nth-child(3)::before,
+.cards-container .card:nth-child(3)::after {
+    background: linear-gradient(250deg, #f84200, rgba(250, 223, 100, 0.6));
+}
+
+.cards-container .card span {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.cards-container .card span:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: 0.1s;
+    animation: moving-squares 2s ease-in-out infinite;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+.cards-container .card:hover span:before{
+    top:-50px;
+    left: 35px;
+    width: 50px;
+    height: 50px;
+    opacity: 1;
+}
+.cards-container .card span::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: 0.5s;
+    animation: moving-squares 2s ease-in-out infinite;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    animation-delay: -1s;
+}
+
+.cards-container .card:hover span::after{
+    bottom: -10px;
+    right: -5px;
+    width: 50px;
+    height: 50px;
+    opacity: 1;
+}
+@keyframes moving-squares {
+    0% {
+        transform: translateY(30px);
+    }
+
+    50% {
+        transform: translateX(-30px);
+    }
+
+    100% {
+        transform: translateY(30px);
+    }
+
+
+}
+.cards-container .card .card-info {
+    position: relative;
+    left: 0;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1;
+    transition:0.5s;
+    color: #fff;
+
+}
+body {
+    margin: 0 0  0 0;
+    padding: 0 0 0 0;
+}
+.cards-container .card:hover .card-info{
+    padding: 60px 40px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.social{
+    width: 100%;
+    height: 100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+/*надо задать еще position relative and overflow hidden*/
+
+.icons{
+    text-decoration: none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px #00000080;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow:hidden;
+}
+
+.icons i {
+    font-size: 26px;
+    color: #67798e;
+    transition: all .7s ease;
+    z-index: 1;
+}
+
+.icons::before{
+    content: "";
+    width: 70px;
+    height: 70px;
+    position:absolute;
+    transform: translate(0, -70px);
+    transition: all .7s ease;
+}
+
+.icons.instagram::before{
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+.icons.youtube::before{
+    background-color: red;
+}
+.icons.git::before{
+    background-color: #333;
+}
+.icons.telegram::before{
+    background-color: #00acee;
+}
+.icons.vk::before {
+    background-color: #0e76a8;
+}
+.icons.odnoklassniki::before {
+    background-color: orange;
+}
+.icons:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 15px #00000080;
+}
+
+.icons:hover i{
+    color: #fff;
+}
+
+.icons:hover::before{
+    transform: translate(0);
+}
+
+footer {
+    height: fit-content;
+
+    border-top-style: solid;
+    border-top-width: 5px;
+}
+.social {
+    height: fit-content;
+}
+
+.login-form {
+    position: relative;
+    background-color: rgba(131, 111, 111, 0.05);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
+    z-index:2;
+}
+.input-block {
+    padding: 30px 30px 30px 30px;
+}
+.block {
+    z-index: 1;
+    background: rgba(17, 15, 15, 0.05);
+    width: 50px;
+    backdrop-filter: blur(10px);
+    height: 50px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-radius: 8px;
+}
+
+#block1 {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    animation: random-moving-blocks 11s linear infinite;
+    animation-direction: alternate;
+    animation-delay: 1s;
+}
+#block2 {
+    position: absolute;
+    top: -60px;
+    left: calc(100% / 2);
+    z-index: 2;
+    animation-delay: 2s;
+    animation: random-moving-blocks 7s ease-in-out infinite;
+}
+
+#block3 {
+    position: absolute;
+    left: -40px;
+    bottom: calc(100% / 2);
+    animation: random-moving-blocks 10s ease infinite;
+    animation-direction: alternate;
+    animation-delay: 3s;
+
+}
+#block4 {
+    position: absolute;
+    right: calc(100%/ 3);
+    bottom: -30px;
+    animation-delay: 6s;
+    animation: random-moving-blocks 8s ease infinite;
+}
+#block5 {
+    position: absolute;
+    right: -70px;
+    bottom: calc(100% / 3);
+    z-index: 2;
+    animation-direction: alternate;
+    animation-delay: 7s;
+    animation: random-moving-blocks 12s ease-out infinite;
+}
+
+@keyframes random-moving-blocks {
+    0 % {
+        transform: translateX(50px);
+    }
+    30% {
+        transform: translateY(-40px);
+    }
+    60% {
+        transform: translateX(-50px);
+    }
+    90% {
+        transform: translateY(40px);
+    }
+
+
+}
