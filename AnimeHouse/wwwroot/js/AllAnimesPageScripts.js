@@ -21,6 +21,7 @@
         $('.anime-container').each(function (index, item) {
             if (item.getAttribute('id') === currentElem.getAttribute('id')) {
                 item.style.filter = "brightness(120%)";
+                item.style.transform = "scale(1.1)";
             } else {
                 item.style.filter = "blur(5px)";
             }
@@ -30,6 +31,7 @@
         
         $('.anime-container').each(function (index, item) {
             item.style.filter = "none";
+            item.style.transform = "scale(1)";
         });
     });
     
