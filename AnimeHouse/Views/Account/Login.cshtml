@@ -4,7 +4,8 @@
 	<head>
 		<title>Home Page</title>
 				<link rel="stylesheet" href="/css/StyleSheet.css">
-				<link rel="stylesheet" href="/css/style.css" />
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+		<link href="/css/style.css" rel="stylesheet">
 		<meta charset="utf-8" />
 	</head>
 	<body class="reg_log">
@@ -16,6 +17,7 @@
 			<ul class="nav_bar">
 				<li class="nav-bar-element"><p>AnimeHouse</p></li>
 				<li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				<li class="nav-bar-element page-controllers"><a asp-action="DevelopersPage" asp-controller="Home">DevPage</a></li>
 				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 				{
 					<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
@@ -35,7 +37,8 @@
 					<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
 					<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
 				}
-					 
+				<li   class="nav-bar-element page-controllers" id="notice"><label for="notice_box"><img src="/img/bell.png" width="30px" height="30px"></label></li>
+
 			</ul>
 		</nav>
 	</header>
@@ -74,6 +77,28 @@
 			<div class="block" id="block5"></div>
 		</div>
 	</main>
+	<footer>
+			<div class="social">
+				<a class="icons instagram" href="#">
+					<i class="fab fa-instagram"></i>
+				</a>
+				<a class="icons youtube" href="#">
+					<i class="fab fa-youtube"></i>
+				</a>
+				<a class="icons git" href="#">
+					<i class="fab fa-github"></i>
+				</a>
+				<a class="icons telegram" href="#">
+					<i class="fab fa-telegram"></i>
+				</a>
+				<a class="icons odnoklassniki" href="#">
+					<i class="fab fa-odnoklassniki"></i>
+				</a>
+				<a class="icons vk" href="#">
+					<i class="fab fa-vk"></i>
+				</a>
+			</div>
+		</footer>
 
 		<script src="~/js/jquery-3.5.1.min.js"></script>
 		<script src="~/js/jquery.validate.min.js"></script>

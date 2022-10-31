@@ -398,12 +398,6 @@ figure img {
 }
 
 
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
 .anime-container:hover::before {
     content: '';
     z-index: -20;

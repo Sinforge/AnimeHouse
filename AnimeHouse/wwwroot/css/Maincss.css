@@ -1,7 +1,79 @@
-﻿main {
-    margin: 30px 30px 0 30px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+﻿.advantages-info {
+    display: grid;
+    width: 100%;
+    grid-gap: 5px;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows:repeat(3, 250px);
+  
+}
+.item1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: rgb(27, 9, 9);
+    grid-row-start: 1;
+    grid-row-end: 2;
+    transition: 1.5s;
+}
+.item2 {
+    background-color: rgb(27, 9, 9);
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 2 / 4;
+    transition: 1.5s;
+}
+.item3 {
+    background-color: rgb(27, 9, 9);
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2 / 3;
+    transition: 1.5s;
+}
+.item4 {
+    background-color: rgb(27, 9, 9);
+    grid-column: 2 / 5;
+    grid-row: 3 / 4;
+    transition: 1.5s;
+}
+.item5 {
+    background-color: rgb(27, 9, 9);
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+    transition: 1.5s;
+}
+.item6 {
+    background-color: rgb(27, 9, 9);
+    grid-column: 4 / 5;
+    grid-row: 1 / 2;
+    transition: 1.5s;
+}
+.item7 {
+    background-color: rgb(27, 9, 9);
+    grid-column: 4 / 5;
+    grid-row: 2 / 3;
+    transition: 1.5s;
+}
+.item1, .item2, .item3, .item4, .item5, .item6, .item7 {
+      text-align: center;
+      color: white;
+      font-size: 30px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+    .item1:hover, .item2:hover, .item3:hover, .item4:hover, .item5:hover, .item6:hover, .item7:hover {
+        background-color: white;
+    }
+    .item1:hover p , .item2:hover p , .item3:hover p , .item4:hover p , .item5:hover p , .item6:hover p, .item7:hover p {
+        color:black;
+    }
+
+.icon-advantages {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100Px;
+}
+.icon-advantages + p {
+    margin-left: 5px;
+    margin-right: 5px;
 }

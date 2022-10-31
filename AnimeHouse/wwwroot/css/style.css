@@ -161,6 +161,8 @@ main {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-content: center;
+    align-items:center;
 
 }
 .social{
@@ -239,6 +241,7 @@ main {
 
 footer {
     height: fit-content;
+    flex-shrink: 0;
 
     border-top-style: solid;
     border-top-width: 5px;

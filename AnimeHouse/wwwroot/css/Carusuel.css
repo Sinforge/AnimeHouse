@@ -1,11 +1,13 @@
 ﻿
-.slideshow-container {
+.slideshow-containter {
     position: relative;
-    width: fit-content;
+    width: 100%;
     top: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    align-content: center;
+    align-items: center;
     justify-content: center;
 }
 
@@ -18,8 +20,7 @@
 
 .slide {
     width: fit-content; 
-
-
+    
 }
 
 .dot {

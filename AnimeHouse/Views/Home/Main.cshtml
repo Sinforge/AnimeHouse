@@ -7,40 +7,45 @@
 		<link rel="stylesheet" href="/css/StyleSheet.css">
 		<link rel="stylesheet" href="/css/Carusuel.css" />
 		<link rel="stylesheet" href="/css//Maincss.css" />
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+		<link href="/css/style.css" rel="stylesheet">
 	</head>
 	<body>
 		<header>
-			<input  type="checkbox" id="burger"/>
-			<label for="burger">&#8801</label>
-			<nav>
+		<input  type="checkbox" id="burger"/>
+		<label for="burger">&#8801</label>
+		<nav>
 				
-				<ul class="nav_bar">
-						<li class="nav-bar-element"><p>AnimeHouse</p></li>
-						 <li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
-							@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
-							{
-								<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
-								<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
-							}
-							<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
-							@if(User.Identity.IsAuthenticated) {
-								<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+			<ul class="nav_bar">
+				<li class="nav-bar-element"><p>AnimeHouse</p></li>
+				<li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				<li class="nav-bar-element page-controllers"><a asp-action="DevelopersPage" asp-controller="Home">DevPage</a></li>
+				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+				{
+					<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+					<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+				}
+				<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+				@if(User.Identity.IsAuthenticated) {
+					<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
 		
-								<li  class="nav-bar-element page-controllers">
-									<form method="post" asp-controller="Account" asp-action="Logout">
-										<input type="submit" value="Выход" />
-									</form>
-								</li>
-							}
-							else {
-								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
-								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
-							}
-					 
-				</ul>
-			</nav>
+					<li  class="nav-bar-element page-controllers">
+						<form method="post" asp-controller="Account" asp-action="Logout">
+							<input type="submit" value="Выход" />
+						</form>
+					</li>
+				}
+				else {
+					<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
+					<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+				}
+				<li   class="nav-bar-element page-controllers" id="notice"><label for="notice_box"><img src="/img/bell.png" width="30px" height="30px"></label></li>
+
+			</ul>
+		</nav>
+	</header>
 		</header>
-		<main >
+		<main style="align-content:center;">
 			<div class="slideshow-containter">
 				<div class="slide fade">
 					<img width="200px" height="300px" src="~/img/graviti falls.jpg"/>
@@ -66,11 +71,64 @@
 					This is a platform for watching any animated series and for communicating this topic
 				</p>
 			</section>
+		<div class="advantages-info">
+			<div class="item1">
+				<img class="icon-advantages"  src="~/img/free-icon-4k-2363782.png"/>
+				<p>High quality video 1080p, 2K, 4K</p>
+			</div>
+			<div class="item2">
+				<img class="icon-advantages"  src="/img/free-icon-best-choice-5163495.png" />
+				<p>The best among the likes!</p>
+			</div>
+			<div class="item3">
+				<img  class="icon-advantages"  src="~/img/free-icon-free-5542799.png"/>
+				<p>Everything is absolutely free</p>
+			</div>
+			<div class="item4">
+				<img class="icon-advantages"   src="~/img/free-icon-microphone-1298571.png"/>
+				<p>A large selection of high-quality voice acting</p>
+			</div>
+			<div class="item5">
+				<img class="icon-advantages"  src="~/img/free-icon-server-1621427.png"/>
+				<p>Powerful servers that support the work of a large number of users</p>
+			</div>
+			<div class="item6">
+				<img class="icon-advantages"  src="~/img/free-icon-setting-8223078.png"/>
+				<p> Fast and high-quality technical support</p>
+			</div>
+			<div class="item7">
+				<img class="icon-advantages"  src="/img/free-icon-speed-2825474.png"/>
+				<p>The appearance of new products in a short time</p>
+			</div>
+
+		</div>
 		</main>
 		
 		
 		<script src="~/js/Carusuel.js"></script>
-
+	
 		
 	</body>
+	<footer>
+			<div class="social">
+				<a class="icons instagram" href="#">
+					<i class="fab fa-instagram"></i>
+				</a>
+				<a class="icons youtube" href="#">
+					<i class="fab fa-youtube"></i>
+				</a>
+				<a class="icons git" href="#">
+					<i class="fab fa-github"></i>
+				</a>
+				<a class="icons telegram" href="#">
+					<i class="fab fa-telegram"></i>
+				</a>
+				<a class="icons odnoklassniki" href="#">
+					<i class="fab fa-odnoklassniki"></i>
+				</a>
+				<a class="icons vk" href="#">
+					<i class="fab fa-vk"></i>
+				</a>
+			</div>
+		</footer>
 </html>
