@@ -6,9 +6,15 @@
 		<meta charset="utf-8" />
 				<script src="~/js/jquery-3.6.1.js"></script>
 				<script src="~/js/AllAnimesPageScripts.js"></script>
-				<link rel="stylesheet" href="/css/StyleSheet.css">
+						<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<title>Home Page</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="/css/StyleSheet.css">
+		<link rel="stylesheet" href="/css/Carusuel.css" />
+		<link rel="stylesheet" href="/css//Maincss.css" />
 		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 		<link href="/css/style.css" rel="stylesheet">
+
 
 		<base href="/" />
 	</head>
@@ -94,28 +100,79 @@
 	
 
 		</main>
-				<footer>
-			<div class="social">
-				<a class="icons instagram" href="#">
-					<i class="fab fa-instagram"></i>
-				</a>
-				<a class="icons youtube" href="#">
-					<i class="fab fa-youtube"></i>
-				</a>
-				<a class="icons git" href="#">
-					<i class="fab fa-github"></i>
-				</a>
-				<a class="icons telegram" href="#">
-					<i class="fab fa-telegram"></i>
-				</a>
-				<a class="icons odnoklassniki" href="#">
-					<i class="fab fa-odnoklassniki"></i>
-				</a>
-				<a class="icons vk" href="#">
-					<i class="fab fa-vk"></i>
-				</a>
+		<footer>
+		<div class="contact">
+			<h1>Contact</h1>
+			<form action="#">
+				<div class="contact-form">
+					<div class="data-block elem1">
+						<input name="name" id="name" type="text" placeholder="Name"/>
+					</div>
+					<div class="data-block elem2">
+						<input name="surname" id="surname" type="text" placeholder="Surname" />
+					</div>
+					<div class="data-block elem3">
+						<input name="email" id="email" type="email" placeholder="Email" />
+					</div>
+					<div class="data-block elem4">
+						<input name="tel" id="tel" type="tel" placeholder="Phone number" />
+					</div>
+					<div class="data-block elem5">
+						<input name="user-comment" id="user-comment" type="text" placeholder="Your message" />
+					</div>
+				</div>
+				<div class="data-block">
+					<input type="submit" value="Send" />
+
+				</div>
+			</form>
+		</div>
+		<div class="footer-info">
+			<div id="about-us">
+				<h1>About Us</h1>
+				A web application for watching animated series anywhere and anytime
 			</div>
-		</footer>
+			<div class="media-links">
+				<h1>Media Links</h1>
+				<div class="social">
+					<a class="icons instagram" href="#">
+						<i class="fab fa-instagram"></i>
+					</a>
+					<a class="icons youtube" href="#">
+						<i class="fab fa-youtube"></i>
+					</a>
+					<a class="icons git" href="#">
+						<i class="fab fa-github"></i>
+					</a>
+					<a class="icons telegram" href="#">
+						<i class="fab fa-telegram"></i>
+					</a>
+					<a class="icons odnoklassniki" href="#">
+						<i class="fab fa-odnoklassniki"></i>
+					</a>
+					<a class="icons vk" href="#">
+						<i class="fab fa-vk"></i>
+					</a>
+				</div>
+			</div>
+			<div class="quick-links">
+				<h1>Quick Links</h1>
+				<p>About</p>
+				<p>FAQ</p>
+				<p>Privacy Policy</p>
+				<p>Help</p>
+				<p>Terms & Conditions</p>
+			</div>
+			<div class="contact-us">
+				<h1>Contact Us</h1>
+				<p>Address: One Microsoft Way in Redmond, Washington.</p>
+				<p>Telephone: +79151937591</p>
+				<p>Email: vlad.vlasov77@mail.ru</p>
+			</div>
+		</div>
+		
+		<p style="margin-top: 20px;">Copyright © 2022 SinForge. All Right Reserved</p>
+	</footer>
 
 	
 </body>

@@ -1,4 +1,12 @@
-﻿.nav_bar {
+﻿@font-face {
+    font-family: "Ubuntu-Reg";
+    src: url("/fonts/Ubuntu-Regular.ttf");
+}
+* {
+    font-family: Ubuntu-Reg;
+}
+
+.nav_bar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -13,9 +21,6 @@
     justify-items: center;
     align-content: center;
     align-items: center;
-}
-*{
-    font-family: 'Times New Roman', Times, serif;
 }
 
 
