@@ -15,8 +15,7 @@
 			<nav>
 				
 				<ul class="nav_bar">
-						<li class="nav-bar-element"><p>AnimeHouse</p></li>
-						 <li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+						 <li class="nav-bar-element page-controllers"><a asp-action="Main" asp-controller="Home">Home</a></li>
 							@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 							{
 								<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>

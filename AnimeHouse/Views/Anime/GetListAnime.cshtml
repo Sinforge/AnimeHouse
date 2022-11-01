@@ -26,8 +26,7 @@
 		<nav>
 				
 			<ul class="nav_bar">
-				<li class="nav-bar-element"><p>AnimeHouse</p></li>
-				<li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				<li class="nav-bar-element page-controllers"><a asp-action="Main" asp-controller="Home">Home</a></li>
 				<li class="nav-bar-element page-controllers"><a asp-action="DevelopersPage" asp-controller="Home">DevPage</a></li>
 				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 				{
@@ -63,7 +62,7 @@
 			<h2>Search of animes</h2>
 			<form id="search_anime">
 				<input name="animeTitle" type="text"  />
-				<input type="submit" id="search"value="Search"/>
+				<input class="form-button" type="submit" id="search"value="Search"/>
 			</form>
 			<h2>Anime List</h2>
 				<div id="anime_list" class="anime-list">
@@ -122,7 +121,7 @@
 					</div>
 				</div>
 				<div class="data-block">
-					<input type="submit" value="Send" />
+					<input class="form-button" type="submit" value="Send" />
 
 				</div>
 			</form>

@@ -8,6 +8,7 @@
 }
 .card{
     background-color: transparent;
+    border: none;
 }
 .cards-container .card {
     position: relative;

@@ -23,8 +23,7 @@
 		<nav>
 				
 			<ul class="nav_bar">
-				<li class="nav-bar-element"><p>AnimeHouse</p></li>
-				<li class="nav-bar-element page-controllers"><a class="active" asp-action="Main" asp-controller="Home">Home</a></li>
+				<li class="nav-bar-element page-controllers"><a  asp-action="Main" asp-controller="Home">Home</a></li>
 				<li class="nav-bar-element page-controllers"><a asp-action="DevelopersPage" asp-controller="Home">DevPage</a></li>
 				@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 				{
@@ -50,6 +49,12 @@
 			</ul>
 		</nav>
 	</header>
+	<input style="display: none" type="checkbox" id="notice_box" />
+	<div class="open-notice">
+		<div class="notice-info">Don't forget to upgrade your premium subscription</div>
+		<div class="notice-info">Add 2FA to save your account</div>
+		<div class="notice-info">Leave comments and add favorites animes</div>
+	</div>
 	<main>
 		<div class="cards-container">
 			<div class="card">
@@ -98,7 +103,7 @@
 					</div>
 				</div>
 				<div class="data-block">
-					<input type="submit" value="Send" />
+					<input  class="form-button" type="submit" value="Send" />
 
 				</div>
 			</form>

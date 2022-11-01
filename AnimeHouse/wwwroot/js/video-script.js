@@ -9,24 +9,26 @@
     };
 
     var video = controls.video[0];
-    var imgbutton = $("#play-pause-img");
-    video.addEventListener("canplaythrough", () => controls.progress.attr("max", video.duration));
+    video.addEventListener("canplaythrough", () => controls.progress.attr("max", Math.floor(video.duration) ));
     controls.playpause.click(function () {
         if (video.paused) {
             video.play();
             console.log("button to play clicked");
-            imgbutton.attr("src", "/img/pause.png")
+            controls.playpause.attr("src", "/img/pause.png");
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            }
         } else {
             video.pause();
             console.log("button to pause clicked");
-            imgbutton.attr("src", "/img/play-button.png");
+            controls.playpause.attr("src", "/img/play-buttton.png");
         }
 
     });
     video.addEventListener("ended", function () {
         video.pause();
         console.log("button to pause clicked");
-        imgbutton.attr("src", "/img/play-button.png");
+        controls.playpause.attr("src", "/img/play-buttton.png");
     });
     video.addEventListener("canplay", function () {
         controls.hasHours = (video.duration / 3600) >= 1.0;
@@ -65,7 +67,7 @@
 
     controls.progress.change(function () {
         video.currentTime = document.getElementById("fader").value;
-        constrols.currentTime.text(formatTime(video.currentTime, controls.hasHours));
+        controls.currentTime.text(formatTime(video.currentTime, controls.hasHours));
     });
 });
 
