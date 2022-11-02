@@ -5,6 +5,8 @@
         progress: $("#fader"),
         duration: $("#duration"),
         currentTime: $("#currenttime"),
+        zoom: $("#fullmode"),
+        volume: $("#volume"),
         hasHours: false
     };
 
@@ -15,9 +17,7 @@
             video.play();
             console.log("button to play clicked");
             controls.playpause.attr("src", "/img/pause.png");
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            }
+
         } else {
             video.pause();
             console.log("button to pause clicked");
@@ -25,10 +25,22 @@
         }
 
     });
+    controls.zoom.click(function() {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        }
+    });
     video.addEventListener("ended", function () {
         video.pause();
         console.log("button to pause clicked");
         controls.playpause.attr("src", "/img/play-buttton.png");
+    });
+    controls.volume.click(function() {
+        if (video.volume !== 0) {
+            video.volume = 0;
+        } else {
+            video.volume = 1.0;
+        }
     });
     video.addEventListener("canplay", function () {
         controls.hasHours = (video.duration / 3600) >= 1.0;
@@ -69,6 +81,8 @@
         video.currentTime = document.getElementById("fader").value;
         controls.currentTime.text(formatTime(video.currentTime, controls.hasHours));
     });
+    
 });
+
 
 

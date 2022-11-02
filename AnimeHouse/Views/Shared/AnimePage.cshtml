@@ -53,7 +53,6 @@
 						<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
 					}
 					<li   class="nav-bar-element page-controllers" id="notice"><label for="notice_box"><img src="/img/bell.png" width="30px" height="30px"></label></li>
-
 				</ul>
 			</nav>
 	</header>
@@ -71,54 +70,71 @@
 						<form id="add-delete-favorite-form">
 							<input name="userId" type="text" value="@user.Id" hidden>
 							<input name="animeId" type="number" value="@Model.SearchedAnime.Id" hidden>
-
 						</form>
 							@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
 							{
 								<button id="add-delete-favorite">Delete from favorite</button>
-
 							}
 							else
 							{
 								<button id="add-delete-favorite">Add to favorite</button>
-
 							}
-
-
-
 					}
 				</div>
 				<div id="anime-description">
 					<h1>@Model.SearchedAnime.TitleName</h1>
 					<p>@Model.SearchedAnime.Description</p>
 				</div>
-
 			</div>
-
-
-
 			<div class="video-player-block">
 				
 				<div class="player">
-					<video class="video" preload="auto" id="myvideo" src="~/animes/Gravity Falls/episods/space.mp4" height="300" width="400">
+					<video class="video" preload="auto" id="myvideo" src="~/animes/@Model.SearchedAnime.TitleName/episods/1.mp4" height="300" width="400">
 					</video>
 					<div id="controlls">
-						<div class="video-play">
-							<img style="background-image: none;" id="play-pause" width="20px" height="20px" class="play-button" src="/img/play-buttton.png" alt="play"/>
-						</div>
 						<div class="video-progress">
 							<!--<output for="fader" id="volume">0</output>-->
 							<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
 						</div>
-						<div class="video-time">
-							<span id="currenttime">00:00</span>/
-							<span id="duration">00:00</span>
+						<div class="video-buttons">
+							<div class="video-play">
+								<img style="background-image: none;" id="play-pause" width="20px" height="20px" class="play-button" src="/img/play-buttton.png" alt="play"/>
+							</div>
+							<div class="volume">
+								<img  id="volume" width="20px" height="20px" src="~/img//volume.png"/>
+							</div>
+						
+							<div class="video-time">
+								<span id="currenttime">00:00</span>
+								<span>/</span>
+								<span id="duration">00:00</span>
+							</div>
+							<div class="fullscreen-mode">
+								<img id="fullmode" src="~/img/fullscreen-mode.png" width="20px" height="20px"/>
+							</div>
+							
 						</div>
+						
 					</div>
+				</div>
+				<div class="choose-episod">
+					<h2>Choose episod</h2>
+					<ul>
+						@for (int i = 0; i < @Model.SearchedAnime.CountEpisodes; i++)
+						{
+							<li><span id="@(i+1)" onclick="ChangeVideo(@(i+1))">Episod @(i+1)</span></li>
+						}
+					</ul>
 				</div>
 			</div>
 			
 			<script>
+				function ChangeVideo(id) {
+					let video = document.getElementById("myvideo");
+					let newId = id + '.';
+					video.src = video.src.replace(/\d+\./, newId);
+					console.log(video.src);
+				}
 			</script>
 	
 		<div class="comments-block">
@@ -254,5 +270,3 @@
 </body>
 	
 </html>
-
-

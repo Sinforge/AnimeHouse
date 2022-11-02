@@ -25,52 +25,19 @@
             height: 400px;
         }
 
-    .video-player-block .controlls {
-        display: flex;
-        padding: 20px 40px;
-        align-content: flex-start;
-        margin-top: -5px;
-    }
-
-.video-player-block .video-stop {
-        margin-left: 20px;
-        margin: 0;
-        width: fit-content;
-        cursor: pointer;
-
-        display: inline-flex;
-    }
-
-    .video-player-block .video-play {
-        cursor: pointer;
-        display: inline-flex;
-        justify-content: center;
-        width: fit-content;
-        margin: 0;
-    }
-
-    .video-player-block .video-progress {
-        display: inline-flex;
-        position: relative;
-        align-items: center;
-    }
-    .video-player-block .video-time {
-        display: inline-flex;
-    }
 
 .video-player-block .controlls #play-pause {
     color: black;
 }
 #controlls {
     display: flex;
-    justify-content: center;
-    align-content: center;
+    flex-direction: column;
     align-items: center;
     position: relative;
-    top: -45px;
+    top: -80px;
     margin-left: 25px;
     margin-right: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: transparent;
     padding: 10px 10px 10px 10px;
 }
 .video {
@@ -78,6 +45,9 @@
 }
 /*------------------------------------------------------------------Input range styles--------------------------------------------------------------------------*/
 
+.volume {
+    margin-right: 5px;
+}
 
 output {
     position: absolute;
@@ -93,7 +63,7 @@ output {
     align-self: center;
     width: 600px;
     height: 10px;
-    background: #fff; 
+    background: rgba(114, 100, 100, 0.5); 
     -webkit-appearance: none;
     outline: none;
     transition: 2s;
@@ -101,6 +71,7 @@ output {
 
 }
 span {
+    color: white;
     transition: 0.4s;
 }
 
@@ -112,7 +83,55 @@ span {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: black;
+    background: white;
     box-shadow: 0 0 2px #222;
 }
 
+.video-buttons {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+}
+.fullscreen-mode {
+    display: inline-flex;
+    margin-left: 74%;
+    justify-self: flex-end;
+}
+.choose-episod ul {
+    margin: 0;
+    list-style-type: none;
+
+    text-decoration: none;
+    height: 400px;
+    width: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.choose-episod {
+    justify-self: flex-start;
+}
+.choose-episod ul::-webkit-scrollbar {
+    width: 20px;
+
+}
+.choose-episod ul::-webkit-scrollbar-track {
+    background: grey;
+    border-radius: 10px;
+}
+.choose-episod ul::-webkit-scrollbar-thumb {
+    background: white;
+    height: 50px;
+    border-radius: 10px;
+
+}
+.choose-episod ul li span {
+    color: white;
+    width: 100%;
+}
+.choose-episod ul li span:hover {
+    color: black;
+    background: white;
+}

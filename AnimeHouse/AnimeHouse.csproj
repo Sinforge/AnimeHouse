@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\animes\Gravity Falls\episods\" />
   </ItemGroup>
 
   <ItemGroup>
