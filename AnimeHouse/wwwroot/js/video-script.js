@@ -7,6 +7,8 @@
         currentTime: $("#currenttime"),
         zoom: $("#fullmode"),
         volume: $("#volume"),
+        volume_mixer: $("#volume-mixer"),
+        volume_block: $("#volume-block"),
         hasHours: false
     };
 
@@ -81,7 +83,21 @@
         video.currentTime = document.getElementById("fader").value;
         controls.currentTime.text(formatTime(video.currentTime, controls.hasHours));
     });
-    
+    controls.volume_mixer.change(function () {
+        console.log("Im change volume");
+        video.volume = this.value / 100;
+
+
+    });
+    controls.volume_block.mouseover(function() {
+        console.log("Show range volume");
+        controls.volume_mixer.css("display", "block");
+    });
+    controls.volume_block.mouseout(function() {
+        console.log("Hide range volume");
+        controls.volume_mixer.css("display", "none");
+    });
+
 });
 
 
