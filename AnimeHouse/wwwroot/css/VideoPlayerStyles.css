@@ -10,11 +10,9 @@
     overflow: visible;
 }
 .player {
-    overflow: visible;
 }
 
     .video-player-block .player {
-        max-width: 850px;
         text-align: center;
         width: 100%;
     }
@@ -92,13 +90,11 @@ span {
     margin-left: 10px;
     display: inline-flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     width: 80%;
 }
 .fullscreen-mode {
-    display: inline-flex;
-    margin-left: 74%;
-    justify-self: flex-end;
+    margin-left: auto;
 }
 .choose-episod ul {
     margin: 0;
@@ -134,4 +130,21 @@ span {
 .choose-episod ul li span:hover {
     color: black;
     background: white;
+}
+.volume {
+    display: flex;
+    flex-direction:row;
+}
+#volume-mixer {
+    transition: 2s;
+    background-color: transparent;
+}
+#volume-mixer::-webkit-slider-thumb {
+    color:red;
+    border-radius: 10px;
+}
+#volume-mixer::-webkit-slider-runnable-track {
+    align-self: center;
+    height: 10px;
+    border-radius: 10px;
 }

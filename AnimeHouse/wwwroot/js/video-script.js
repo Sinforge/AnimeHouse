@@ -11,6 +11,8 @@
         volume_block: $("#volume-block"),
         hasHours: false
     };
+    var controlsBlock = $("#controlls");
+    var videoPlayer = $(".player")
 
     var video = controls.video[0];
     video.addEventListener("canplaythrough", () => controls.progress.attr("max", Math.floor(video.duration) ));
@@ -27,11 +29,51 @@
         }
 
     });
+    var fullscreen = 0;
     controls.zoom.click(function() {
-        if (video.requestFullscreen) {
-            video.requestFullscreen();
+        if (fullscreen == 0) {
+            fullscreen = 1;
+            controls.video.appendTo('body');
+            controls.video.css('position', 'absolute').css('width', "100%").css('height', '100%').css('z-index', 600);
+        } else {
+            fullscreen = 0;
+            videoPlayer.css('position', 'relative').css('width', '700px').css('height', '400px');
+
+
         }
     });
+    /*
+    .player {
+        overflow: visible;
+    }
+
+    .video - player - block.player {
+        max - width: 850px;
+        text - align: center;
+        width: 100 %;
+    }
+
+    .video - player - block.player.video {
+        max - width: 100 %;
+        width: 700px;
+        height: 400px;
+    }
+
+
+    .video - player - block.controlls #play - pause {
+        color: black;
+    }
+    #controlls {
+        display: flex;
+        flex - direction: column;
+        align - items: center;
+        position: relative;
+        top: -80px;
+        margin - left: 25px;
+        margin - right: 20px;
+        background - color: transparent;
+        padding: 10px 10px 10px 10px;
+    }*/
     video.addEventListener("ended", function () {
         video.pause();
         console.log("button to pause clicked");
