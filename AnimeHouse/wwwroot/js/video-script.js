@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿
+
+
+$(document).ready(function () {
     var controls = {
         video: $("#myvideo"),
         playpause: $("#play-pause"),
@@ -12,7 +15,68 @@
         hasHours: false
     };
     var controlsBlock = $("#controlls");
-    var videoPlayer = $(".player")
+    var videoPlayer = $(".player");
+
+    document.querySelector('#fullmode').addEventListener('click', toggleScreen);
+    let fullscreenVideo = 0;
+    let player1 = document.querySelector('.player');
+    let video1 = document.querySelector('.video');
+    function toggleScreen() {
+
+
+        if (fullscreenVideo == 0) {
+            console.log("Im in fullscreen");
+            fullscreenVideo = 1;
+
+            video1.style.width = '100%';
+            video1.style.height = '100%';
+            player1.style.position = 'absolute';
+            player1.style.width = '100%';
+            player1.style.height = '100%';
+            if (player1.requestFullscreen) {
+                player1.requestFullscreen();
+            }
+            else if (player1.mozRequestFullScreen) {
+                player1.mozRequestFullScreen();
+            }
+            else if (player1.webkitRequestFullScreen) {
+                player1.webkitRequestFullScreen();
+            }
+            else if (player1.msRequestFullscreen) {
+                player1.msRequestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            }
+            else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            }
+            else if (document.msExitFullScreen) {
+                document.msExitFullscreen();
+            }
+            console.log("Im not in fullscreen");
+            fullscreenVideo = 0;
+            video1.style.width = '';
+            video1.style.height = '';
+            player1.style.position = '';
+            player1.style.width = '';
+            player1.style.height = '';
+
+        }
+
+
+
+    }
+    function ChangeVideo(id) {
+        let video = document.getElementById("myvideo");
+        let newId = id + '.';
+        video.src = video.src.replace(/\d+\./, newId);
+        console.log(video.src);
+    }
+
 
     var video = controls.video[0];
     video.addEventListener("canplaythrough", () => controls.progress.attr("max", Math.floor(video.duration) ));
@@ -29,20 +93,33 @@
         }
 
     });
-    var fullscreen = 0;
-    controls.zoom.click(function() {
-        if (fullscreen == 0) {
+    /*controls.zoom.click(function() {
+        /*if (fullscreen == 0) {
             fullscreen = 1;
             controls.video.appendTo('body');
-            controls.video.css('position', 'absolute').css('width', "100%").css('height', '100%').css('z-index', 600);
+            $('body').css('overflow', 'hidden');
+            controls.video.css('position', 'fixed').css('right', 0).css('bottom', 0).css('min-width', '100%')
+                .css('min-heigth', '100%').css('width', 'auto')
+                .css('height', 'auto').css('z-index', '1000').css('background-size', 'cover')
+                .css('top', '');
         } else {
             fullscreen = 0;
             videoPlayer.css('position', 'relative').css('width', '700px').css('height', '400px');
 
 
         }
-    });
+        let element = document.getElementsByClassName("video-player-block");
+        fullscreen(element);
+}); */
+
     /*
+     video {
+    position: fixed; right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto; z-index: -100;
+    background: url(polina.jpg) no-repeat;
+    background-size: cover;
+}
     .player {
         overflow: visible;
     }

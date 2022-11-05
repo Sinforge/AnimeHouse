@@ -112,32 +112,26 @@
 								<span id="duration">00:00</span>
 							</div>
 							<div class="fullscreen-mode">
-								<img id="fullmode" src="~/img/fullscreen-mode.png" width="20px" height="20px"/>
+								<img id="fullmode" src="~/img/fullscreen-mode.png" width="20px" height="20px" />
 							</div>
+							<script>
+							</script>
 							
-						</div>
+								</div>
 						
-					</div>
-				</div>
-				<div class="choose-episod">
-					<h2>Choose episod</h2>
-					<ul>
-						@for (int i = 0; i < @Model.SearchedAnime.CountEpisodes; i++)
+								</div>
+								</div>
+								<div class="choose-episod">
+								<h2>Choose episod</h2>
+								<ul>
+								@for (int i = 0; i < @Model.SearchedAnime.CountEpisodes; i++)
 						{
 							<li><span id="@(i+1)" onclick="ChangeVideo(@(i+1))">Episod @(i+1)</span></li>
 						}
-					</ul>
-				</div>
-			</div>
-			
-			<script>
-				function ChangeVideo(id) {
-					let video = document.getElementById("myvideo");
-					let newId = id + '.';
-					video.src = video.src.replace(/\d+\./, newId);
-					console.log(video.src);
-				}
-			</script>
+								</ul>
+								</div>
+								</div>
+
 	
 		<div class="comments-block">
 			<div>

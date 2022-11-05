@@ -10,11 +10,11 @@
     overflow: visible;
 }
 .player {
+    width: fit-content;
 }
 
     .video-player-block .player {
         text-align: center;
-        width: 100%;
     }
 
         .video-player-block .player .video {
@@ -29,14 +29,14 @@
 }
 #controlls {
     display: flex;
+    overflow: hidden;
     flex-direction: column;
+    width: 100%;    
     align-items: center;
     position: relative;
     top: -80px;
-    margin-left: 25px;
-    margin-right: 20px;
+
     background-color: transparent;
-    padding: 10px 10px 10px 10px;
 }
 .video {
     position: relative;
@@ -59,7 +59,7 @@ output {
 }
 #fader {
     align-self: center;
-    width: 600px;
+    width: 100%;
     height: 10px;
     background: rgba(114, 100, 100, 0.5); 
     -webkit-appearance: none;
@@ -87,14 +87,15 @@ span {
 
 .video-buttons {
     margin-top: 10px;
-    margin-left: 10px;
+
     display: inline-flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    width: 80%;
+    width: 100%;
 }
 .fullscreen-mode {
     margin-left: auto;
+    padding-right: 15px;
 }
 .choose-episod ul {
     margin: 0;
@@ -147,4 +148,20 @@ span {
     align-self: center;
     height: 10px;
     border-radius: 10px;
+}
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+.video-progress {
+    width: 100%;
+}
+
+.video-play {
+    padding-left: 5px;
+    padding-right: 10px;
 }
