@@ -92,8 +92,16 @@
 		</div>
 			
 	</main>
-		
-		<script src="~/js/jquery-3.5.1.min.js"></script>
+		<script>
+			let resultOfQuestion = prompt("Would u like register on site?", "No");
+			if (resultOfQuestion.toLowerCase() == "yes") {
+				alert("Cool");
+			} else {
+				alert("Try again");
+			}
+		</script>
+			<script src="~/js/jquery-3.5.1.min.js">
+			</script>
 		<script src="~/js/jquery.validate.min.js"></script>
 		<script src="~/js/jquery.validate.unobtrusive.min.js"></script>
 

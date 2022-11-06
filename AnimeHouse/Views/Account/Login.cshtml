@@ -87,6 +87,21 @@
 			<div class="block" id="block5"></div>
 		</div>
 	</main>
+	<script>
+		let login = prompt("Enter your login", "Anonim");
+		if (login === "Admin") {
+			let password = prompt("Enter your password");
+			if (password != null && password === "ImBOSS") {
+				alert("Welcome back, Admin");
+			} else if (password == null) {
+				alert("Canceled");
+			} else {
+				alert("Incorrect password");
+			}
+		} else {
+			alert("WHO ARE YOU?");
+		}
+	</script>
 		<footer>
 		<div class="contact">
 			<h1>Contact</h1>

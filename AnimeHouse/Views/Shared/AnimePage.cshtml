@@ -27,7 +27,7 @@
 	<body>
 		<header>
 			<input  type="checkbox" id="burger"/>
-			<label for="burger">&#8801</label>
+			<label for="burger">&#8801;</label>
 			<nav>
 				
 				<ul class="nav_bar">
@@ -71,52 +71,82 @@
 							<input name="userId" type="text" value="@user.Id" hidden>
 							<input name="animeId" type="number" value="@Model.SearchedAnime.Id" hidden>
 						</form>
-							@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
-							{
-								<button id="add-delete-favorite">Delete from favorite</button>
-							}
-							else
-							{
-								<button id="add-delete-favorite">Add to favorite</button>
-							}
+						@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
+						{
+							<button id="add-delete-favorite">Delete from favorite</button>
+						}
+						else
+						{
+							<button id="add-delete-favorite">Add to favorite</button>
+						}
 					}
-				</div>
+					<div style="display: inline">
+						<button id="heart" style="background-color: transparent; border-style:none;">&#10084;</button>
+						<div id="counter">0</div>
+					</div>
+					</div>
+				<script>
+					let heart = document.getElementById("heart");
+					var isLiked = false;
+					var counter = document.getElementById("counter");
+					heart.addEventListener("click", () => {
+						if (!isLiked) {
+							isLiked = true;
+							heart.style.color = "red";
+							counter.innerHTML = Number(counter.innerHTML) + 1;
+						} else
+						{ 
+							isLiked = false;
+							heart.style.color = "white";
+							counter.innerHTML = Number(counter.innerHTML) - 1;
+
+						}
+					});
+				</script>
 				<div id="anime-description">
-					<h1>@Model.SearchedAnime.TitleName</h1>
-					<p>@Model.SearchedAnime.Description</p>
+				<h1>@Model.SearchedAnime.TitleName</h1>
+				<p>@Model.SearchedAnime.Description</p>
 				</div>
-			</div>
-			<div class="video-player-block">
+				</div>
+				<div class="video-player-block">
 				
 				<div class="player">
-					<video class="video" preload="auto" id="myvideo" src="~/animes/@Model.SearchedAnime.TitleName/episods/1.mp4" height="300" width="400">
-					</video>
-					<div id="controlls">
-						<div class="video-progress">
-							<!--<output for="fader" id="volume">0</output>-->
-							<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
-						</div>
-						<div class="video-buttons">
-							<div class="video-play">
-								<img style="background-image: none;" id="play-pause" width="20px" height="20px" class="play-button" src="/img/play-buttton.png" alt="play"/>
-							</div>
-							<div id="volume-block" class="volume">
-								<img  id="volume" width="20px" height="20px" src="~/img//volume.png"/>
-								<input style="display: none;" type="range" id="volume-mixer" min="0" max="100"/>
+				<video class="video" preload="auto" id="myvideo" src="~/animes/@Model.SearchedAnime.TitleName/episods/1.mp4" height="300" width="400">
+				</video>
+				<div id="controlls">
+				<div class="video-progress">
+				<!--<output for="fader" id="volume">0</output>-->
+				<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
+				<input type="range" id="current-progress" class="progress" min="0" max="10000" value="0" step="1"/>
 
-							</div>
-						
-							<div class="video-time">
-								<span id="currenttime">00:00</span>
-								<span>/</span>
-								<span id="duration">00:00</span>
-							</div>
-							<div class="fullscreen-mode">
-								<img id="fullmode" src="~/img/fullscreen-mode.png" width="20px" height="20px" />
-							</div>
-							<script>
-							</script>
-							
+				</div>
+				<div class="video-buttons">
+				<div class="video-play">
+				<img style="background-image: none;" id="play-pause" width="20px" height="20px" class="play-button" src="/img/play-buttton.png" alt="play"/>
+				</div>
+				<div id="volume-block" class="volume">
+				<img  id="volume" width="20px" height="20px" src="~/img//volume.png"/>
+				<input style="display: none;" type="range" id="volume-mixer" min="0" max="100"/>
+
+				</div>
+				
+				<div class="video-time">
+				<span id="currenttime">00:00</span>
+				<span>/</span>
+				<span id="duration">00:00</span>
+				</div>
+				<div class="fullscreen-mode">
+				<img id="fullmode" src="~/img/fullscreen-mode.png" width="20px" height="20px" />
+				</div>
+				<script>
+					function ChangeVideo(id) {
+						let video = document.getElementById("myvideo");
+						let newId = id + '.';
+						video.src = video.src.replace(/\d+\./, newId);
+						console.log(video.src);
+					}
+				</script>
+					
 								</div>
 						
 								</div>

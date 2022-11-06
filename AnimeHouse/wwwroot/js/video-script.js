@@ -21,6 +21,42 @@ $(document).ready(function () {
     let fullscreenVideo = 0;
     let player1 = document.querySelector('.player');
     let video1 = document.querySelector('.video');
+    document.addEventListener('keydown', function(event) {
+        const key = event.key;
+        if (key == "Escape") {
+            if (fullscreenVideo == 1) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                } else if (document.msExitFullScreen) {
+                    document.msExitFullscreen();
+                }
+                console.log("Im not in fullscreen");
+                fullscreenVideo = 0;
+                video1.style.width = '';
+                video1.style.height = '';
+                player1.style.position = '';
+                player1.style.width = '';
+                player1.style.height = '';
+            }
+        }
+    });
+    controls.video.click(function() {
+        if (video.paused) {
+            video.play();
+            console.log("button to play clicked");
+            controls.playpause.attr("src", "/img/pause.png");
+
+        } else {
+            video.pause();
+            console.log("button to pause clicked");
+            controls.playpause.attr("src", "/img/play-buttton.png");
+        }
+
+    });
     function toggleScreen() {
 
 
@@ -70,12 +106,7 @@ $(document).ready(function () {
 
 
     }
-    function ChangeVideo(id) {
-        let video = document.getElementById("myvideo");
-        let newId = id + '.';
-        video.src = video.src.replace(/\d+\./, newId);
-        console.log(video.src);
-    }
+    
 
 
     var video = controls.video[0];
