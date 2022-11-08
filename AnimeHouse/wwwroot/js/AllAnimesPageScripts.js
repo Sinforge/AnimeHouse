@@ -34,7 +34,34 @@
             item.style.transform = "scale(1)";
         });
     });
-    
 
-    
+    var categories = document.querySelectorAll(".categories input");
+    var arrSelectedCategories = [];
+    for (let i = 0; i < categories.length; i++)
+    {
+        categories[i].addEventListener("change", () => {
+            console.log(categories[i]);
+            if (categories[i].checked) {
+                arrSelectedCategories.push(categories[i].name);
+            } else {
+                arrSelectedCategories = arrSelectedCategories.filter(val => val !== categories[i].name);
+            }
+            console.log(JSON.stringify({ categories: arrSelectedCategories }));
+            console.log(arrSelectedCategories);
+             $.ajax({
+                 url: "/Anime/FilterAnimes",
+                 type: "post",
+                 traditional: true,
+                 data: {categories: arrSelectedCategories },
+                 success: function (response) {
+                     console.log(response);
+                     $("#anime_list").html(response);
+
+                 }
+             });
+            
+        });
+    }
+
+
 });

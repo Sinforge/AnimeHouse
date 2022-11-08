@@ -60,41 +60,60 @@
 	</div>
 		<main style="display: flex; flex-direction: column; justify-items: center; justify-content: center; align-items: center;">
 			<h2>Search of animes</h2>
-			<form id="search_anime">
-				<input name="animeTitle" type="text"  />
-				<input class="form-button" type="submit" id="search"value="Search"/>
-			</form>
 			<h2>Anime List</h2>
-				<div id="anime_list" class="anime-list">
-					@if (Model != null)
-					{
-						int pos = 0;
-						@foreach(var anime in Model) {
-							<div class="anime-container" id="@pos">
-								<div class="background-card">
-									<div class="anime-list-item">
-										<div class="anime-list-item-img">
-											<img src="@(@anime.Path + anime.ImgName)" width="200" height="250" alt="Cant found img">
-										</div>
-										<div class="anime-list-item-info">
-											<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1>@anime.TitleName</a>
-											<div class="short-desc">
-												<p>Count episods</p>
-												<p>Short desc</p>
+				<div class="select-anime-block">
+					<div id="anime_list" class="anime-list">
+						@if (Model != null)
+						{
+							int pos = 0;
+							@foreach(var anime in Model) {
+								<div class="anime-container" id="@pos">
+									<div class="background-card">
+										<div class="anime-list-item">
+											<div class="anime-list-item-img">
+												<img src="@(@anime.Path + anime.ImgName)" id="img-anime" alt="Cant found img">
+											</div>
+											<div class="anime-list-item-info">
+												<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1>@anime.TitleName</a>
+												<div class="short-desc">
+													<p>Count episodes</p>
+													<p>Short desc</p>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							pos++;
+								pos++;
 
+							}
 						}
-					}
-					else
-					{
-						<h2>We can find nothing</h2>
-					}
-			</div>
+						else
+						{
+							<h2>We can find nothing</h2>
+						}
+					</div>
+						
+					<div class="categories-block">
+						<form id="search_anime">
+							<input name="animeTitle" type="text"  />
+							<input class="form-button" type="submit" id="search"value="Search"/>
+						</form>
+						<div class="categories">
+							<h2>Categories</h2>
+							@foreach (var categoryName in (List<string>)ViewData["CategoriesList"])
+							{
+								<label><input type="checkbox" name="@categoryName">@categoryName</label>
+							}
+
+						</div>
+						<div class="sort-method">
+							<h2>Sort By</h2>
+							<label><input type="checkbox"/>Alphabetically</label>
+							<label><input type="checkbox"/>Count episodes</label>
+
+						</div>
+					</div>
+				</div>
 			
 	
 

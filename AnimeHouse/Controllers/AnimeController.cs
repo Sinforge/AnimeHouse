@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections;
+using Microsoft.AspNetCore.Mvc;
 using AnimeHouse.Models;
 using AnimeHouse.Data;
 using AnimeHouse.ViewModels.AdminModels;
@@ -24,12 +25,19 @@ namespace AnimeHouse.Controllers
         [Route("Anime")]
         public IActionResult GetListAnime()
         {
+            ViewData["CategoriesList"] = new List<string>
+            { 
+                "Games", "Detective", "Military", "Mystic", "Romance", "Supernatural", "Sport", "School", "Thriller",
+                "Fantasy", "Horror", "Everyday life", "Music", "Magic", "Comedy"
+
+            };
 
             return View(_db.Animes.ToArray());
 
         }
 
         [HttpGet]        
+
         public IActionResult SearchAnime(string animeTitle)
         {
 
@@ -40,6 +48,38 @@ namespace AnimeHouse.Controllers
             string NormalizedTitle = animeTitle.ToLower();
             IEnumerable<Anime> findedAnimes = from anime in _db.Animes where anime.TitleName.ToLower().Contains(NormalizedTitle) select anime;
             return PartialView("SearchedAnimePartialView", findedAnimes);
+        }
+
+        [Route("/Anime/FilterAnimes")]
+        [HttpPost]
+        public IActionResult FilterAnimes([FromForm] List<string> categories)
+        {
+            List<Anime> filteredAnimes = new List<Anime>();
+            if (categories == null)
+            {
+                IEnumerable<Anime> allAnimes = from anime in _db.Animes select anime;
+                return PartialView("SearchedAnimePartialView", allAnimes);
+            }
+            foreach (var anime in _db.Animes)
+            {
+                bool hasAllCategories = true;
+                foreach (string animeCat in categories)
+                {
+                    if (anime.Categories.Find(cat => cat.Name == animeCat) == null)
+                    {
+                        hasAllCategories = false;
+                        break;
+                    }
+
+                }
+
+                if (hasAllCategories)
+                {
+                    filteredAnimes.Add(anime);
+                }
+            }
+
+            return PartialView("SearchedAnimePartialView", filteredAnimes);
         }
 
        

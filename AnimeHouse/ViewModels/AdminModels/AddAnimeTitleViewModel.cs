@@ -32,5 +32,10 @@ namespace AnimeHouse.ViewModels.AdminModels
         public IFormFile Img { get; set; }
 
 
+        [Display(Name = "Categories")]
+        public List<string> Categories { get; set; } = new List<string>();
+
+
+
     }
 }

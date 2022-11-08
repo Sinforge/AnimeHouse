@@ -10,14 +10,16 @@ namespace AnimeHouse.Data
 	{
 		public DbSet<Anime> Animes { get; set; } = null!;
 		public DbSet<Comment> Comments { get; set; } = null!;
+
+        public DbSet<Category> Categories { get; set; } = null!;
+
 		public ApplicationContext(DbContextOptions<ApplicationContext> options)
 			: base(options)
 		{
 			Database.EnsureCreated();
 		}
 
-     
-		
+
     }
 
 }

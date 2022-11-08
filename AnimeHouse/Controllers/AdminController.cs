@@ -43,6 +43,18 @@ namespace AnimeHouse.Controllers
                 ShortDescription = model.ShortDescription,
                 TitleName = model.Title
             };
+            _db.Animes.Add(anime);
+
+            foreach (var catName in model.Categories)
+            {
+                var foundedCategory = _db.Categories.First(cat => cat.Name == catName);
+                if (foundedCategory != null)
+                {
+                    anime.Categories.Add(foundedCategory);
+                }
+            }
+
+
 
             if (model.Img != null)
             {
@@ -56,11 +68,7 @@ namespace AnimeHouse.Controllers
             {
                 _logger.LogInformation("User dont add img");
             }
-
-
-            //Add to database
-            _db.Animes.Add(anime);
-            await _db.SaveChangesAsync();
+            _db.SaveChanges();
 
 
             _logger.LogInformation("New title was succesful added");
@@ -73,6 +81,11 @@ namespace AnimeHouse.Controllers
         [Route("/Admin/CreateTitle")]
         public IActionResult CreateTitle()
         {
+            ViewData["CategoriesList"] = new List<string> 
+            { "Games", "Detective", "Military", "Mystic", "Romance", "Supernatural", "Sport", "School", "Thriller",
+                "Fantasy", "Horror", "Everyday life", "Music", "Magic", "Comedy"
+
+            };
             return View();
         }
 
