@@ -7,7 +7,10 @@ using AnimeHouse.ViewModels.AnimeModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 namespace AnimeHouse.Controllers
 {
     public class AnimeController : Controller
@@ -54,29 +57,16 @@ namespace AnimeHouse.Controllers
         [HttpPost]
         public IActionResult FilterAnimes([FromForm] List<string> categories)
         {
-            List<Anime> filteredAnimes = new List<Anime>();
+            var filteredAnimes = from anime in _db.Animes select anime;
             if (categories == null)
             {
                 IEnumerable<Anime> allAnimes = from anime in _db.Animes select anime;
                 return PartialView("SearchedAnimePartialView", allAnimes);
             }
-            foreach (var anime in _db.Animes)
+
+            foreach (var cat in _db.Categories.Include(c => c.Animes ).Where(c => categories.Contains(c.Name)))
             {
-                bool hasAllCategories = true;
-                foreach (string animeCat in categories)
-                {
-                    if (anime.Categories.Find(cat => cat.Name == animeCat) == null)
-                    {
-                        hasAllCategories = false;
-                        break;
-                    }
-
-                }
-
-                if (hasAllCategories)
-                {
-                    filteredAnimes.Add(anime);
-                }
+               filteredAnimes = filteredAnimes.Intersect(cat.Animes);
             }
 
             return PartialView("SearchedAnimePartialView", filteredAnimes);

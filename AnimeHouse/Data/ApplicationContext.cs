@@ -18,9 +18,9 @@ namespace AnimeHouse.Data
 		{
 			Database.EnsureCreated();
 		}
-
-
-    }
+        
+        
+	}
 
 }
 

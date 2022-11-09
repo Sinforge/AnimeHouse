@@ -44,17 +44,13 @@ namespace AnimeHouse.Controllers
                 TitleName = model.Title
             };
             _db.Animes.Add(anime);
-
-            foreach (var catName in model.Categories)
+            foreach (var cat in _db.Categories.Where(cat => model.Categories.Contains(cat.Name)))
             {
-                var foundedCategory = _db.Categories.First(cat => cat.Name == catName);
-                if (foundedCategory != null)
-                {
-                    anime.Categories.Add(foundedCategory);
-                }
+ 
+                cat.Animes.Add(anime);
+                _db.Categories.Update(cat);
+
             }
-
-
 
             if (model.Img != null)
             {
@@ -68,7 +64,7 @@ namespace AnimeHouse.Controllers
             {
                 _logger.LogInformation("User dont add img");
             }
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
 
             _logger.LogInformation("New title was succesful added");
