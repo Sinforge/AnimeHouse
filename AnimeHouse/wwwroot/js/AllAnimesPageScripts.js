@@ -37,6 +37,39 @@
 
     var categories = document.querySelectorAll(".categories input");
     var arrSelectedCategories = [];
+    var methods = document.querySelectorAll(".sort-method input");
+    var selectedMethod = null;
+    for (let i = 0; i < methods.length; i++) {
+        methods[i].addEventListener("change",
+            () => {
+
+                if (methods[i].checked) {
+                    for (let j = 0; j < methods.length; j++) {
+                        if (methods[i].name != methods[j].name) {
+                            methods[j].checked = false;
+                        }
+
+                    }
+                    selectedMethod = methods[i].name;
+                } else {
+                    selectedMethod = null;
+                }
+                console.log(methods[i].name);
+                console.log(selectedMethod);
+                $.ajax({
+                    url: "/Anime/FilterAnimes",
+                    type: "post",
+                    traditional: true,
+                    data: { categories: arrSelectedCategories, sortMethod: selectedMethod },
+                    success: function (response) {
+                        console.log(response);
+                        $("#anime_list").html(response);
+
+                    }
+                });
+                
+            });
+    }
     for (let i = 0; i < categories.length; i++)
     {
         categories[i].addEventListener("change", () => {
@@ -52,7 +85,7 @@
                  url: "/Anime/FilterAnimes",
                  type: "post",
                  traditional: true,
-                 data: {categories: arrSelectedCategories },
+                 data: {categories: arrSelectedCategories, sortMethod:  selectedMethod},
                  success: function (response) {
                      console.log(response);
                      $("#anime_list").html(response);

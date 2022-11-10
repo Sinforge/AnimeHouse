@@ -55,18 +55,45 @@ namespace AnimeHouse.Controllers
 
         [Route("/Anime/FilterAnimes")]
         [HttpPost]
-        public IActionResult FilterAnimes([FromForm] List<string> categories)
+        public IActionResult FilterAnimes([FromForm] List<string> categories, [FromForm] string sortMethod)
         {
-            var filteredAnimes = from anime in _db.Animes select anime;
-            if (categories == null)
+            IEnumerable<Anime> filteredAnimes = from anime in _db.Animes select anime;
+            if (categories.Count == 0)
             {
-                IEnumerable<Anime> allAnimes = from anime in _db.Animes select anime;
+                IEnumerable<Anime> allAnimes;
+                if (sortMethod == null)
+                {
+                    allAnimes = from anime in _db.Animes select anime;
+
+                }
+                else if (sortMethod == "Alphabetically")
+                { 
+                    allAnimes = from anime in _db.Animes orderby anime.TitleName select anime;
+                }
+                else
+                {
+                    allAnimes = from anime in _db.Animes orderby anime.CountEpisodes select anime;
+
+                }
                 return PartialView("SearchedAnimePartialView", allAnimes);
             }
 
             foreach (var cat in _db.Categories.Include(c => c.Animes ).Where(c => categories.Contains(c.Name)))
             {
                filteredAnimes = filteredAnimes.Intersect(cat.Animes);
+            }
+
+            if (filteredAnimes?.Any() == true && sortMethod != null)
+            {
+                if (sortMethod == "Alphabetically")
+                {
+                    filteredAnimes = filteredAnimes.OrderBy(anime => anime.TitleName);
+
+                }
+                else
+                {
+                    filteredAnimes = filteredAnimes.OrderBy(anime => anime.CountEpisodes);
+                }
             }
 
             return PartialView("SearchedAnimePartialView", filteredAnimes);
