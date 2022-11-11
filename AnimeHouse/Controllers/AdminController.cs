@@ -127,7 +127,7 @@ namespace AnimeHouse.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditRole([FromRoute] string id, [FromForm] List<string> roles )
+        public async Task<IActionResult> EditRole([FromForm] string id, [FromForm] List<string> roles )
         {
             User user = await _userManager.FindByIdAsync(id);
             if(user != null)

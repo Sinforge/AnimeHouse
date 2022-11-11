@@ -2,68 +2,155 @@
 @model List<UserListForAdminViewModel>
 <!doctype html>
 <html>
-	<head>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<link rel="stylesheet" href="/css/StyleSheet.css">
-		<title>Home Page</title>
-		<meta charset="utf-8" />
-	</head>
-	<body>
-		<header>
-			<input  type="checkbox" id="burger"/>
-			<label for="burger">&#8801</label>
-			<nav>
+<head>
+	<link rel="stylesheet" href="/css/StyleSheet.css">
+	<link rel="stylesheet" href="/css/Carusuel.css" />
+	<link rel="stylesheet" href="/css/Maincss.css" />
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<header>
+	<input  type="checkbox" id="burger"/>
+	<label for="burger">&#8801</label>
+	<nav>
 				
-				<ul class="nav_bar">
-						 <li class="nav-bar-element page-controllers"><a asp-action="Main" asp-controller="Home">Home</a></li>
-							@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
-							{
-								<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
-								<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
-							}
-							<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
-							@if(User.Identity.IsAuthenticated) {
-								<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
+		<ul class="nav_bar">
+			<li class="nav-bar-element page-controllers"><a asp-action="Main" asp-controller="Home">Home</a></li>
+			@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+			{
+				<li  class="nav-bar-element page-controllers"><a asp-action="UserList" asp-controller="Admin">User's List</a></li>
+				<li   class="nav-bar-element page-controllers"><a asp-action="CreateTitle" asp-controller="Admin" >Create Title</a></li>
+			}
+			<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
+			@if(User.Identity.IsAuthenticated) {
+				<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
 		
-								<li  class="nav-bar-element page-controllers">
-									<form method="post" asp-controller="Account" asp-action="Logout">
-										<input type="submit" value="Выход" />
-									</form>
-								</li>
-							}
-							else {
-								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
-								<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
-							}
+				<li  class="nav-bar-element page-controllers">
+					<form method="post" asp-controller="Account" asp-action="Logout">
+						<input type="submit" value="Выход" />
+					</form>
+				</li>
+			}
+			else {
+				<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Login">Login</a></li>
+				<li  class="nav-bar-element page-controllers"><a asp-controller="Account" asp-action="Registration">Registration</a></li>
+			}
 					 
-				</ul>
-			</nav>
-		</header>
-			<h2>User list</h2>
-			<table>
-				<tr>
-					<td>User Id</td>
-					<td>User Email</td>
-					<td>User Nickname</td>
-					<td colspan="3">User Roles</td>
-				</tr>
-				@foreach(var User in Model) {
-						<tr>
-							<td>@User.UserId</td>
-							<td>@User.UserEmail</td>
-							<td>@User.UserNickname</td>
-							<td>@foreach (var role in @User.UserRoles)
-								{
-									<p>@role</p>
-								}
-							</td>
-							<td>
-								<form asp-action="EditRole" asp-route-id="@User.UserId"  asp-controller="Admin" method="get">
-									<input type="submit" value="Change">
-								</form>
-							</td>
-						</tr>
-				}
-			</table>
-	</body>
+		</ul>
+	</nav>
+</header>
+<h2>User list</h2>
+<main style="display: flex; justify-content: center">
+	<table>
+		<caption>User list </caption>
+		<thead>
+		<tr>
+			<th scope="col">Id</th>
+			<th scope="col">Email</th>
+			<th scope="col">UserName</th>
+			<th scope="col">Roles</th>
+			<th scope="col">Delete</th>
+			<th scope="col">Change Roles</th>
+		</tr>
+		</thead>
+		<tbody>
+		@foreach(var User in Model)
+		{
+			var setRoles = "";
+			<tr>
+				<td>@User.UserId</td>
+				<td>@User.UserEmail</td>
+				<td>@User.UserNickname</td>
+				<td>
+					@foreach (var role in @User.UserRoles)
+					{
+						<p>@role</p>
+					}
+					@{
+						if (@User.UserRoles.Contains("admin"))
+						{
+							setRoles = setRoles + "1";
+						}
+						else
+						{
+							setRoles = setRoles + "0";
+						}
+						if (@User.UserRoles.Contains("user"))
+						{
+							setRoles = setRoles + "1";
+						}
+						else
+						{
+							setRoles = setRoles + "0";
+						}
+						if (@User.UserRoles.Contains("moderator"))
+						{
+							setRoles = setRoles + "1";
+						}
+						else
+						{
+							setRoles = setRoles + "0";
+						}
+						setRoles = setRoles + @User.UserNickname;
+					}
+				</td>
+				<td>
+					<form asp-action="EditRole" asp-route-id="@User.UserId" asp-controller="Admin" method="get">
+						<input type="submit" value="Delete"/>
+					</form>
+				</td>
+				<td>
+					<button value="@setRoles" name="@User.UserId" class="changeRoles">Change Roles</button>
+				</td>
+			</tr>
+		}
+		</tbody>
+	</table>
+</main>
+
+<div id="hidden-window">
+	<button id="closeWindow">Close window</button>
+	<h2 id="header">Change</h2>
+	<form asp-action="EditRole" asp-controller="Admin" method="post">
+		<div class="form-group">
+			<label><input type="checkbox" id="role1" name="roles" value="admin"/>Admin</label><br/>
+			<label><input type="checkbox" id="role2" name="roles" value="user"/>DefaultUser</label><br/>
+			<label><input type="checkbox" id="role3" name="roles" value="moderator"/>Moderator</label><br/>
+		</div>
+		<input hidden name="id" id="UserIdInput" value="" />
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</div>
+<script>
+	let buttonEditRoles = document.querySelectorAll(".changeRoles");
+	var roleInputs = document.querySelectorAll(".form-group input");
+	var windowBlock = document.getElementById("hidden-window");
+	var userIdField = document.getElementById("UserIdInput");
+	console.log(userIdField);
+	for (let i = 0; i < buttonEditRoles.length; i++) {
+		buttonEditRoles[i].addEventListener("click",
+			() => {
+				document.getElementById("header").innerHTML = "Change " + buttonEditRoles[i].value.slice(3) + "roles";
+				console.log(buttonEditRoles[i].name);
+				userIdField.value = buttonEditRoles[i].name;
+				console.log(userIdField.value);
+				roleInputs[0].checked = buttonEditRoles[i].value[0] === "1" ? true : false;
+				roleInputs[1].checked = buttonEditRoles[i].value[1] === "1" ? true : false;
+				roleInputs[2].checked = buttonEditRoles[i].value[2] === "1" ? true : false;
+				ShowWindow();
+			});
+	}
+	document.getElementById("closeWindow").addEventListener("click", CloseWindow);
+	function ShowWindow() {
+		windowBlock.style.display = "block";
+
+	}
+	function CloseWindow() {
+		windowBlock.style.display = "none";
+		
+	}
+</script>				
+</body>
+
 </html>
