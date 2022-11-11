@@ -168,8 +168,8 @@ main {
     justify-content: center;
     flex-direction: column;
     align-content: center;
-    align-items:center;
-
+    align-items: center;
+    background-color: rgb(233,235,238);
 }
 .social{
     width: 100%;

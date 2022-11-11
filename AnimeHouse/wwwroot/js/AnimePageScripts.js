@@ -53,7 +53,7 @@
             } else {
                 document.getElementById("isLiked").innerHTML = "0";
                 isLiked = false;
-                heart.style.color = "white";
+                heart.style.color = "black";
                 counter.innerHTML = Number(counter.innerHTML) - 1;
                 $.ajax({
                     url: "/Anime/DeleteFromFavorite",

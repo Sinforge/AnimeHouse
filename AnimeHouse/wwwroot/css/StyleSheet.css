@@ -123,18 +123,19 @@ nav {
 
 
 .anime-list {
-    background-color: grey;
+    background-color: white;
     padding-top: 30px;
     overflow: hidden;
     padding-bottom: 30px;
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     flex-wrap: wrap;
-    width: 60%;
+    width: 80%;
     justify-content: center;
 }
 
 .anime-list-item {
+
     color: white;
     width: inherit;
     height: 300px;
@@ -143,15 +144,15 @@ nav {
 
 }
 .anime-list-item-info {
-    max-width: 150px;
 }
 .anime-list-item-img {
-    max-width: 150px;
-    max-height: 200px;  
+    width: fit-content;
+    height: fit-content;
 }
 .anime-list-item-info {
     margin-top: 0px;
     display: flex;
+    align-items: center;
     flex-direction: column;
     transition-timing-function: linear;
     transition-duration: 0.5s;
@@ -181,7 +182,10 @@ body {
 .anime {
     margin: 30px 30px 0px 30px;
     background: #282828;
-    color: white;
+    width: 80%;
+   background-color: white;
+    max-width: 1500px;
+    color: black;
     display: flex;
 }
 
@@ -190,8 +194,6 @@ body {
 @media (min-width: 768px) {
     .anime {
         margin: 30px 30px 0px 30px;
-        background: #282828;
-        color: white;
     }
 }
 @media (max-width: 768px) {
@@ -231,11 +233,12 @@ body {
     top: 0;
     left: 0;
     width: 95%;
-    background-color: #282828;
+    background-color: white;
+    max-width: 1500px; 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: white;   
+    color: black;   
     margin-top: 20px;
     overflow: auto;
 }
@@ -347,11 +350,12 @@ figure img {
     }
 }
 .short-desc {
-    font-size: 10px;
+    font-size: 13px;
     display: none;
     opacity: .1;
     margin-top:0;   
 }
+p { margin: 0 0 0 0;}
 .short-desc p {
     margin: 0 0 0 0;
 }
@@ -370,15 +374,23 @@ figure img {
 }
 .anime-list-item:hover .anime-list-item-info {
     margin: 0;
-    transform: translateY(-40px);
+    transform: translateY(-70px);
 }
 .anime-list-item:hover .anime-list-item-img {
-    transform: translateY(-40px);
+    transform: translateY(-70px);
 }
 
 .anime-container {
-    height: fit-content;
-    background-color: white; margin-left: 10px; margin-bottom: 10px; overflow: visible; transition: 1.5s;z-index: 5; overflow: hidden;
+    height: 350px;
+    width: 200px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    background-color: white;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    overflow: visible;
+    transition: 1.5s;
+    z-index: 5;
+    overflow: hidden;
 }
 
 
@@ -420,11 +432,11 @@ figure img {
     
 }
 .categories-block {
-    width: 40%;
+    width: 30%;
     margin-left: 20px;
     display: flex;
     flex-direction: column;
-    background-color: rgb(173, 158, 158);
+    background-color: white;
 }
 .categories {
     display: flex;
@@ -446,10 +458,50 @@ figure img {
 }
 #img-anime {
     align-self: center;
-    width: 90%;
-    height: 70%;
+    width: 200px;
+    height: 280px;
     object-fit: cover;
     max-width: 360px;
-    max-height: 250px;
-    
+}
+.form-container {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(233, 235, 238);
+}
+.forms {
+    background-color: white;
+    padding: 100px 100px 100px 100px;
+}
+html, body {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(233, 235, 238);
+}
+table {
+    font-size: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: rgb(94,84,93);
+    color: white;
+}
+
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: black;
+}
+#hidden-window {
+    position: absolute;
+    display: none;
+    top : 20%;
+    left : 20%;
+    width : 60%;
+    height : 60%;
+    text-align: center;
+    background-color: grey;
 }

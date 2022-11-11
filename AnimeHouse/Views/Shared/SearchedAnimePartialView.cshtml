@@ -4,20 +4,22 @@
 {
 	int pos = 0;
 	@foreach(var anime in Model) {
-		<div class="anime-container" id="@pos">
+		<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1 style="text-decoration: none;">
+			<div class="anime-container" id="@pos">
 				<div class="anime-list-item">
 					<div class="anime-list-item-img">
 						<img src="@(@anime.Path + anime.ImgName)" id="img-anime" alt="Cant found img">
 					</div>
 					<div class="anime-list-item-info">
-						<a asp-action="AnimePage" asp-controller="Anime" asp-route-title="@anime.TitleName" asp-route-episod=1>@anime.TitleName</a>
+						<p style="color: black;">@anime.TitleName</p>
 						<div class="short-desc">
-							<p>Count episodes</p>
-							<p>Short desc</p>
+							<p><strong>Count episodes</strong>: @anime.CountEpisodes</p>
+							<p><strong>Short desc</strong>: @anime.ShortDescription</p>
 						</div>
 					</div>
 				</div>
-		</div>
+			</div>
+		</a>	
 		pos++;
 
 	}
