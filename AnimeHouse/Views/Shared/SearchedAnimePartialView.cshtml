@@ -5,7 +5,6 @@
 	int pos = 0;
 	@foreach(var anime in Model) {
 		<div class="anime-container" id="@pos">
-			<div class="background-card">
 				<div class="anime-list-item">
 					<div class="anime-list-item-img">
 						<img src="@(@anime.Path + anime.ImgName)" id="img-anime" alt="Cant found img">
@@ -18,7 +17,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 		pos++;
 

@@ -143,10 +143,19 @@ nav {
 
 }
 .anime-list-item-info {
+    max-width: 150px;
+}
+.anime-list-item-img {
+    max-width: 150px;
+    max-height: 200px;  
+}
+.anime-list-item-info {
     margin-top: 0px;
+    display: flex;
+    flex-direction: column;
     transition-timing-function: linear;
     transition-duration: 0.5s;
-    text-align:center;
+    text-align: center;
 }
     .anime-list-item-info a {
         color: #3500D3;
@@ -338,8 +347,13 @@ figure img {
     }
 }
 .short-desc {
+    font-size: 10px;
     display: none;
     opacity: .1;
+    margin-top:0;   
+}
+.short-desc p {
+    margin: 0 0 0 0;
 }
 .anime-list-item:hover {
     overflow: visible;
@@ -379,14 +393,7 @@ figure img {
     visibility: collapse;
 }
 
-.player:hover + .hidden-block {
-    background-color:red;
-    visibility: visible;
-    transform: translate(100px, -150px);
-    transition:.5s;
-    color: white;
-    content: "Text here";
-}
+
 @keyframes fade {
     from {
         opacity: .4
@@ -398,37 +405,10 @@ figure img {
 }
 
 
-.anime-container:hover::before {
-    content: '';
-    z-index: -20;
-    width: 170px;
-    height: 240px;
-    position: absolute;
-    left: -10%;
-    top: -13%;
-    background-image: linear-gradient(0deg, transparent, #fa0505);
-    animation: spin 6s infinite linear;
-    transform-origin: bottom right;
-}
 
-.background-card {
-    margin: 10px 10px 10px 10px;
-    z-index: 11;
-    overflow: hidden;
-    background: white;
-}
-.background-card:hover::before {
-    background: white;
-}
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 
-}
+
+
 .fa-heart {
     color: white;
 }
