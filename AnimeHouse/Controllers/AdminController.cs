@@ -152,6 +152,20 @@ namespace AnimeHouse.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> DeleteAnime([FromForm] int animeId)
+        {
+            Anime animeForDelete = _db.Animes.FirstOrDefault(anime => anime.Id == animeId);
+            if (animeForDelete != null)
+            {
+                _db.Animes.Remove(animeForDelete);
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToAction("CreateTitle");
+
+        }
+
+        [HttpPost]
         public async Task<IActionResult> ChangeAnime([FromForm] AddAnimeTitleViewModel model)
         {
 
