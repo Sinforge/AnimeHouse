@@ -62,160 +62,161 @@
 		<div class="notice-info">Add 2FA to save your account</div>
 		<div class="notice-info">Leave comments and add favorites animes</div>
 	</div>
-		<main>
-			<div class="anime" >
-				<div id="anime-poster">
-					<img src="@(@Model.SearchedAnime.Path + @Model.SearchedAnime.ImgName)" />
-					@if(User.Identity.IsAuthenticated)	{
-						<form id="add-delete-favorite-form">
-							<input name="userId" type="text" value="@user.Id" hidden>
-							<input name="animeId" type="number" value="@Model.SearchedAnime.Id" hidden>
-						</form>
-						@if(user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
-						{
-							<button id="add-delete-favorite">Delete from favorite</button>
-						}
-						else
-						{
-							<button id="add-delete-favorite">Add to favorite</button>
-						}
+	<main>
+		@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+		{
+			<form method="post" asp-action="DeleteAnime" asp-controller="Admin">
+				<input type="number" value="@Model.SearchedAnime.Id" name="animeId" hidden>
+				<input type="submit" value="Delete">
+			</form>
+		}
+		<div class="anime">
+			<div id="anime-poster">
+				<img src="@(@Model.SearchedAnime.Path + @Model.SearchedAnime.ImgName)"/>
+				@if (User.Identity.IsAuthenticated)
+				{
+					<form id="add-delete-favorite-form">
+						<input name="userId" type="text" value="@user.Id" hidden>
+						<input name="animeId" type="number" value="@Model.SearchedAnime.Id" hidden>
+					</form>
+					@if (user.Animes.FirstOrDefault(a => a.TitleName == @Model.SearchedAnime.TitleName) != null)
+					{
+						<span id="isLiked" hidden>1</span>
+						<div style="display: flex">
+							<button id="heart" style="background-color: transparent; border-style: none; color: red; font-size: 50px; height: 50px;">&#10084;</button>
+							<div id="counter" style="font-size: 50px;">@Model.SearchedAnime.Likes</div>
+						</div>
 					}
-					<div style="display: inline">
-						<button id="heart" style="background-color: transparent; border-style:none;">&#10084;</button>
-						<div id="counter">0</div>
-					</div>
-					</div>
-				<script>
-					let heart = document.getElementById("heart");
-					var isLiked = false;
-					var counter = document.getElementById("counter");
-					heart.addEventListener("click", () => {
-						if (!isLiked) {
-							isLiked = true;
-							heart.style.color = "red";
-							counter.innerHTML = Number(counter.innerHTML) + 1;
-						} else
-						{ 
-							isLiked = false;
-							heart.style.color = "white";
-							counter.innerHTML = Number(counter.innerHTML) - 1;
+					else
+					{
+						<span id="isLiked" hidden>0</span>
+						<div style="display: flex">
+							<button id="heart" style="background-color: transparent; border-style: none; color: white; font-size: 50px; height: 50px;">&#10084;</button>
+							<div id="counter" style="font-size: 50px;">@Model.SearchedAnime.Likes</div>
+						</div>
+					}
+				}
 
-						}
-					});
-				</script>
-				<div id="anime-description">
+			</div>
+			<script>
+
+			</script>
+			<div id="anime-description">
 				<h1>@Model.SearchedAnime.TitleName</h1>
 				<p>@Model.SearchedAnime.Description</p>
-				</div>
-				</div>
-				<div class="video-player-block">
-				
-				<div class="player">
+			</div>
+		</div>
+		<div class="video-player-block">
+
+			<div class="player">
 				<video class="video" preload="auto" id="myvideo" src="~/animes/@Model.SearchedAnime.TitleName/episods/1.mp4" height="300" width="400">
 				</video>
 				<div id="controlls">
-				<div class="video-progress">
-				<!--<output for="fader" id="volume">0</output>-->
-				<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
-				<input type="range" id="current-progress" class="progress" min="0" max="10000" value="0" step="1"/>
+					<div class="video-progress">
+						<!--<output for="fader" id="volume">0</output>-->
+						<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
+						<input type="range" id="current-progress" class="progress" min="0" max="10000" value="0" step="1"/>
+
+					</div>
+					<div class="video-buttons">
+						<div class="video-play">
+							<img style="background-image: none;" id="play-pause" width="20px" height="20px" class="play-button" src="/img/play-buttton.png" alt="play"/>
+						</div>
+						<div id="volume-block" class="volume">
+							<img id="volume" width="20px" height="20px" src="~/img//volume.png"/>
+							<input style="display: none;" type="range" id="volume-mixer" min="0" max="100"/>
+
+						</div>
+
+						<div class="video-time">
+							<span id="currenttime">00:00</span>
+							<span>/</span>
+							<span id="duration">00:00</span>
+						</div>
+						<div class="fullscreen-mode">
+							<img id="fullmode" src="~/img/fullscreen-mode.png" width="20px" height="20px"/>
+						</div>
+						<script>
+							function ChangeVideo(id) {
+								let video = document.getElementById("myvideo");
+								let newId = id + '.';
+								video.src = video.src.replace(/\d+\./, newId);
+								console.log(video.src);
+							}
+						</script>
+
+					</div>
 
 				</div>
-				<div class="video-buttons">
-				<div class="video-play">
-				<img style="background-image: none;" id="play-pause" width="20px" height="20px" class="play-button" src="/img/play-buttton.png" alt="play"/>
-				</div>
-				<div id="volume-block" class="volume">
-				<img  id="volume" width="20px" height="20px" src="~/img//volume.png"/>
-				<input style="display: none;" type="range" id="volume-mixer" min="0" max="100"/>
-
-				</div>
-				
-				<div class="video-time">
-				<span id="currenttime">00:00</span>
-				<span>/</span>
-				<span id="duration">00:00</span>
-				</div>
-				<div class="fullscreen-mode">
-				<img id="fullmode" src="~/img/fullscreen-mode.png" width="20px" height="20px" />
-				</div>
-				<script>
-					function ChangeVideo(id) {
-						let video = document.getElementById("myvideo");
-						let newId = id + '.';
-						video.src = video.src.replace(/\d+\./, newId);
-						console.log(video.src);
+			</div>
+			<div class="choose-episod">
+				<h2>Choose episod</h2>
+				<ul>
+					@for (int i = 0; i < @Model.SearchedAnime.CountEpisodes; i++)
+					{
+						<li><span id="@(i + 1)" onclick="ChangeVideo(@(i + 1))">Episod @(i + 1)</span></li>
 					}
-				</script>
-					
-								</div>
-						
-								</div>
-								</div>
-								<div class="choose-episod">
-								<h2>Choose episod</h2>
-								<ul>
-								@for (int i = 0; i < @Model.SearchedAnime.CountEpisodes; i++)
-						{
-							<li><span id="@(i+1)" onclick="ChangeVideo(@(i+1))">Episod @(i+1)</span></li>
-						}
-								</ul>
-								</div>
-								</div>
+				</ul>
+			</div>
+		</div>
 
-	
+
 		<div class="comments-block">
 			<div>
 				<h2>Comments</h2>
 			</div>
 
-			@if(!User.Identity.IsAuthenticated) {
+			@if (!User.Identity.IsAuthenticated)
+			{
 			}
 			else
 			{
 
-				<div  class="send-comment-block">
+				<div class="send-comment-block">
 					<form id="send_comment_form">
-						<input hidden id = "userName" name="userName" type="text" value="@user.UserName">
-						<input hidden  id = "animeId" name="animeId" type="number" value="@Model.SearchedAnime.Id">
+						<input hidden id="userName" name="userName" type="text" value="@user.UserName">
+						<input hidden id="animeId" name="animeId" type="number" value="@Model.SearchedAnime.Id">
 						<textarea id="text" name="text" cols="50" rows="5"></textarea>
 						<button id="send_comment">Leave</button>
 					</form>
 				</div>
 			}
-		
-			@if (User.IsInRole("admin") || @User.IsInRole("moderator")) {
+
+			@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
+			{
 				<div id="list_of_comments" class="comments-list">
-				@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
-				{
-					<div class="author-comment">
-						<figure >
-							<img src="~/img/DefaultUserImg.png">
-						</figure>
-						<form id="delete_comment_form">
-							<input value="@comment.UserName" name="userName" id="userNameForm" hidden>
-							<input value="@Model.SearchedAnime.Id" name="animeId" id="animeIdForm" hidden>
-							<input value="@comment.Text" name="text" hidden>
-							<input type="button" id="delete_user_comment" value="Удалить">
-						</form>
-						<h5>@comment.UserName</h5>
-						<p>@comment.Text</p>
-					</div><br/>
-				}
+					@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
+					{
+						<div class="author-comment">
+							<figure >
+								<img src="~/img/DefaultUserImg.png">
+							</figure>
+							<form id="delete_comment_form">
+								<input value="@comment.UserName" name="userName" id="userNameForm" hidden>
+								<input value="@Model.SearchedAnime.Id" name="animeId" id="animeIdForm" hidden>
+								<input value="@comment.Text" name="text" hidden>
+								<input type="button" id="delete_user_comment" value="Удалить">
+							</form>
+							<h5>@comment.UserName</h5>
+							<p>@comment.Text</p>
+						</div><br/>
+					}
 				</div>
 
 			}
-			else {
+			else
+			{
 				<div id="list_of_comments" class="comments-list">
-				@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
-				{
-					<div class="author-comment">
-						<figure >
-							<img src="~/img/DefaultUserImg.png">
-						</figure>
-						<h5>@comment.UserName</h5>
-						<p>@comment.Text</p>
-					</div><br/>
-				}
+					@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
+					{
+						<div class="author-comment">
+							<figure >
+								<img src="~/img/DefaultUserImg.png">
+							</figure>
+							<h5>@comment.UserName</h5>
+							<p>@comment.Text</p>
+						</div><br/>
+					}
 				</div>
 			}
 		</div>

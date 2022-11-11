@@ -14,6 +14,8 @@
 
         public int? CountEpisodes { get; set; }
 
+        public int Likes { get; set; } = 0;
+
         public  List<Category> Categories { get; set; } = new List<Category>();
 
         public List<User> Users { get; set; } = new List<User>();

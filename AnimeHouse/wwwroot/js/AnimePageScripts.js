@@ -29,34 +29,39 @@
                 }
             });
         });
-    $('#add-delete-favorite').click(function(e) {
-
-        console.log("Button is clicked");
-        console.log($("#add-delete-favorite-form").serialize());
-        if ($('#add-delete-favorite').text() == "Delete from favorite") {
-            $.ajax({
-                url: "/Anime/DeleteFromFavorite",
-                type: "POST",
-                data: $("#add-delete-favorite-form").serialize(),
-                success: function (response) {
-                    console.log(response);
-                    $("#add-delete-favorite").text("Add to favorite");
-
-                }
-            });
-							}
-        else {
-            $.ajax({
-                url: "/Anime/AddToFavorite",
-                type: "POST",
-                data: $("#add-delete-favorite-form").serialize(),
-                success: function (response) {
-                    console.log(response);
-                    $("#add-delete-favorite").text("Delete from favorite");
-
-                }
-            });
+        let heart = document.getElementById("heart");
+        var isLiked;
+        if (document.getElementById("isLiked").innerHTML === "0") {
+            isLiked = false;
+        } else {
+            isLiked = true;
         }
+        var counter = document.getElementById("counter");
+    heart.addEventListener("click", () => {
+        if (!isLiked) {
+                document.getElementById("isLiked").innerHTML = "1";
+                isLiked = true;
+                heart.style.color = "red";
+                counter.innerHTML = Number(counter.innerHTML) + 1;
+                $.ajax({
+                    url: "/Anime/AddToFavorite",
+                    type: "POST",
+                    data: $("#add-delete-favorite-form").serialize(),
+
+                });
+               
+            } else {
+                document.getElementById("isLiked").innerHTML = "0";
+                isLiked = false;
+                heart.style.color = "white";
+                counter.innerHTML = Number(counter.innerHTML) - 1;
+                $.ajax({
+                    url: "/Anime/DeleteFromFavorite",
+                    type: "POST",
+                    data: $("#add-delete-favorite-form").serialize(),
+                });
+
+            }
     });
                  
 						 

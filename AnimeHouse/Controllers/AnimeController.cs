@@ -142,6 +142,7 @@ namespace AnimeHouse.Controllers
             User? user = _db.Users.Include(u => u.Animes).FirstOrDefault(u => u.Id == userId);
             if (anime != null && user != null)
             {
+                anime.Likes++;
                 user.Animes.Add(anime);
                 _db.SaveChanges();
                 return StatusCode(200);
@@ -158,6 +159,7 @@ namespace AnimeHouse.Controllers
             User? user = _db.Users.Include(u => u.Animes).FirstOrDefault(u => u.Id == userId);
             if (anime != null && user != null)
             {
+                anime.Likes--;
                 user.Animes.Remove(anime);
                 _db.SaveChanges();
                 return StatusCode(200);
