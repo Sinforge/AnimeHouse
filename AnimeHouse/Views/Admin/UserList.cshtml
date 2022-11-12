@@ -5,7 +5,6 @@
 <head>
 	<link rel="stylesheet" href="/css/StyleSheet.css">
 	<link rel="stylesheet" href="/css/Carusuel.css" />
-	<link rel="stylesheet" href="/css/Maincss.css" />
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<link href="/css/style.css" rel="stylesheet">
 </head>
@@ -28,7 +27,7 @@
 		
 				<li  class="nav-bar-element page-controllers">
 					<form method="post" asp-controller="Account" asp-action="Logout">
-						<input type="submit" value="Выход" />
+						<input class="form-button" type="submit" value="Exit" />
 					</form>
 				</li>
 			}
@@ -40,8 +39,7 @@
 		</ul>
 	</nav>
 </header>
-<h2>User list</h2>
-<main style="display: flex; justify-content: center">
+<main style="display: flex; justify-content: flex-start; width: 100%; height: 100%;">
 	<table>
 		<caption>User list </caption>
 		<thead>
@@ -97,11 +95,11 @@
 				</td>
 				<td>
 					<form asp-action="EditRole" asp-route-id="@User.UserId" asp-controller="Admin" method="get">
-						<input type="submit" value="Delete"/>
+						<input class="form-button" type="submit" value="Delete"/>
 					</form>
 				</td>
 				<td>
-					<button value="@setRoles" name="@User.UserId" class="changeRoles">Change Roles</button>
+					<button class="form-button changeRoles" value="@setRoles" name="@User.UserId" class="changeRoles">Change Roles</button>
 				</td>
 			</tr>
 		}
@@ -110,7 +108,7 @@
 </main>
 
 <div id="hidden-window">
-	<button id="closeWindow">Close window</button>
+	<button class="form-button" id="closeWindow">Close window</button>
 	<h2 id="header">Change</h2>
 	<form asp-action="EditRole" asp-controller="Admin" method="post">
 		<div class="form-group">
@@ -119,7 +117,7 @@
 			<label><input type="checkbox" id="role3" name="roles" value="moderator"/>Moderator</label><br/>
 		</div>
 		<input hidden name="id" id="UserIdInput" value="" />
-		<button type="submit" class="btn btn-primary">Save</button>
+		<button  type="submit" class="form-button">Save</button>
 	</form>
 </div>
 <script>
@@ -144,11 +142,13 @@
 	document.getElementById("closeWindow").addEventListener("click", CloseWindow);
 	function ShowWindow() {
 		windowBlock.style.display = "block";
+		document.querySelector("main").style.filter = "blur(10px)";
 
 	}
 	function CloseWindow() {
 		windowBlock.style.display = "none";
-		
+		document.querySelector("main").style.filter = "none";
+
 	}
 </script>				
 </body>

@@ -266,6 +266,7 @@ footer {
     backdrop-filter: blur(5px);
     display: flex;
     flex-wrap: wrap;
+    padding: 100px 100px 100px 100px;
     flex-direction: column;
     height: fit-content;
     width: fit-content;

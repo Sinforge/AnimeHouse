@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="/css/Maincss.css" />
 		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 		<link href="/css/style.css" rel="stylesheet">
+
 	</head>
 	<body>
 	<header>
@@ -29,7 +30,7 @@
 		
 					<li  class="nav-bar-element page-controllers">
 						<form method="post" asp-controller="Account" asp-action="Logout">
-							<input type="submit" value="Выход" />
+							<input class="form-button" type="submit" value="Exit" />
 						</form>
 					</li>
 				}
@@ -52,55 +53,57 @@
 	<main class="form-container">
 		<div class="forms">
 			<h2>Title creating</h2>
-			<form method="post" asp-controller="Admin" asp-action="CreateTitle" enctype="multipart/form-data">
+			<form method="post" asp-controller="Admin" asp-action="CreateTitle" class="create-anime-form" enctype="multipart/form-data">
 				<div asp-validation-summary="ModelOnly"> </div>
-				<div>
+				<div class="data-block">
 					<label asp-for="Title"></label><br/>
-					<input type="text" asp-for="Title"/>
+					<input  type="text" asp-for="Title"/>
 					<span asp-validation-for="Title"/>
 				</div>
-				<div>
+				<div class="data-block">
 
 					<label asp-for="ShortDescription"></label><br/>
-					<input type="text" asp-for="ShortDescription"/>
+					<input  type="text" asp-for="ShortDescription"/>
 					<span asp-validation-for="ShortDescription"/>
 				</div>
-				<div>
+				<div class="data-block" style="max-width: 500px;">
 
 					<label asp-for="Description"></label><br/>
-					<input type="text" asp-for="Description"/>
+					<textarea asp-for="Description" rows="10" cols="60"> </textarea>
 					<span asp-validation-for="Description"/>
 				</div>
 				<div>
 
 					<label asp-for="CountEpisodes"></label><br/>
-					<input type="number" asp-for="CountEpisodes"/>
+					<input   type="number" asp-for="CountEpisodes"/>
 					<span asp-validation-for="CountEpisodes"/>
 				</div>
-				<div>
+				<div class="data-block">
 
-					<label asp-for="Img"></label><br/>
-					<input type="file" asp-for="Img"/>
+					<input type="file" id="input-file" asp-for="Img"/>
+					<label asp-for="Img"></label>
+
 					<span asp-validation-for="Img"/>
 				</div>
-				<div>
-					<label asp-for="Categories"></label>
-					<select asp-for="Categories">
-						@foreach (var category in (List<string>)ViewData["CategoriesList"])
-						{
-							<option value="@category">@category</option>
-						}
-					</select>
-					<span asp-validation-for="Categories"></span>
+				<div class="data-block">
+					<h3>Select categories </h3>
+
+					<div class="select-container">
+						<select asp-for="Categories" size="15" class="list-categories">
+							@foreach (var category in (List<string>)ViewData["CategoriesList"])
+							{
+								<option value="@category">@category</option>
+							}
+						</select>
+					</div>
+
 				</div>
 
-				<input type="submit" value="Send">
+				<input class="form-button" type="submit" value="Send">
 			</form>
 		</div>
-		
-		<script src="~/js/jquery-3.5.1.min.js"></script>
-		<script src="~/js/jquery.validate.min.js"></script>
-		<script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+
+
 	</main>
 	
 	</body>
