@@ -1,5 +1,6 @@
 using AnimeHouse.Data;
 using AnimeHouse.Models;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationContext>(options =>
 	options.UseSqlServer(connectionString));
-
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
-	options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireNonAlphanumeric = false;
 	options.Password.RequiredLength = 5;
 	options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
 	options.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
@@ -46,11 +46,11 @@ if (!app.Environment.IsDevelopment())
 	app.UseExceptionHandler("/Home/Error");
 	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
+
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

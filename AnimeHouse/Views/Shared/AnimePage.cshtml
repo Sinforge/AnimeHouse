@@ -67,8 +67,14 @@
 		{
 			<form method="post" asp-action="DeleteAnime" asp-controller="Admin">
 				<input type="number" value="@Model.SearchedAnime.Id" name="animeId" hidden>
-				<input type="submit" value="Delete">
+				<input class="form-button" type="submit" value="Delete">
 			</form>
+			<form  asp-action="AddEpisode" asp-controller="Admin" method="post" enctype="multipart/form-data">
+				<input hidden name="Name" value="@Model.SearchedAnime.TitleName">
+				<input name="Episode" type="file"  />
+				<input class="form-button" type="submit" value="Add">
+			</form>
+			
 		}
 		<div class="anime">
 			<div id="anime-poster">
@@ -109,13 +115,12 @@
 		<div class="video-player-block">
 
 			<div class="player">
-				<video class="video" preload="auto" id="myvideo" src="~/animes/@Model.SearchedAnime.TitleName/episods/1.mp4" height="300" width="400">
+				<video class="video" preload="auto" id="myvideo" src="~/animes/@Model.SearchedAnime.TitleName/episodes/1.mp4" height="300" width="400">
 				</video>
 				<div id="controlls">
 					<div class="video-progress">
 						<!--<output for="fader" id="volume">0</output>-->
 						<input type="range" id="fader" class="progress" min="0" max="10000" value="0" step="1"/>
-						<input type="range" id="current-progress" class="progress" min="0" max="10000" value="0" step="1"/>
 
 					</div>
 					<div class="video-buttons">

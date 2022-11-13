@@ -218,5 +218,32 @@ namespace AnimeHouse.Controllers
             var allComments = from com in _db.Comments where com.AnimeId == animeId select com;
             return PartialView("CommentPartialView", allComments);
         }
+
+        [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 409_715_200)]
+        [RequestSizeLimit(409_715_200)]
+        public async Task<IActionResult> AddEpisode(AddEpisodeViewModel model)
+        {
+            string FilePath = @"wwwroot\animes\" + model.Name + @"\episodes\";
+            if (!Directory.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FilePath);
+            }
+
+            string episodeNumber = "1";
+            List<string> filesDir1 = (from a in Directory.GetFiles(FilePath) select Path.GetFileNameWithoutExtension(a))
+                .ToList();
+            if (filesDir1.Count != 0)
+            {
+                episodeNumber = (filesDir1.Count + 1).ToString();
+            }
+
+            using (var fileStream = new FileStream(FilePath + episodeNumber + ".mp4", FileMode.Create))
+            {
+                await model.Episode.CopyToAsync(fileStream);
+            }
+
+            return StatusCode(200);
+        }
     }
 }
