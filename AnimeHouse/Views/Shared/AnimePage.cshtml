@@ -40,11 +40,19 @@
 					}
 					<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
 					@if(User.Identity.IsAuthenticated) {
-						<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
-		
+						<li class="nav-bar-element page-controllers">
+
+							<div class="dropdown">
+								<a action="#">@User.Identity.Name</a>
+								<div class="dropdown-content">
+									<a asp-action="FavoriteAnimeList" asp-controller="Profile" asp-route-UserId="@user.Id">List of favorite animes</a>
+									<a action="#">Account Info</a>
+								</div>
+							</div>
+						</li>		
 						<li  class="nav-bar-element page-controllers">
 							<form method="post" asp-controller="Account" asp-action="Logout">
-								<input type="submit" value="Выход" />
+								<input class="form-button" type="submit" value="Exit" />
 							</form>
 						</li>
 					}
@@ -155,11 +163,11 @@
 				</div>
 			</div>
 			<div class="choose-episod">
-				<h2>Choose episod</h2>
+				<h2>Choose episode</h2>
 				<ul>
 					@for (int i = 0; i < @Model.SearchedAnime.CountEpisodes; i++)
 					{
-						<li><span id="@(i + 1)" onclick="ChangeVideo(@(i + 1))">Episod @(i + 1)</span></li>
+						<li><span id="@(i + 1)" onclick="ChangeVideo(@(i + 1))">Episode @(i + 1)</span></li>
 					}
 				</ul>
 			</div>
@@ -182,7 +190,7 @@
 						<input hidden id="userName" name="userName" type="text" value="@user.UserName">
 						<input hidden id="animeId" name="animeId" type="number" value="@Model.SearchedAnime.Id">
 						<textarea id="text" name="text" cols="50" rows="5"></textarea>
-						<button id="send_comment">Leave</button>
+						<button class="form-button" id="send_comment">Leave</button>
 					</form>
 				</div>
 			}
@@ -192,19 +200,22 @@
 				<div id="list_of_comments" class="comments-list">
 					@foreach (var comment in db.Comments.Where(c => c.AnimeId == @Model.SearchedAnime.Id))
 					{
-						<div class="author-comment">
-							<figure >
-								<img src="~/img/DefaultUserImg.png">
-							</figure>
-							<form id="delete_comment_form">
-								<input value="@comment.UserName" name="userName" id="userNameForm" hidden>
-								<input value="@Model.SearchedAnime.Id" name="animeId" id="animeIdForm" hidden>
-								<input value="@comment.Text" name="text" hidden>
-								<input type="button" id="delete_user_comment" value="Удалить">
-							</form>
-							<h5>@comment.UserName</h5>
-							<p>@comment.Text</p>
-						</div><br/>
+						<div class="author-comment ">
+								<div class="admin-comment">
+
+									<figure >
+										<img src="~/img/DefaultUserImg.png">
+									</figure>
+									<form id="delete_comment_form">
+										<input value="@comment.UserName" name="userName" id="userNameForm" hidden>
+										<input value="@Model.SearchedAnime.Id" name="animeId" id="animeIdForm" hidden>
+										<input value="@comment.Text" name="text" hidden>
+										<input type="button" class="form-button" style="background-color: black; color: white;" id="delete_user_comment" value="Delete">
+									</form>
+								</div>
+								<h5>@comment.UserName</h5>
+								<p>@comment.Text</p>
+							</div><br/>
 					}
 				</div>
 

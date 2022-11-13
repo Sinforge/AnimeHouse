@@ -1,18 +1,24 @@
-﻿@model UserLoginViewModel
+﻿@using AnimeHouse.Data
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model UserLoginViewModel
+@inject ApplicationContext db
 <!doctype html>
 <html>
-	<head>
-		<title>Home Page</title>
-						<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<meta charset="utf-8" />
-		<link rel="stylesheet" href="/css/StyleSheet.css">
-		<link rel="stylesheet" href="/css/Carusuel.css" />
-		<link rel="stylesheet" href="/css/Maincss.css" />
-		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-		<link href="/css/style.css" rel="stylesheet">
+<head>
+	<title>Home Page</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="/css/StyleSheet.css">
+	<link rel="stylesheet" href="/css/Carusuel.css" />
+	<link rel="stylesheet" href="/css/Maincss.css" />
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<link href="/css/style.css" rel="stylesheet">
 
-		<meta charset="utf-8" />
-	</head>
+	<meta charset="utf-8" />
+</head>
+@{
+	User user =  db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+}	
 	<body class="reg_log">
 	<header>
 		<input  type="checkbox" id="burger"/>
@@ -29,8 +35,16 @@
 				}
 				<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
 				@if(User.Identity.IsAuthenticated) {
-					<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
-		
+					<li class="nav-bar-element page-controllers">
+
+						<div class="dropdown">
+							<a action="#">@User.Identity.Name</a>
+							<div class="dropdown-content">
+								<a asp-action="FavoriteAnimeList" asp-controller="Profile" asp-route-UserId="@user.Id">List of favorite animes</a>
+								<a action="#">Account Info</a>
+							</div>
+						</div>
+					</li>		
 					<li  class="nav-bar-element page-controllers">
 						<form method="post" asp-controller="Account" asp-action="Logout">
 							<input class="form-button" type="submit" value="Exit" />

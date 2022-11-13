@@ -1,4 +1,10 @@
-﻿@model UserRegistrationViewModel
+﻿@using AnimeHouse.Data
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model UserRegistrationViewModel
+@inject ApplicationContext db
+@{
+	User user =  db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+}	
 <!doctype html>
 <html>
 	<head>
@@ -30,8 +36,16 @@
 				}
 				<li   class="nav-bar-element page-controllers"><a asp-action="GetListAnime" asp-controller="Anime">Anime</a></li>
 				@if(User.Identity.IsAuthenticated) {
-					<li  class="nav-bar-element page-controllers"><a asp-action="Services" asp-controller="Profile">@User.Identity.Name</a></li>
-		
+					<li class="nav-bar-element page-controllers">
+
+						<div class="dropdown">
+							<a action="#">@User.Identity.Name</a>
+							<div class="dropdown-content">
+								<a asp-action="FavoriteAnimeList" asp-controller="Profile" asp-route-UserId="@user.Id">List of favorite animes</a>
+								<a action="#">Account Info</a>
+							</div>
+						</div>
+					</li>		
 					<li  class="nav-bar-element page-controllers">
 						<form method="post" asp-controller="Account" asp-action="Logout">
 							<input class="form-button" type="submit" value="Exit" />

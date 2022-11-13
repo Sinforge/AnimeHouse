@@ -44,10 +44,10 @@
 					<li class="nav-bar-element page-controllers">
 
 						<div class="dropdown">
-							<a asp-action="AccountInfo" asp-controller="Profile">@User.Identity.Name</a>
+							<a style="color:black" action="#">@User.Identity.Name</a>
 							<div class="dropdown-content">
-								<a asp-action="FavoriteAnimeList" asp-controller="Profile" asp-route-UserId="@user.Id">List of favorite animes</a>
-								<a asp-action="AccountInfo" asp-controller="Profile">Account Info</a>
+								<a  asp-action="FavoriteAnimeList" asp-controller="Profile" asp-route-UserId="@user.Id">List of favorite animes</a>
+								<a  style="color:black" action="#">Account Info</a>
 							</div>
 						</div>
 					</li>
