@@ -22,7 +22,7 @@
             if (item.getAttribute('id') === currentElem.getAttribute('id')) {
                 item.style.transform = "scale(1.1)";
             } else {
-                item.style.filter = "blur(5px)";
+                item.style.filter = "blur(2px)";
             }
         });
     });

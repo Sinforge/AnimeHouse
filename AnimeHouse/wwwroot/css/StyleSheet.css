@@ -385,7 +385,7 @@ p { margin: 0 0 0 0;}
     margin-left: 10px;
     margin-bottom: 10px;
     overflow: visible;
-    transition: 1.5s;
+    transition: 1s;
     z-index: 5;
     overflow: hidden;
 }
