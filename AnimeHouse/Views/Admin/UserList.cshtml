@@ -8,10 +8,10 @@
 <!doctype html>
 <html>
 <head>
-	<link rel="stylesheet" href="/css/StyleSheet.css">
-	<link rel="stylesheet" href="/css/Carusuel.css" />
+	<link rel="stylesheet" href="/css/styles1.css">
+	<link rel="stylesheet" href="/css/Сarousel.css" />
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-	<link href="/css/style.css" rel="stylesheet">
+	<link href="/css/styles2.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -134,35 +134,35 @@
 	</form>
 </div>
 <script>
-	let buttonEditRoles = document.querySelectorAll(".changeRoles");
-	var roleInputs = document.querySelectorAll(".form-group input");
-	var windowBlock = document.getElementById("hidden-window");
-	var userIdField = document.getElementById("UserIdInput");
-	console.log(userIdField);
-	for (let i = 0; i < buttonEditRoles.length; i++) {
-		buttonEditRoles[i].addEventListener("click",
-			() => {
-				document.getElementById("header").innerHTML = "Change " + buttonEditRoles[i].value.slice(3) + "roles";
-				console.log(buttonEditRoles[i].name);
-				userIdField.value = buttonEditRoles[i].name;
-				console.log(userIdField.value);
-				roleInputs[0].checked = buttonEditRoles[i].value[0] === "1" ? true : false;
-				roleInputs[1].checked = buttonEditRoles[i].value[1] === "1" ? true : false;
-				roleInputs[2].checked = buttonEditRoles[i].value[2] === "1" ? true : false;
-				ShowWindow();
-			});
-	}
-	document.getElementById("closeWindow").addEventListener("click", CloseWindow);
-	function ShowWindow() {
-		windowBlock.style.display = "block";
-		document.querySelector("main").style.filter = "blur(10px)";
+let buttonEditRoles = document.querySelectorAll(".changeRoles");
+var roleInputs = document.querySelectorAll(".form-group input");
+var windowBlock = document.getElementById("hidden-window");
+var userIdField = document.getElementById("UserIdInput");
+console.log(userIdField);
+for (let i = 0; i < buttonEditRoles.length; i++) {
+	buttonEditRoles[i].addEventListener("click",
+		() => {
+			document.getElementById("header").innerHTML = "Change " + buttonEditRoles[i].value.slice(3) + "roles";
+			console.log(buttonEditRoles[i].name);
+			userIdField.value = buttonEditRoles[i].name;
+			console.log(userIdField.value);
+			roleInputs[0].checked = buttonEditRoles[i].value[0] === "1" ? true : false;
+			roleInputs[1].checked = buttonEditRoles[i].value[1] === "1" ? true : false;
+			roleInputs[2].checked = buttonEditRoles[i].value[2] === "1" ? true : false;
+			ShowWindow();
+		});
+}
+document.getElementById("closeWindow").addEventListener("click", CloseWindow);
+function ShowWindow() {
+	windowBlock.style.display = "block";
+	document.querySelector("main").style.filter = "blur(10px)";
 
-	}
-	function CloseWindow() {
-		windowBlock.style.display = "none";
-		document.querySelector("main").style.filter = "none";
+}
+function CloseWindow() {
+	windowBlock.style.display = "none";
+	document.querySelector("main").style.filter = "none";
 
-	}
+}
 </script>				
 </body>
 

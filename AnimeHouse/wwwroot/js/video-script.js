@@ -124,64 +124,7 @@ $(document).ready(function () {
         }
 
     });
-    /*controls.zoom.click(function() {
-        /*if (fullscreen == 0) {
-            fullscreen = 1;
-            controls.video.appendTo('body');
-            $('body').css('overflow', 'hidden');
-            controls.video.css('position', 'fixed').css('right', 0).css('bottom', 0).css('min-width', '100%')
-                .css('min-heigth', '100%').css('width', 'auto')
-                .css('height', 'auto').css('z-index', '1000').css('background-size', 'cover')
-                .css('top', '');
-        } else {
-            fullscreen = 0;
-            videoPlayer.css('position', 'relative').css('width', '700px').css('height', '400px');
-
-
-        }
-        let element = document.getElementsByClassName("video-player-block");
-        fullscreen(element);
-}); */
-
-    /*
-     video {
-    position: fixed; right: 0; bottom: 0;
-    min-width: 100%; min-height: 100%;
-    width: auto; height: auto; z-index: -100;
-    background: url(polina.jpg) no-repeat;
-    background-size: cover;
-}
-    .player {
-        overflow: visible;
-    }
-
-    .video - player - block.player {
-        max - width: 850px;
-        text - align: center;
-        width: 100 %;
-    }
-
-    .video - player - block.player.video {
-        max - width: 100 %;
-        width: 700px;
-        height: 400px;
-    }
-
-
-    .video - player - block.controlls #play - pause {
-        color: black;
-    }
-    #controlls {
-        display: flex;
-        flex - direction: column;
-        align - items: center;
-        position: relative;
-        top: -80px;
-        margin - left: 25px;
-        margin - right: 20px;
-        background - color: transparent;
-        padding: 10px 10px 10px 10px;
-    }*/
+   
     video.addEventListener("ended", function () {
         video.pause();
         console.log("button to pause clicked");

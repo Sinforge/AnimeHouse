@@ -9,15 +9,14 @@
 <html>
 	<head>
 		<base href="/" />		
-		<title>Home Page</title>
+		<title>Anime Page</title>
 		<meta charset="utf-8" />
 		<script src="~/js/jquery-3.6.1.js"></script>
 		<script src="~/js/AnimePageScripts.js"></script>
-		<link rel="stylesheet" href="/css/StyleSheet.css">
-		<link rel="stylesheet" href="/css/Maincss.css" />
+		<link rel="stylesheet" href="/css/styles1.css">
+		<link rel="stylesheet" href="/css/Main.css" />
 		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-		<link href="/css/style.css" rel="stylesheet" />
-		<link rel="stylesheet" href="/css/StyleSheet.css">
+		<link href="/css/styles2.css" rel="stylesheet" />
 		<link rel="stylesheet" href="/css/VideoPlayerStyles.css" />
 		<script src="~/js/video-script.js"></script>
 	</head>
@@ -73,15 +72,18 @@
 	<main>
 		@if (User.IsInRole("admin") || @User.IsInRole("moderator"))
 		{
-			<form method="post" asp-action="DeleteAnime" asp-controller="Admin">
-				<input type="number" value="@Model.SearchedAnime.Id" name="animeId" hidden>
-				<input class="form-button" type="submit" value="Delete">
-			</form>
-			<form  asp-action="AddEpisode" asp-controller="Admin" method="post" enctype="multipart/form-data">
-				<input hidden name="Name" value="@Model.SearchedAnime.TitleName">
-				<input name="Episode" type="file"  />
-				<input class="form-button" type="submit" value="Add">
-			</form>
+			<div style="width: 100%;text-align:center">
+				<form method="post" asp-action="DeleteAnime" asp-controller="Admin">
+					<input type="number" value="@Model.SearchedAnime.Id" name="animeId" hidden>
+					<input class="form-button" type="submit" value="Delete">
+				</form>
+				<form  asp-action="AddEpisode" asp-controller="Admin" method="post" enctype="multipart/form-data">
+					<input hidden name="Name" value="@Model.SearchedAnime.TitleName">
+					<input name="Episode" type="file"  />
+					<input class="form-button" type="submit" value="Add">
+				</form>
+			</div>
+			
 			
 		}
 		<div class="anime">
