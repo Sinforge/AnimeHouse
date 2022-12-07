@@ -478,7 +478,7 @@ p { margin: 0 0 0 0;}
 }
 .forms {
     background-color: white;
-    padding: 0 100px 100px 100px;
+    overflow: hidden;
     display: flex;
     width: 90%;
     flex-direction: column;
